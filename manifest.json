@@ -1,0 +1,42 @@
+{
+  "name": "دفتر حضور و غیاب — مدرسه من",
+  "short_name": "حضور و غیاب",
+  "description": "سامانه هوشمند مدیریت حضور و غیاب کلاس‌ها و پنل مدیر مدرسه",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#021915",
+  "theme_color": "#03211d",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ورود مدیر",
+      "short_name": "مدیر",
+      "url": "./index.html#manager",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
