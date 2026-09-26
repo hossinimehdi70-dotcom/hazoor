@@ -333,7 +333,6 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 .rankPct{font-size:20px;font-weight:800;color:var(--green);padding-left:6px}
 .mgrEmpty{text-align:center;padding:52px 20px;color:var(--muted)}
 .mgrEmpty .big{font-size:52px;margin-bottom:12px;opacity:.55}
-/* ====== لاگ‌نما ====== */
 #logBox{position:fixed;bottom:0;left:0;right:0;max-height:45vh;overflow:auto;background:rgba(0,0,0,.94);color:#7effe6;font-family:monospace;font-size:11px;direction:ltr;padding:10px;z-index:99998;border-top:2px solid #14e0b0;display:none;line-height:1.6;padding-bottom:20px}
 #logBox.show{display:block}
 #logToggle{position:fixed;bottom:10px;left:10px;z-index:99999;background:linear-gradient(135deg,#14e0b0,#22c55e);color:#04231f;border:none;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;box-shadow:0 6px 20px rgba(20,224,176,.5);display:grid;place-items:center}
@@ -414,7 +413,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       <button data-d="0">۰</button><button class="back" data-a="back">⌫</button>
     </div>
     <button class="btn manager block" id="btnMgrConfirm" type="button">✅ تایید و ورود</button>
-    <div class="hint">💡 کد پیش‌فرض: </div>
+    <div class="hint">💡 کد ورود را از سرپرست سامانه دریافت کنید.</div>
   </div>
 </section>
 
@@ -658,7 +657,8 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         <h4>🎯 کارکرد اصلی</h4>
         <p>ثبت حضور و غیاب، افزودن دانش‌آموز، گزارش‌گیری، و پشتیبان‌گیری دستی — همه بدون نیاز به اینترنت.</p>
         <h4>🔐 کد ورود مدیر</h4>
-        <p>کد پیش‌فرض: <code>98765</code></p>
+        <p>کد ورود به پنل مدیریت توسط <b>سرپرست سامانه</b> تعیین و به‌صورت خصوصی به مدیر اعلام می‌شود.</p>
+        <div class="warn">🛡️ <b>توصیه امنیتی:</b> مدیر محترم، لطفاً در اولین ورود، از مسیر <b>⚙️ تنظیمات → 🔐 رمز مدیر</b> کد خود را تغییر دهید.</div>
         <h4>📚 مدیریت کلاس‌ها</h4>
         <ul>
           <li>افزودن: نام + معلم + کد ۵ رقمی → ➕</li>
@@ -719,7 +719,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         <div class="field"><label>تکرار کد جدید</label><input id="mgrNewPin2" type="tel" maxlength="5" style="text-align:center;letter-spacing:8px;font-weight:800;color:var(--teal)"></div>
         <div class="err" id="mgrPinErr"></div>
         <button class="btn block" id="btnSaveMgrPin" style="margin-top:10px">💾 تغییر کد</button>
-        <button class="btn ghost block" id="btnResetMgrPin" style="margin-top:8px">♻️ بازگردانی</button>
+        <button class="btn ghost block" id="btnResetMgrPin" style="margin-top:8px">♻️ بازگردانی به پیش‌فرض سامانه</button>
       </div>
       <div class="pane" id="mgrClassesTab">
         <div class="note info">هر کلاس: نام + معلم + کد ۵ رقمی.</div>
@@ -887,7 +887,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 
 <script>
 /* ============================================================
-   ۱) لاگ‌نمای روی صفحه — قبل از هر چیز
+   ۱) لاگ‌نمای روی صفحه
 ============================================================ */
 (function(){
   var logBox = document.getElementById('logBox');
@@ -920,7 +920,6 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
     clearBtn.onclick = function(){ logContent.innerHTML=''; };
   }
 
-  /* Override console */
   var origLog = console.log, origWarn = console.warn, origError = console.error;
   console.log = function(){
     var msg = Array.prototype.slice.call(arguments).map(function(a){
@@ -1020,7 +1019,7 @@ async function loadFirebaseSDK(){
         console.log('Firebase initialized');
       }
     }catch(e){
-      console.warn('initApp error:', e.message);
+      console.warn('initApp error: ' + e.message);
       return false;
     }
 
@@ -1030,7 +1029,7 @@ async function loadFirebaseSDK(){
         console.log('Firestore ready');
       }
     }catch(e){
-      console.warn('firestore init error:', e.message);
+      console.warn('firestore init error: ' + e.message);
       fdb = null;
     }
 
@@ -1040,7 +1039,7 @@ async function loadFirebaseSDK(){
         console.log('Auth ready');
       }
     }catch(e){
-      console.warn('auth init error:', e.message);
+      console.warn('auth init error: ' + e.message);
       fauth = null;
     }
 
@@ -1053,7 +1052,7 @@ async function loadFirebaseSDK(){
     console.log('✅ Firebase SDK کامل');
     return true;
   }catch(e){
-    console.warn('SDK load failed:', e.message);
+    console.warn('SDK load failed: ' + e.message);
     return false;
   }
 }
@@ -1065,7 +1064,7 @@ async function cloudSaveConfig(){
       school: getSchoolName(), mgrPin: getMgrPin(),
       classes: loadClasses(), message: getSchoolMsg(), updatedAt: Date.now()
     }, { merge: true });
-  }catch(e){ console.warn('cloudSaveConfig:', e.message); }
+  }catch(e){ console.warn('cloudSaveConfig: ' + e.message); }
 }
 async function cloudSaveClass(id, data){
   if(!cloudReady || !fdb) return;
@@ -1073,7 +1072,7 @@ async function cloudSaveClass(id, data){
     var clean = JSON.parse(JSON.stringify(data));
     delete clean._isEmpty;
     await fdb.collection('classes').doc(id).set(clean, { merge: false });
-  }catch(e){ console.warn('cloudSaveClass:', e.message); }
+  }catch(e){ console.warn('cloudSaveClass: ' + e.message); }
 }
 async function cloudDeleteClass(id){
   if(!cloudReady || !fdb) return;
@@ -1112,7 +1111,7 @@ async function syncFromCloud(showToastMsg){
     if(showToastMsg) toast('✅ همگام‌سازی کامل شد');
     return true;
   }catch(e){
-    console.warn('sync error:', e.message);
+    console.warn('sync error: ' + e.message);
     updateCloudStatus('error', 'sync');
     if(showToastMsg) toast('خطا در همگام‌سازی','err');
     return false;
@@ -1302,6 +1301,7 @@ var LS_SCHOOL_MSG_DISMISSED='hazoor_school_msg_dismissed_v1';
 var LS_THEME='hazoor_theme_v1';
 var LS_LAST_BACKUP='hazoor_last_backup_v1';
 var DEFAULT_SCHOOL='دبستان برکت شهید نیکی ملکی۱';
+/* ⚠️ توجه: این مقدار فقط برای منطق داخلی است و در هیچ‌جای UI نمایش داده نمی‌شود */
 var DEFAULT_MGR_PIN='98765';
 var MGR_INACTIVITY_MS=15*60*1000;
 
@@ -2978,4 +2978,4 @@ function renderMgrOverview(){
 })();
 </script>
 </body>
-  </html>
+</html>
