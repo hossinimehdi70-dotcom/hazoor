@@ -2,7 +2,7 @@
    Service Worker — دفتر حضور و غیاب
    برای آپدیت برنامه فقط VERSION را تغییر دهید
 ============================================================ */
-const VERSION      = 'v6.0.0';
+const VERSION      = 'v7.0.0';
 const STATIC_CACHE = `hazoor-static-${VERSION}`;
 const RUNTIME_CACHE= `hazoor-runtime-${VERSION}`;
 
