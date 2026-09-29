@@ -353,6 +353,33 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 .quickRangeRow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .quickRangeRow .qBtn{padding:7px 12px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:var(--txt);font-family:inherit;transition:.2s}
 .quickRangeRow .qBtn:hover{border-color:var(--teal);background:rgba(20,224,176,.14)}
+/* === Absent-All Section (NEW) === */
+.absentSummaryBar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px;margin-bottom:14px;background:linear-gradient(135deg,rgba(255,90,110,.1),rgba(255,196,77,.06));border:1px solid rgba(255,90,110,.3);border-radius:14px}
+.absentSummaryBar .asbItem{text-align:center}
+.absentSummaryBar .asbItem b{display:block;font-size:22px;font-weight:900;line-height:1.1}
+.absentSummaryBar .asbItem span{font-size:11px;color:var(--muted);font-weight:700;display:block;margin-top:3px}
+@media(max-width:480px){.absentSummaryBar{grid-template-columns:repeat(2,1fr)}.absentSummaryBar .asbItem b{font-size:18px}}
+.absentGroup{margin-bottom:14px;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09)}
+.absentGroupHeader{display:flex;align-items:center;gap:10px;padding:11px 14px;background:linear-gradient(135deg,rgba(20,224,176,.14),rgba(20,224,176,.05));border-bottom:1px solid rgba(20,224,176,.2)}
+.agIcon{font-size:20px;flex:none}
+.agTitle{flex:1;min-width:0}
+.agName{font-weight:800;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.agTeacher{font-size:11.5px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.agCount{font-size:12px;font-weight:800;color:var(--red);padding:4px 10px;border-radius:8px;background:rgba(255,90,110,.15);flex:none}
+.absentList{padding:8px}
+.absentRow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;margin-bottom:5px;background:rgba(0,0,0,.18);border-right:3px solid transparent}
+.absentRow:last-child{margin-bottom:0}
+.absentRow.absent-a{border-right-color:var(--red)}
+.absentRow.absent-l{border-right-color:var(--amber)}
+.absentRow.absent-e{border-right-color:var(--blue)}
+.arBadge{font-size:16px;flex:none}
+.arInfo{flex:1;min-width:0}
+.arName{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.arMeta{font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.arStatus{font-size:11px;font-weight:800;padding:3px 9px;border-radius:8px;flex:none;white-space:nowrap}
+.arStatus.absent{background:rgba(255,90,110,.2);color:#ff9aa8}
+.arStatus.late{background:rgba(255,196,77,.2);color:#ffdd9c}
+.arStatus.excused{background:rgba(90,185,255,.2);color:#a9dbff}
 #logBox{position:fixed;bottom:0;left:0;right:0;max-height:45vh;overflow:auto;background:rgba(0,0,0,.94);color:#7effe6;font-family:monospace;font-size:11px;direction:ltr;padding:10px;z-index:99998;border-top:2px solid #14e0b0;display:none;line-height:1.6;padding-bottom:20px}
 #logBox.show{display:block}
 #logToggle{position:fixed;bottom:10px;left:10px;z-index:99999;background:linear-gradient(135deg,#14e0b0,#22c55e);color:#04231f;border:none;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;box-shadow:0 6px 20px rgba(20,224,176,.5);display:grid;place-items:center}
@@ -630,12 +657,20 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       <div class="tabs">
         <div class="tab on" data-tab="mgrRepRankTab">🏆 رتبه‌بندی</div>
         <div class="tab" data-tab="mgrRepAbsentTab">📨 غایبین</div>
+        <div class="tab" data-tab="mgrRepAbsentAllTab">🚫 غایبین به تفکیک کلاس</div>
         <div class="tab" data-tab="mgrRepTrendTab">📈 روند</div>
         <div class="tab" data-tab="mgrRepRangeTab">📅 بازه دلخواه</div>
         <div class="tab" data-tab="mgrRepOverviewTab">🗂️ نمای کلی</div>
       </div>
       <div class="pane on" id="mgrRepRankTab"><div id="mgrRepRankOut"></div></div>
       <div class="pane" id="mgrRepAbsentTab"><div id="mgrRepAbsentOut"></div></div>
+      <div class="pane" id="mgrRepAbsentAllTab">
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn" id="btnMgrAbsentAllPDF">📄 PDF رسمی</button>
+          <button class="btn ghost" id="btnMgrAbsentAllPrint">🖨️ پرینت</button>
+        </div>
+        <div id="mgrRepAbsentAllOut"></div>
+      </div>
       <div class="pane" id="mgrRepTrendTab"><div id="mgrRepTrendOut"></div></div>
       <div class="pane" id="mgrRepRangeTab">
         <div class="row">
@@ -694,109 +729,79 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="wrap">
     <div class="glass pageTopbar">
       <button class="iconbtn back" data-back type="button">←</button>
-      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">آموزش — نسخه <span id="helpVersion">2.1.1</span></div></div>
+      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">1.2.3</span></div></div>
       <div class="spacerSide"></div>
     </div>
     <div class="glass" style="padding:18px">
       <div class="helpBody">
-        <h4>🎉 قابلیت‌های جدید نسخه <span class="versionBadge">2.1.1</span></h4>
+
+        <h4>🎯 شروع سریع</h4>
         <ul>
-          <li><b>✅ دکمه «همه حاضر»:</b> با یک کلیک، همه دانش‌آموزان «حاضر» ثبت می‌شوند — سپس فقط غایب‌ها را تغییر دهید.</li>
-          <li><b>⚡ انتخاب سریع بازه در گزارش‌ها:</b> در گزارش‌ها، دکمه‌های «این هفته»، «این ماه»، «ترم اول»، «ترم دوم» اضافه شده.</li>
-          <li><b>📸 ذخیره گزارش به‌صورت عکس:</b> در گزارش‌ها، دکمه «ذخیره عکس» تصویر PNG رسمی می‌سازد.</li>
-          <li><b>💾 ذخیره‌سازی تدریجی:</b> تغییرات با تأخیر کوتاه ذخیره می‌شوند تا سرعت بالاتر باشد.</li>
-          <li><b>📨 پیام سریع به والدین:</b> در صفحه مدیریت دانش‌آموز، دکمه «پیام آماده» با متن پیش‌ساخته.</li>
-          <li><b>📊 کارت خلاصه امروز:</b> در داشبورد مدیر، اعداد درشت امروز در بالای صفحه.</li>
-          <li><b>🗑️ حذف داده‌های قدیمی:</b> در تنظیمات مدیر → تب «داده‌های قدیمی».</li>
-          <li><b>↩️ Undo در بازنشانی:</b> بعد از بازنشانی، ۵ ثانیه فرصت بازگشت دارید.</li>
-          <li><b>📄 خروجی PDF رسمی:</b> با دکمه «PDF رسمی» در گزارش‌ها (برای مدیر).</li>
+          <li>در صفحه اول، نام کلاس خود را انتخاب کنید.</li>
+          <li>کد ۵ رقمی کلاس را با صفحه‌کلید وارد کنید.</li>
+          <li>وارد صفحه ثبت حضور و غیاب می‌شوید.</li>
         </ul>
 
-        <h4>✅ دکمه «همه حاضر»</h4>
-        <p>در بالای لیست دانش‌آموزان، دکمه‌ی سبز «✅ همه حاضر» قرار دارد.</p>
-        <div class="tip">
-          💡 <b>روش استفاده:</b>
-          <br>۱. روی «✅ همه حاضر» کلیک کنید — همه دانش‌آموزان حاضر ثبت می‌شوند.
-          <br>۲. سپس فقط روی غایب‌ها بزنید و وضعیتشان را تغییر دهید.
-          <br>۳. با این روش در ۹۰٪ مواقع فقط چند کلیک لازم است!
-        </div>
-
-        <h4>⚡ انتخاب سریع بازه در گزارش‌ها</h4>
-        <p>در گزارش‌های معلم (تب «📈 گزارش کلی») و گزارش‌های مدیر (تب «📅 بازه دلخواه») می‌توانید به‌جای وارد کردن تاریخ، از دکمه‌های سریع استفاده کنید:</p>
+        <h4>👨‍🏫 ثبت حضور و غیاب</h4>
         <ul>
-          <li><b>📆 این هفته</b> — ۷ روز اخیر</li>
-          <li><b>📅 این ماه</b> — ۳۰ روز اخیر</li>
-          <li><b>🍂 ترم اول</b> — مهر تا دی</li>
-          <li><b>🌸 ترم دوم</b> — بهمن تا خرداد</li>
+          <li><b>انتخاب دانش‌آموز:</b> روی ردیف او کلیک کنید.</li>
+          <li><b>ثبت وضعیت:</b> یکی از ۴ دکمه پایین صفحه — حاضر، غایب، تأخیر، موجه.</li>
+          <li><b>همه حاضر:</b> با یک کلیک همه را حاضر ثبت کنید، سپس فقط غایب‌ها را تغییر دهید.</li>
+          <li><b>یادداشت روز:</b> در کادر «📝 یادداشت روز» بنویسید.</li>
+          <li><b>بازنشانی روز:</b> با دکمه «♻️ بازنشانی» — تا ۵ ثانیه فرصت بازگردانی (Undo) دارید.</li>
         </ul>
 
-        <h4>📸 ذخیره گزارش به‌صورت عکس</h4>
-        <p>در گزارش‌ها، دکمه «📸 ذخیره عکس» گزارش فعلی را به‌صورت تصویر PNG ذخیره می‌کند.</p>
-        <div class="tip">💡 تصویر شامل سربرگ، نام مدرسه، نام کلاس، تاریخ و جدول وضعیت است — آماده برای اشتراک‌گذاری در شاد یا واتساپ.</div>
-
-        <h4>📨 پیام سریع به والدین</h4>
-        <p>روی هر دانش‌آموز نگه دارید (یا کلیک کنید → صفحه مدیریت) → دکمه «📨 پیام آماده».</p>
-        <div class="tip">💡 یک پیامک با متن آماده باز می‌شود که شامل نام دانش‌آموز و وضعیت غیبت است.</div>
-
-        <h4>📊 کارت خلاصه امروز (مدیر)</h4>
-        <p>در بالای داشبورد مدیر، یک کارت با ۵ عدد درشت نمایش داده می‌شود:</p>
+        <h4>🗂️ آرشیو و گزارش‌های معلم</h4>
         <ul>
-          <li><b>تعداد کلاس‌ها</b></li>
-          <li><b>تعداد کل دانش‌آموزان</b></li>
-          <li><b>حاضر امروز</b></li>
-          <li><b>غایب امروز</b></li>
-          <li><b>تأخیر امروز</b></li>
+          <li><b>آرشیو:</b> مرور روزهای گذشته با خلاصه آمار هر روز.</li>
+          <li><b>کارنامه:</b> وضعیت یک دانش‌آموز در بازه مشخص.</li>
+          <li><b>گزارش کلی:</b> خلاصه همه دانش‌آموزان کلاس.</li>
+          <li><b>غایبین:</b> متن آماده ارسال در شاد.</li>
+          <li><b>بازه سریع:</b> این هفته، این ماه، ترم اول، ترم دوم.</li>
+          <li><b>ذخیره عکس:</b> هر گزارش را به‌صورت تصویر PNG ذخیره کنید.</li>
         </ul>
 
-        <h4>🗑️ حذف داده‌های قدیمی</h4>
-        <p>در پنل مدیر → ⚙️ تنظیمات → تب «🗑️ داده‌های قدیمی» می‌توانید رکوردهای قدیمی‌تر از یک بازه‌ی زمانی مشخص را حذف کنید.</p>
-        <div class="warn">⚠️ <b>توجه:</b> حذف داده‌های قدیمی قابل بازگشت نیست. قبل از حذف، حتماً از داده‌ها پشتیبان بگیرید.</div>
-
-        <h4>↩️ Undo در بازنشانی</h4>
-        <p>اگر اشتباهی روی «♻️ بازنشانی» زدید، به‌مدت ۵ ثانیه یک پیام با دکمه «↩️ بازگشت» نمایش داده می‌شود. کافی است روی آن بزنید تا اطلاعات بازگردد.</p>
-
-        <h4>📄 خروجی PDF رسمی</h4>
-        <p>در پنل مدیر، هنگام مشاهده‌ی گزارش‌ها، دکمه‌ی «📄» را بزنید. یک صفحه‌ی چاپی رسمی باز می‌شود که شامل:</p>
+        <h4>👨‍💼 پنل مدیر</h4>
         <ul>
-          <li>سربرگ با نام مدرسه</li>
-          <li>عنوان گزارش</li>
-          <li>تاریخ و ساعت تولید</li>
-          <li>جدول کامل اطلاعات</li>
-          <li>جای امضا و مهر</li>
-        </ul>
-        <div class="tip">💡 می‌توانید از آن PDF بگیرید یا مستقیماً چاپ کنید.</div>
-
-        <h4>☁️ اتصال ابری (اختیاری)</h4>
-        <p>اگر VPN روشن باشد، داده‌ها بین همه دستگاه‌ها همگام می‌شوند.</p>
-        <div class="warn">⚠️ Firebase از ایران مسدود است. برای همگام‌سازی، VPN لازم است.</div>
-
-        <h4>🔐 کد ورود مدیر</h4>
-        <p>کد ورود به پنل مدیریت توسط <b>سرپرست سامانه</b> تعیین و به‌صورت خصوصی به مدیر اعلام می‌شود.</p>
-        <div class="warn">🛡️ <b>توصیه امنیتی:</b> در اولین ورود، از مسیر <b>⚙️ تنظیمات → 🔐 رمز مدیر</b> کد خود را تغییر دهید.</div>
-
-        <h4>📚 مدیریت کلاس‌ها</h4>
-        <ul>
-          <li>افزودن: نام + معلم + کد ۵ رقمی → ➕</li>
-          <li>ویرایش: ✏️ → 💾</li>
-          <li>حذف: 🗑️ → کد مدیر</li>
+          <li><b>داشبورد:</b> کارت خلاصه امروز + کارت هر کلاس.</li>
+          <li><b>مدیریت کلاس‌ها:</b> افزودن، ویرایش و حذف کلاس با کد ۵ رقمی.</li>
+          <li><b>گزارش‌ها:</b>
+            <ul>
+              <li>رتبه‌بندی کلاس‌ها</li>
+              <li>غایبین امروز (جدول خلاصه)</li>
+              <li><b>غایبین به تفکیک کلاس:</b> لیست مرتب غایبین/تأخیر/موجه روز جاری، گروه‌بندی‌شده بر اساس کلاس — قابل تبدیل به <b>PDF رسمی</b> و <b>پرینت</b>.</li>
+              <li>روند ۷ روز اخیر</li>
+              <li>بازه دلخواه با دکمه‌های سریع</li>
+              <li>نمای کلی مدرسه</li>
+            </ul>
+          </li>
+          <li><b>PDF و پرینت:</b> خروجی رسمی با سربرگ، جای مهر و امضا.</li>
+          <li><b>پیام مدرسه:</b> ارسال پیام به همه کاربران.</li>
+          <li><b>حذف داده‌های قدیمی:</b> آزادسازی حافظه در تنظیمات.</li>
         </ul>
 
-        <h4>🗓️ ثبت حضور و غیاب</h4>
-        <p>روی ردیف دانش‌آموز کلیک کنید → یکی از ۴ دکمه پایین.</p>
-        <div class="tip">🎉 اگر همه حاضر باشند، جشن کانفتی!</div>
+        <h4>💾 پشتیبان‌گیری و همگام‌سازی</h4>
+        <ul>
+          <li><b>دانلود پشتیبان:</b> فایل JSON فشرده‌شده (`.json.gz`).</li>
+          <li><b>بارگذاری:</b> دو حالت «ادغام هوشمند» یا «جایگزینی کامل».</li>
+          <li><b>خروجی اکسل:</b> فایل CSV سازگار با Excel فارسی.</li>
+          <li><b>همگام‌سازی ابری:</b> نیازمند VPN (Firebase از ایران مسدود است).</li>
+        </ul>
 
-        <h4>💾 پشتیبان‌گیری</h4>
-        <p>از پنل معلم یا مدیر، فایل پشتیبان بسازید و از شاد بفرستید.</p>
+        <h4>🔐 امنیت</h4>
+        <ul>
+          <li>کد ۵ رقمی مدیر را از سرپرست سامانه دریافت کنید.</li>
+          <li>تغییر کد: <b>⚙️ تنظیمات → 🔐 رمز مدیر</b>.</li>
+          <li>خروج خودکار پس از ۱۵ دقیقه عدم فعالیت در پنل مدیر.</li>
+        </ul>
 
         <h4>📋 لاگ‌نما</h4>
-        <p>دکمه‌ی سبز گرد 📋 در گوشه‌ی پایین-چپ، لاگ‌های سیستم را نشان می‌دهد. برای عیب‌یابی استفاده کنید.</p>
-
-        <h4>↩️ دکمه بازگشت گوشی</h4>
-        <p>با فشردن دکمه بازگشت گوشی، یک صفحه به عقب برمی‌گردید. در صفحه اول، اپ بسته نمی‌شود.</p>
+        <p>دکمه گرد 📋 در گوشه پایین-چپ، لاگ سیستم را برای عیب‌یابی نمایش می‌دهد.</p>
 
         <div class="tip" style="text-align:center;font-weight:700">
-          🌿 نسخه <span class="versionBadge">2.1.1</span> — موفق باشید!
+          🌿 نسخه <span class="versionBadge">1.2.3</span>
         </div>
+
       </div>
     </div>
   </div>
@@ -813,7 +818,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       <div class="aboutSchool">دبستان برکت<br>شهید حسین نیکی ملکی یک</div>
       <div class="aboutLoc">📍 اراک، ناحیه ۲</div>
       <div class="aboutThanks">🌿 با هدف تسهیل کار معلمان و مدیران</div>
-      <div style="margin-top:14px"><span class="versionBadge">نسخه 2.1.1</span></div>
+      <div style="margin-top:14px"><span class="versionBadge">نسخه 1.2.3</span></div>
       <div class="shadBox">
         <div class="shadHint">📢 کانال شاد:</div>
         <a href="https://shad.ir/hossini_10" class="shadLink" target="_blank" rel="noopener noreferrer">
@@ -1054,7 +1059,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 /* ============================================================
    نسخه برنامه
 ============================================================ */
-var APP_VERSION = '2.1.1';
+var APP_VERSION = '1.2.3';
 
 /* ============================================================
    ۱) لاگ‌نما
@@ -1242,7 +1247,6 @@ async function syncFromCloud(showToastMsg){
   updateCloudStatus('syncing');
   try{
     console.log('در حال همگام‌سازی...');
-    /* رفع باگ: قبل از همگام‌سازی، تغییرات معوق را ذخیره کن تا از دست نروند */
     if(_saveDebounceTimer){ clearTimeout(_saveDebounceTimer); _saveDebounceTimer = null; }
     if(DB.meta.classId){ saveTeacherDB(); }
 
@@ -1256,7 +1260,6 @@ async function syncFromCloud(showToastMsg){
     }
     var classSnap = await fdb.collection('classes').get();
     var count = 0;
-    /* رفع باگ: ادغام داده‌های ابری با محلی به‌جای بازنویسی کامل */
     classSnap.forEach(function(ds){
       try{
         var cloudData = ds.data();
@@ -1394,7 +1397,6 @@ function d2j(jdn){
 }
 var pad2 = function(n){ return String(n).padStart(2,'0'); };
 var toFa = function(s){ return String(s).replace(/\d/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; }); };
-/* رفع باگ: پشتیبانی از ارقام فارسی و عربی */
 var toEn = function(s){
   return String(s)
     .replace(/[۰-۹]/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); })
@@ -1499,7 +1501,6 @@ function setSchoolMsg(txt){
     localStorage.removeItem(LS_SCHOOL_MSG_DISMISSED);
   }catch(e){}
 }
-/* رفع باگ حیاتی: تابع نمایش بنر پیام مدرسه */
 function updateSchoolMsgBanner(){
   var box = $('schoolMessageBanner');
   var txt = $('schoolMessageText');
@@ -1544,7 +1545,6 @@ var pendingImportData = null;
 var pendingImportSource = null;
 var pendingClassEntry = null;
 
-/* Debounce Save — ذخیره‌سازی تدریجی */
 var _saveDebounceTimer = null;
 function debouncedSave(){
   if(_saveDebounceTimer) clearTimeout(_saveDebounceTimer);
@@ -1569,7 +1569,6 @@ function confetti(){
     setTimeout(function(el){ return function(){ if(el.parentNode) el.parentNode.removeChild(el); }; }(c), 3800);
   }
 }
-/* رفع باگ Confetti تکراری: از فلگ روی رکورد استفاده می‌کنیم */
 function checkAllPresentTrigger(){
   if(!DB.students.length || isHoliday) return;
   var rec = getRec(false);
@@ -1674,7 +1673,6 @@ function enterTeacherApp(){
   currentDate=todayJalali();
   var wd=weekdayFa(currentDate);
   currentDay=DAYS.indexOf(wd)>=0?wd:'';
-  /* رفع باگ: جمعه به‌عنوان تعطیل پیش‌فرض */
   isHoliday=(wd === 'جمعه');
   renderDateUI(); renderStudents(); renderStats();
   updateStudentCount();
@@ -1774,7 +1772,6 @@ function renderStudents(){
       if(isHoliday) badge='<span class="stBadge unset">🚫 تعطیل</span>';
       else if(st && STATUS[st]) badge='<span class="stBadge '+STATUS[st].badge+'">'+STATUS[st].icon+' '+STATUS[st].label+'</span>';
       else badge='<span class="stBadge unset">— تعیین نشده</span>';
-      /* رفع باگ: افزودن data-phone برای قابلیت کپی */
       el.innerHTML='<div class="idx">'+toFa(idx+1)+'</div>' +
         '<div class="stuMain"><div class="stuLine1">' +
         '<span class="stuName">'+escapeHtml(s.name)+'</span>' +
@@ -1928,7 +1925,6 @@ function buildCSV(){
   });
   return '\uFEFF'+rows.map(function(r){ return r.map(function(c){ return '"'+String(c==null?'':c).replace(/"/g,'""')+'"'; }).join(','); }).join('\r\n');
 }
-/* رفع باگ: CSV از داده‌ی یک کلاس مشخص (برای مدیر) */
 function buildCSVFromClass(cls){
   var def = getClassDef(cls.meta.classId);
   var rows=[];
@@ -2239,7 +2235,6 @@ function applyQuickRange(type, target){
       if(rt3) rt3.value = toStr;
       if(typeof renderMgrRangeReport === 'function') renderMgrRangeReport();
     } else if(target === 'gen' || target === 'card'){
-      /* رفع باگ: پیاده‌سازی واقعی ترم اول برای معلم */
       setTeacherRangeByDate(target, fromStr, toStr, '🍂 ترم اول');
     }
   } else if(type === 'term2'){
@@ -2258,7 +2253,6 @@ function applyQuickRange(type, target){
     }
   }
 }
-/* رفع باگ: تبدیل بازه ترم به تعداد روز برای معلم */
 function setTeacherRangeByDate(target, fromStr, toStr, label){
   var today = todayJalali();
   var from = parseJalali(fromStr);
@@ -2338,7 +2332,6 @@ function classStatsForDay(cls, dateStr){
   var denom=p+a+l+e||1;
   return { total:total, present:p, absent:a, late:l, excused:e, unset:u, holiday:false, holidayReason:'', pct:Math.round((p/denom)*100) };
 }
-/* آمار کلاس در یک بازه دلخواه */
 function classStatsInRange(cls, fromStr, toStr){
   var from = parseJalali(fromStr);
   var to = parseJalali(toStr);
@@ -2361,7 +2354,6 @@ function classStatsInRange(cls, fromStr, toStr){
   return { days:days, present:p, absent:a, late:l, excused:e, pct:Math.round((p/denom)*100), total: cls.students.length };
 }
 
-/* ---- کارت خلاصه امروز ---- */
 function renderTodaySummary(){
   var today = todayJalali();
   var totalStudents = 0, tP = 0, tA = 0, tL = 0;
@@ -2644,12 +2636,12 @@ document.querySelectorAll('.tab').forEach(function(t){
     var p=$(t.dataset.tab); if(p) p.classList.add('on');
     if(t.dataset.tab === 'mgrCleanupTab') renderCleanupStats();
     if(t.dataset.tab === 'mgrRepRangeTab'){
-      // مقدار پیش‌فرض: ۳۰ روز اخیر
       var rf = $('rangeFrom'), rt = $('rangeTo');
       if(rf && !rf.value) rf.value = addDaysToJalali(todayJalali(), -30);
       if(rt && !rt.value) rt.value = todayJalali();
       renderMgrRangeReport();
     }
+    if(t.dataset.tab === 'mgrRepAbsentAllTab') renderMgrAllAbsentToday();
   };
 });
 
@@ -2738,7 +2730,6 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-/* رفع باگ: استفاده از replace:true برای جلوگیری از ایجاد صفحه اضافی در history */
 bind('btnHome', function(){
   saveTeacherDB();
   var ss=$('sSchool'); if(ss) ss.value=getSchoolName();
@@ -2779,7 +2770,6 @@ bind('btnAdd', addStudent);
   });
 });
 
-/* ---- دکمه همه حاضر ---- */
 bind('btnAllPresent', function(){
   if(isHoliday){ toast('امروز تعطیل است','err'); return; }
   if(!DB.students.length){ toast('هنوز دانش‌آموزی ثبت نشده','err'); return; }
@@ -2838,7 +2828,6 @@ bind('btnSaveDay', function(){
   toast('ذخیره شد 💾');
 });
 
-/* ---- Undo Reset ---- */
 bind('btnReset', function(){
   var k=recKey(currentDate,currentDay);
   if(!DB.records[k]){ toast('رکوردی نیست'); return; }
@@ -2901,7 +2890,6 @@ var sl=$('studentList');
 if(sl){
   sl.addEventListener('click', function(e){
     var ph=e.target.closest('.stuPhone');
-    /* رفع باگ: استفاده از data-phone + preventDefault */
     if(ph){
       e.preventDefault();
       var phone=ph.dataset.phone || '';
@@ -2929,7 +2917,6 @@ if(sl){
 bind('btnEditStu', function(){ var id=actionStudentId; closeModals(); setTimeout(function(){ if(id) openEdit(id); },180); });
 bind('btnDeleteStu', function(){ var id=actionStudentId; closeModals(); setTimeout(function(){ if(id) deleteStudent(id); },180); });
 
-/* ---- پیام آماده به والدین ---- */
 bind('btnQuickMsgStu', function(){
   var s = DB.students.find(function(x){ return x.id===actionStudentId; });
   if(!s || !s.shad){ toast('شماره شاد ثبت نشده','err'); return; }
@@ -3031,7 +3018,6 @@ bind('btnDelClassConfirm', function(){
 bind('btnDelClassCancel', function(){ pendingDeleteClassId=null; $('delClassPin').value=''; closeModals(); });
 var dcp=$('delClassPin'); if(dcp) dcp.addEventListener('input', function(){ dcp.value=toEn(dcp.value).replace(/\D/g,'').slice(0,5); });
 
-/* ---- Cleanup ---- */
 bind('btnCleanupOld', function(){ doCleanupOldData(); });
 var cms=$('cleanupMonths'); if(cms) cms.addEventListener('change', function(){ renderCleanupStats(); });
 
@@ -3064,7 +3050,6 @@ bind('btnMgrDownloadJSON', function(){
   toast('آماده شد 💾');
 });
 bind('btnMgrPrint', function(){ window.print(); });
-/* رفع باگ: خروجی CSV مدیر از داده‌های همان کلاس انتخاب‌شده استفاده کند */
 bind('btnMgrClsExcel', function(){
   var cls = null;
   for(var i=0;i<MGR.classes.length;i++) if(MGR.classes[i].meta.classId===MGR.selectedClassId){ cls=MGR.classes[i]; break; }
@@ -3075,7 +3060,6 @@ bind('btnMgrClsExcel', function(){
   toast('آماده شد 📗');
 });
 
-/* استخراج منطق ساخت گزارش PDF کلاس مدیر برای استفاده مشترک بین PDF و پرینت */
 function buildMgrClassPDFOpts(){
   var cls = null;
   for(var i=0;i<MGR.classes.length;i++) if(MGR.classes[i].meta.classId===MGR.selectedClassId){ cls=MGR.classes[i]; break; }
@@ -3108,21 +3092,18 @@ function buildMgrClassPDFOpts(){
     }
   };
 }
-/* رفع باگ: پرینت کلاس مدیر حالا خروجی رسمی می‌دهد (نه کل صفحه) */
 bind('btnMgrClsPrint', function(){
   var opts = buildMgrClassPDFOpts();
   if(!opts){ toast('کلاسی انتخاب نشده','err'); return; }
   exportOfficialPDF(opts);
 });
 
-/* ---- PDF رسمی مدیر - کلاس ---- */
 bind('btnMgrClsPDF', function(){
   var opts = buildMgrClassPDFOpts();
   if(!opts){ toast('کلاسی انتخاب نشده','err'); return; }
   exportOfficialPDF(opts);
 });
 
-/* ---- PDF رسمی مدیر - گزارش‌ها ---- */
 bind('btnMgrRepPDF', function(){
   var today = todayJalali();
   var title = 'گزارش رسمی کل مدرسه';
@@ -3156,7 +3137,6 @@ bind('btnMgrRepPDF', function(){
   });
 });
 
-/* ---- ذخیره گزارش‌های معلم به عکس ---- */
 bind('btnCardImage', function(){
   var sel = $('cardStudent');
   if(!sel || !sel.value){ toast('دانش‌آموزی انتخاب نشده','err'); return; }
@@ -3214,7 +3194,6 @@ bind('btnGenImage', function(){
   });
 });
 
-/* ---- Quick Range Buttons (معلم) ---- */
 document.querySelectorAll('.qBtn').forEach(function(b){
   b.onclick = function(){
     if(b.dataset.qr) applyQuickRange(b.dataset.qr, 'card');
@@ -3527,7 +3506,7 @@ function renderArchiveDetail(){
 }
 
 function renderMgrReports(){
-  renderMgrRanking(); renderMgrAbsentToday(); renderMgrTrend(); renderMgrOverview(); renderMgrRangeReport();
+  renderMgrRanking(); renderMgrAbsentToday(); renderMgrTrend(); renderMgrOverview(); renderMgrRangeReport(); renderMgrAllAbsentToday();
 }
 function renderMgrRanking(){
   var today=todayJalali();
@@ -3572,6 +3551,111 @@ function renderMgrAbsentToday(){
   }).join('');
   out.innerHTML='<div class="note">'+toFa(rows.length)+' مورد</div><div style="overflow-x:auto"><table class="dataTable"><thead><tr><th>کلاس</th><th>دانش‌آموز</th><th>شاد</th><th>وضعیت</th></tr></thead><tbody>'+trs+'</tbody></table></div>';
 }
+
+/* ====== Absent-All Section (NEW) ====== */
+function collectAbsentAllToday(){
+  var today = todayJalali();
+  var dayName = weekdayFa(today) || '';
+  var key = today + '|' + dayName;
+  var groups = [];
+  var tA = 0, tL = 0, tE = 0;
+  MGR.classes.forEach(function(cls){
+    if(cls._isEmpty) return;
+    var rec = cls.records[key];
+    if(!rec || rec.holiday) return;
+    var absent = [], late = [], excused = [];
+    cls.students.forEach(function(st){
+      var status = (rec.att||{})[st.id];
+      if(status === 'absent') absent.push(st);
+      else if(status === 'late') late.push(st);
+      else if(status === 'excused') excused.push(st);
+    });
+    if(absent.length || late.length || excused.length){
+      groups.push({
+        cls: cls,
+        def: getClassDef(cls.meta.classId),
+        absent: absent, late: late, excused: excused
+      });
+      tA += absent.length; tL += late.length; tE += excused.length;
+    }
+  });
+  return { date: today, dayName: dayName, groups: groups, totalAbsent: tA, totalLate: tL, totalExcused: tE };
+}
+function renderMgrAllAbsentToday(){
+  var out = $('mgrRepAbsentAllOut');
+  if(!out) return;
+  var data = collectAbsentAllToday();
+  if(!data.groups.length){
+    out.innerHTML = '<div class="note" style="text-align:center;padding:24px">✅ امروز هیچ غیبت، تأخیر یا موجهی ثبت نشده است.</div>';
+    return;
+  }
+  var html = '<div class="absentSummaryBar">' +
+    '<div class="asbItem"><b style="color:var(--red)">'+toFa(data.totalAbsent)+'</b><span>غایب</span></div>' +
+    '<div class="asbItem"><b style="color:var(--amber)">'+toFa(data.totalLate)+'</b><span>تأخیر</span></div>' +
+    '<div class="asbItem"><b style="color:var(--blue)">'+toFa(data.totalExcused)+'</b><span>موجه</span></div>' +
+    '<div class="asbItem"><b style="color:var(--teal)">'+toFa(data.groups.length)+'</b><span>کلاس</span></div>' +
+  '</div>';
+  html += '<div class="note">📅 تاریخ: <b>' + escapeHtml(data.date) + '</b>' + (data.dayName ? ' — ' + escapeHtml(data.dayName) : '') + '</div>';
+  data.groups.forEach(function(g){
+    var total = g.absent.length + g.late.length + g.excused.length;
+    html += '<div class="absentGroup">';
+    html += '<div class="absentGroupHeader">' +
+      '<span class="agIcon">📚</span>' +
+      '<div class="agTitle"><div class="agName">' + escapeHtml(g.def.name) + '</div>' +
+      '<div class="agTeacher">معلم: ' + escapeHtml(g.def.teacher || '—') + '</div></div>' +
+      '<div class="agCount">' + toFa(total) + ' مورد</div>' +
+    '</div>';
+    html += '<div class="absentList">';
+    g.absent.forEach(function(s){
+      html += '<div class="absentRow absent-a"><span class="arBadge">❌</span>' +
+        '<div class="arInfo"><div class="arName">' + escapeHtml(s.name) + '</div>' +
+        '<div class="arMeta">پدر: ' + escapeHtml(s.father||'—') + ' · شاد: <span dir="ltr">' + toFa(s.shad||'—') + '</span></div></div>' +
+        '<span class="arStatus absent">غایب</span></div>';
+    });
+    g.late.forEach(function(s){
+      html += '<div class="absentRow absent-l"><span class="arBadge">⏰</span>' +
+        '<div class="arInfo"><div class="arName">' + escapeHtml(s.name) + '</div>' +
+        '<div class="arMeta">پدر: ' + escapeHtml(s.father||'—') + ' · شاد: <span dir="ltr">' + toFa(s.shad||'—') + '</span></div></div>' +
+        '<span class="arStatus late">تأخیر</span></div>';
+    });
+    g.excused.forEach(function(s){
+      html += '<div class="absentRow absent-e"><span class="arBadge">📝</span>' +
+        '<div class="arInfo"><div class="arName">' + escapeHtml(s.name) + '</div>' +
+        '<div class="arMeta">پدر: ' + escapeHtml(s.father||'—') + ' · شاد: <span dir="ltr">' + toFa(s.shad||'—') + '</span></div></div>' +
+        '<span class="arStatus excused">موجه</span></div>';
+    });
+    html += '</div></div>';
+  });
+  out.innerHTML = html;
+}
+function exportAbsentAllPDF(){
+  var data = collectAbsentAllToday();
+  if(!data.groups.length){ toast('امروز موردی ثبت نشده','err'); return; }
+  var rows = [];
+  data.groups.forEach(function(g){
+    g.absent.forEach(function(s){
+      rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'غایب غیرموجه']);
+    });
+    g.late.forEach(function(s){
+      rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'تأخیر']);
+    });
+    g.excused.forEach(function(s){
+      rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'غایب موجه']);
+    });
+  });
+  exportOfficialPDF({
+    title: 'گزارش غایبین روز — به تفکیک کلاس',
+    className: 'کل مدرسه (' + toFa(data.groups.length) + ' کلاس)',
+    teacher: '—',
+    date: data.date + (data.dayName ? ' (' + data.dayName + ')' : ''),
+    headers: ['کلاس', 'نام دانش‌آموز', 'نام پدر', 'شماره شاد', 'وضعیت'],
+    rows: rows,
+    summary: null
+  });
+}
+bind('btnMgrAbsentAllPDF', exportAbsentAllPDF);
+bind('btnMgrAbsentAllPrint', exportAbsentAllPDF);
+
 function renderMgrTrend(){
   var out=$('mgrRepTrendOut'); if(!out) return;
   var today=todayJalali();
@@ -3590,7 +3674,6 @@ function renderMgrTrend(){
   }).join('');
   out.innerHTML='<div style="overflow-x:auto"><table class="dataTable"><thead><tr><th>کلاس</th>'+th+'</tr></thead><tbody>'+trs+'</tbody></table></div>';
 }
-/* رفع باگ: پیاده‌سازی واقعی بازه دلخواه مدیر */
 function renderMgrRangeReport(){
   var rf=$('rangeFrom'), rt=$('rangeTo'), out=$('mgrRepRangeOut');
   if(!out) return;
@@ -3655,7 +3738,6 @@ function renderMgrOverview(){
     loadTheme();
     var wd=weekdayFa(currentDate);
     currentDay=DAYS.indexOf(wd)>=0?wd:'';
-    /* رفع باگ: جمعه به‌عنوان تعطیل پیش‌فرض */
     isHoliday=(wd === 'جمعه');
     console.log('تاریخ امروز: ' + currentDate + ' — ' + currentDay);
 
