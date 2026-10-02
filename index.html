@@ -873,7 +873,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
           <ul>
             <li>در صفحه‌ی اول، روی «🔐 ورود مدیر» کلیک کنید.</li>
             <li>کد ۵ رقمی مدیریت را با صفحه‌کلید وارد کنید و روی «✅ تایید و ورود» بزنید.</li>
-            <li>اگر کد را نمی‌دانید، با سرپرست سامانه تماس بگیرید. (کد پیش‌فرض: <code>98765</code> — حتماً عوضش کنید.)</li>
+            <li>اگر کد را نمی‌دانید، با سرپرست سامانه تماس بگیرید.</li>
           </ul>
 
           <h4><span class="num">گام ۲</span>افزودن کلاس‌ها (فقط بار اول یا هر ترم)</h4>
@@ -4342,7 +4342,6 @@ function collectAbsentAllToday(){
   return { date: today, dayName: dayName, groups: groups, totalAbsent: tA, totalLate: tL, totalExcused: tE };
 }
 
-/* ساخت متن پیام سریع برای دانش‌آموز بر اساس وضعیت */
 function buildQuickStudentMsg(student, status, dateStr, clsDef){
   var statusLabel = '';
   var statusIcon = '';
@@ -4413,7 +4412,6 @@ function renderMgrAllAbsentToday(){
   });
   out.innerHTML = html;
 
-  /* بایند دکمه‌های پیام سریع */
   out.querySelectorAll('.arMsgBtn').forEach(function(btn){
     btn.onclick = function(e){
       e.stopPropagation();
