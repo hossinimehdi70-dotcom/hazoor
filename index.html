@@ -236,9 +236,9 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 .actionBtns{display:flex;gap:9px;flex-wrap:wrap}
 .actionBtns .btn{flex:1;min-width:110px;padding:12px}
 .helpBody{font-size:13.5px;line-height:2;color:var(--txt)}
-.helpBody h4{color:var(--teal);font-size:15px;margin:20px 0 10px;padding-bottom:7px;border-bottom:2px solid rgba(20,224,176,.25);display:flex;align-items:center;gap:8px}
+.helpBody h4{color:var(--teal);font-size:15px;margin:22px 0 10px;padding-bottom:7px;border-bottom:2px solid rgba(20,224,176,.25);display:flex;align-items:center;gap:9px}
 .helpBody h4:first-child{margin-top:0}
-.helpBody h4 .num{background:linear-gradient(135deg,var(--teal),var(--green));color:#04231f;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px;font-weight:900;flex:none}
+.helpBody h4 .num{background:linear-gradient(135deg,var(--teal),var(--green));color:#04231f;min-width:28px;height:28px;padding:0 6px;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:900;flex:none}
 .helpBody p{margin-bottom:8px;color:#cfe9e2}
 .helpBody ul{padding-right:22px;margin-bottom:10px;list-style:none}
 .helpBody li{margin-bottom:7px;color:#cfe9e2;position:relative;padding-right:18px}
@@ -371,7 +371,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 .dataTable .center{text-align:center}
 .mgrEmpty{text-align:center;padding:52px 20px;color:var(--muted)}
 .mgrEmpty .big{font-size:52px;margin-bottom:12px;opacity:.55}
-.quickRangeRow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.quickRangeRow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .quickRangeRow .qBtn{padding:7px 12px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:var(--txt);font-family:inherit;transition:.2s}
 .quickRangeRow .qBtn:hover{border-color:var(--teal);background:rgba(20,224,176,.14)}
 .quickRangeRow .qBtn.on{background:linear-gradient(135deg,var(--teal),var(--green));color:#04231f;border-color:transparent;box-shadow:0 4px 12px rgba(20,224,176,.3)}
@@ -388,7 +388,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 .agTeacher{font-size:11.5px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .agCount{font-size:12px;font-weight:800;color:var(--red);padding:4px 10px;border-radius:8px;background:rgba(255,90,110,.15);flex:none}
 .absentList{padding:8px}
-.absentRow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;margin-bottom:5px;background:rgba(0,0,0,.18);border-right:3px solid transparent}
+.absentRow{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;margin-bottom:5px;background:rgba(0,0,0,.18);border-right:3px solid transparent}
 .absentRow:last-child{margin-bottom:0}
 .absentRow.absent-a{border-right-color:var(--red)}
 .absentRow.absent-l{border-right-color:var(--amber)}
@@ -401,6 +401,9 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 .arStatus.absent{background:rgba(255,90,110,.2);color:#ff9aa8}
 .arStatus.late{background:rgba(255,196,77,.2);color:#ffdd9c}
 .arStatus.excused{background:rgba(90,185,255,.2);color:#a9dbff}
+.arMsgBtn{flex:none;width:34px;height:30px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--teal),var(--green));color:#04231f;font-size:14px;cursor:pointer;display:grid;place-items:center;font-family:inherit;padding:0;box-shadow:0 3px 8px rgba(20,224,176,.35);transition:.15s}
+.arMsgBtn:hover{transform:scale(1.08)}
+.arMsgBtn:active{transform:scale(.94)}
 #logBox{position:fixed;bottom:0;left:0;right:0;max-height:45vh;overflow:auto;background:rgba(0,0,0,.94);color:#7effe6;font-family:monospace;font-size:11px;direction:ltr;padding:10px;z-index:99998;border-top:2px solid #14e0b0;display:none;line-height:1.6;padding-bottom:20px}
 #logBox.show{display:block}
 #logToggle{position:fixed;bottom:10px;left:10px;z-index:99999;background:linear-gradient(135deg,#14e0b0,#22c55e);color:#04231f;border:none;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;box-shadow:0 6px 20px rgba(20,224,176,.5);display:grid;place-items:center}
@@ -697,6 +700,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       </div>
       <div class="pane" id="mgrRepAbsentTab"><div id="mgrRepAbsentOut"></div></div>
       <div class="pane" id="mgrRepAbsentAllTab">
+        <div class="note info">💡 با لمس دکمه <b style="color:var(--teal);font-size:14px">📨</b> روی هر ردیف، متن پیام مخصوص همان دانش‌آموز و همان وضعیت (غایب غیرموجه / تأخیر / موجه) کپی می‌شود و می‌توانید در شاد یا پیامک برای والدین بفرستید.</div>
         <div class="row" style="margin-bottom:10px">
           <button class="btn" id="btnMgrAbsentAllPDF">📄 PDF رسمی</button>
           <button class="btn ghost" id="btnMgrAbsentAllPrint">🖨️ پرینت</button>
@@ -761,7 +765,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="wrap">
     <div class="glass pageTopbar">
       <button class="iconbtn back" data-back type="button">←</button>
-      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">۳.۲.۱</span></div></div>
+      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">۳.۱.۲</span></div></div>
       <div class="spacerSide"></div>
     </div>
     <div class="glass" style="padding:18px">
@@ -773,124 +777,191 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       <div class="pane on" id="helpTeacherTab">
         <div class="helpBody">
 
-          <h4><span class="num">۱</span>شروع سریع</h4>
+          <h4><span class="num">گام ۱</span>ورود به کلاس</h4>
           <ul>
-            <li>در صفحه اول، نام کلاس خود را انتخاب کنید.</li>
-            <li>کد ۵ رقمی کلاس را با صفحه‌کلید وارد کنید.</li>
-            <li>وارد صفحه ثبت حضور و غیاب می‌شوید.</li>
+            <li>در صفحه اول، نام مدرسه خود را در کادر بالای صفحه ببینید (در صورت نیاز اصلاح کنید).</li>
+            <li>در بخش «کلاس خود را انتخاب کنید»، روی کارت کلاس خود کلیک کنید.</li>
+            <li>صفحه‌ی ورود کلاس باز می‌شود — کد ۵ رقمی را با صفحه‌کلید لمس کنید.</li>
+            <li>دکمه «✅ تایید و ورود» را بزنید تا وارد صفحه‌ی ثبت حضور و غیاب شوید.</li>
           </ul>
 
-          <h4><span class="num">۲</span>ثبت حضور و غیاب</h4>
+          <h4><span class="num">گام ۲</span>افزودن دانش‌آموزان (فقط بار اول)</h4>
           <ul>
-            <li><b>انتخاب دانش‌آموز:</b> روی ردیف او کلیک کنید.</li>
-            <li><b>ثبت وضعیت:</b> یکی از ۴ دکمه پایین صفحه — حاضر، غایب، تأخیر، موجه.</li>
-            <li><span class="new">جدید</span><b>اعلان صوتی و لرزشی:</b> هنگام ثبت هر وضعیت، یک بوق کوتاه و لرزش دریافت می‌کنید.</li>
-            <li><b>همه حاضر:</b> با یک کلیک همه را حاضر ثبت کنید.</li>
-            <li><b>اعلان نقص ثبت:</b> اگر وضعیت چند دانش‌آموز ثبت نشده باشد، هشدار کهربایی در بالای صفحه ظاهر می‌شود.</li>
-            <li><span class="new">جدید</span><b>هشدار غیبت پی‌درپی:</b> روی کارت دانش‌آموزی که ۳ روز یا بیشتر پی‌درپی غایب بوده، بج قرمز «⚠️ X غیبت پی‌درپی» نمایش داده می‌شود.</li>
-            <li><b>یادداشت روز:</b> در کادر «📝 یادداشت روز» بنویسید.</li>
-            <li><b>بازنشانی روز:</b> با دکمه «♻️ بازنشانی» — تا ۵ ثانیه فرصت بازگردانی (Undo) دارید.</li>
+            <li>اگر اولین بار است که وارد می‌شوید و لیست دانش‌آموزان خالی است، دکمه «➕ افزودن دانش‌آموز» را بزنید.</li>
+            <li>سه فیلد را پر کنید: <b>نام و نام خانوادگی</b>، <b>نام پدر</b>، <b>شماره شاد (۰۹...)</b>.</li>
+            <li>دکمه «ثبت» را بزنید یا Enter بزنید — دانش‌آموز به لیست اضافه می‌شود.</li>
+            <li>این کار را برای همه دانش‌آموزان کلاس تکرار کنید (یک‌بار برای همیشه).</li>
           </ul>
 
-          <h4><span class="num">۳</span>اطلاع به والدین</h4>
+          <h4><span class="num">گام ۳</span>ثبت حضور و غیاب روزانه</h4>
           <ul>
-            <li><b>پیامک تکی:</b> با نگه‌داشتن کارت دانش‌آموز، دکمه «📨 پیام آماده» در دسترس است.</li>
-            <li><span class="new">جدید</span><b>ارسال به شاد:</b> در منوی دانش‌آموز، دکمه «💬 ارسال به شاد» متن آماده را کپی کرده و اپلیکیشن شاد را باز می‌کند.</li>
-            <li><span class="new">جدید</span><b>ارسال گروهی به شاد:</b> در تب «📨 غایبین» گزارش‌ها، دکمه «💬 ارسال به شاد» لیست غایبین را کپی می‌کند و شاد را باز می‌کند.</li>
+            <li>تاریخ امروز به‌صورت خودکار در بالای صفحه نمایش داده می‌شود. اگر روز دیگری مدنظر دارید، با دکمه‌های «›» و «‹» جابه‌جا شوید یا روی «امروز» بزنید.</li>
+            <li>روز هفته به‌صورت خودکار انتخاب می‌شود. اگر <b>پنجشنبه یا جمعه</b> باشد، برنامه خودکار آن را تعطیل ثبت می‌کند و نیازی به ثبت نیست.</li>
+            <li>روی کارت هر دانش‌آموز در لیست کلیک کنید تا انتخاب شود.</li>
+            <li>یکی از ۴ دکمه پایین صفحه را بزنید:
+              <ul>
+                <li>✔️ <b>حاضر</b></li>
+                <li>❌ <b>غایب غیرموجه</b></li>
+                <li>⏰ <b>تأخیر</b></li>
+                <li>📝 <b>غایب موجه</b></li>
+              </ul>
+            </li>
+            <li>پس از ثبت، به‌طور خودکار دانش‌آموز بعدی انتخاب می‌شود تا سریع ثبت را ادامه دهید. با هر ثبت یک بوق کوتاه و لرزش دریافت می‌کنید.</li>
+            <li>اگر می‌خواهید سریع همه را حاضر کنید، از دکمه «✅ همه حاضر» استفاده کنید و بعد فقط استثناها را تغییر دهید.</li>
+            <li>اگر وضعیت بعضی دانش‌آموزان جا افتاد، بنر کهربایی «ثبت ناقص» در بالای صفحه ظاهر می‌شود؛ با دکمه «✅ بقیه حاضر» یا انتخاب تکی، کامل کنید.</li>
+            <li><span class="new">هشدار هوشمند</span>اگر دانش‌آموزی ۳ روز پشت سر هم غایب باشد، بج قرمز «⚠️ X غیبت پی‌درپی» روی کارت او نمایش داده می‌شود.</li>
           </ul>
 
-          <h4><span class="num">۴</span>تعطیلی خودکار</h4>
-          <p>روزهای <b>پنج‌شنبه</b> و <b>جمعه</b> خودکار به‌عنوان تعطیل ثبت می‌شوند.</p>
+          <h4><span class="num">گام ۴</span>یادداشت و ذخیره‌ی روز</h4>
           <ul>
-            <li>در این روزها نیازی به ثبت نیست و دکمه‌های وضعیت غیرفعال هستند.</li>
-            <li>می‌توانید با کلیک روی دکمه «🚫 تعطیل» حالت تعطیلی را دستی برای روز دلخواه فعال کنید.</li>
+            <li>در کادر «📝 یادداشت روز» می‌توانید توضیح یا نکته‌ای درباره‌ی امروز بنویسید (اختیاری).</li>
+            <li>تغییرات خودکار ذخیره می‌شوند، اما برای اطمینان دکمه «💾 ذخیره» را بزنید.</li>
+            <li>اگر می‌خواهید همه‌ی وضعیت‌های امروز را پاک کنید، «♻️ بازنشانی» را بزنید — تا ۵ ثانیه فرصت بازگردانی (Undo) دارید.</li>
           </ul>
 
-          <h4><span class="num">۵</span>آرشیو و گزارش‌ها</h4>
+          <h4><span class="num">گام ۵</span>اطلاع سریع به والدین</h4>
           <ul>
-            <li><b>آرشیو:</b> مرور روزهای گذشته با خلاصه آمار هر روز.</li>
-            <li><b>کارنامه:</b> وضعیت یک دانش‌آموز در بازه مشخص.</li>
-            <li><b>گزارش کلی:</b> خلاصه همه دانش‌آموزان کلاس.</li>
-            <li><b>غایبین:</b> متن آماده ارسال در شاد یا پیامک.</li>
-            <li><span class="new">جدید</span><b>گزارش والدین:</b> کارنامه ماهانه با سربرگ رسمی قابل چاپ و ارسال به والدین.</li>
-            <li><b>بازه سریع:</b> این هفته، این ماه، ترم اول، ترم دوم.</li>
-            <li><b>ذخیره عکس:</b> هر گزارش را به‌صورت تصویر PNG ذخیره کنید.</li>
+            <li>برای اطلاع دادن به والدین یک دانش‌آموز خاص، کارت او را <b>نگه دارید</b> (حدود ۶۵۰ میلی‌ثانیه) تا پنجره‌ی «مدیریت دانش‌آموز» باز شود.</li>
+            <li>در این پنجره دو دکمه مهم دارید:
+              <ul>
+                <li>📨 <b>پیام آماده</b> — پیامک را با متن آماده باز می‌کند.</li>
+                <li>💬 <b>ارسال به شاد</b> — متن را کپی می‌کند و شاد را باز می‌کند.</li>
+              </ul>
+            </li>
+            <li>برای اطلاع گروهی به همه‌ی غایبین امروز: به «📊 گزارش‌ها» بروید، تب «📨 غایبین» را انتخاب کنید و دکمه «💬 ارسال به شاد» را بزنید.</li>
           </ul>
 
-          <h4><span class="num">۶</span>پشتیبان‌گیری و همگام‌سازی</h4>
+          <h4><span class="num">گام ۶</span>گزارش‌گیری و اطلاع به والدین</h4>
           <ul>
-            <li><span class="new">جدید</span><b>حالت آفلاین:</b> وقتی اینترنت قطع باشد، همه تغییرات محلی ذخیره و در نوار ابری با رنگ کهربایی نشان داده می‌شوند. پس از اتصال مجدد، خودکار ارسال می‌شوند.</li>
-            <li><b>دانلود پشتیبان:</b> فایل JSON فشرده‌شده (`.json.gz`).</li>
-            <li><b>بارگذاری:</b> دو حالت «ادغام هوشمند» یا «جایگزینی کامل».</li>
-            <li><b>خروجی اکسل:</b> فایل CSV سازگار با Excel فارسی.</li>
+            <li>روی آیکون 📊 در نوار بالای صفحه بزنید تا وارد گزارش‌ها شوید.</li>
+            <li>پنج تب در اختیار شماست:
+              <ul>
+                <li>🎯 <b>کارنامه:</b> وضعیت حضور یک دانش‌آموز در بازه دلخواه (۷ روز / ۳۰ روز / کل).</li>
+                <li>📄 <b>گزارش والدین:</b> کارنامه ماهانه با سربرگ رسمی — دکمه «📄 تولید PDF رسمی» کارنامه‌ای مناسب ارائه به والدین می‌سازد.</li>
+                <li>📨 <b>غایبین:</b> متن آماده برای ارسال در شاد یا پیامک (کپی/ارسال مستقیم به شاد).</li>
+                <li>📈 <b>کلی:</b> خلاصه‌ی همه دانش‌آموزان کلاس در بازه مشخص.</li>
+                <li>🗂️ <b>سابقه:</b> همه‌ی روزهای ثبت‌شده با آمار.</li>
+              </ul>
+            </li>
+            <li>برای هر گزارش می‌توانید با دکمه‌های سریع («این هفته»، «این ماه»، «ترم اول»، «ترم دوم») بازه را انتخاب کنید.</li>
+            <li>با دکمه «📸 ذخیره عکس» هر گزارش را به‌صورت تصویر PNG ذخیره کنید.</li>
           </ul>
 
-          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۳.۲.۱</span></div>
+          <h4><span class="num">گام ۷</span>مشاهده‌ی آرشیو</h4>
+          <ul>
+            <li>روی آیکون 🗂️ بزنید تا همه‌ی روزهای ثبت‌شده را ببینید.</li>
+            <li>روی هر روز کلیک کنید تا جزئیات حضور و غیاب آن روز را مشاهده کنید.</li>
+          </ul>
+
+          <h4><span class="num">گام ۸</span>پشتیبان‌گیری</h4>
+          <ul>
+            <li>روی آیکون 💾 بزنید تا وارد صفحه‌ی پشتیبان شوید.</li>
+            <li>با دکمه «⬇️ دانلود پشتیبان» یک فایل فشرده از داده‌ها دانلود کنید و در جای امن نگه دارید.</li>
+            <li>اگر لازم شد، می‌توانید با «📤 بارگذاری فایل» پشتیبان قبلی را بازگردانید (ادغام یا جایگزینی کامل).</li>
+            <li>با «📗 خروجی اکسل» فایل CSV سازگار با Excel فارسی می‌گیرید.</li>
+            <li><span class="new">حالت آفلاین</span>اگر اینترنت قطع باشد، همه‌ی تغییرات محلی ذخیره می‌شوند و در نوار ابری بالای صفحه با رنگ کهربایی نمایش داده می‌شوند. پس از اتصال، خودکار همگام می‌شوند.</li>
+          </ul>
+
+          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۳.۱.۲</span> — پایان راهنمای معلم</div>
         </div>
       </div>
 
       <div class="pane" id="helpMgrTab">
         <div class="helpBody">
 
-          <h4><span class="num">۱</span>ورود و داشبورد</h4>
+          <h4><span class="num">گام ۱</span>ورود مدیر</h4>
           <ul>
-            <li>در صفحه اول، روی «🔐 ورود مدیر» کلیک کنید و کد ۵ رقمی را وارد نمایید.</li>
-            <li>داشبورد شامل: کارت خلاصه امروز + کارت هر کلاس با آمار دقیق.</li>
+            <li>در صفحه‌ی اول، روی «🔐 ورود مدیر» کلیک کنید.</li>
+            <li>کد ۵ رقمی مدیریت را با صفحه‌کلید وارد کنید و روی «✅ تایید و ورود» بزنید.</li>
+            <li>اگر کد را نمی‌دانید، با سرپرست سامانه تماس بگیرید. (کد پیش‌فرض: <code>98765</code> — حتماً عوضش کنید.)</li>
           </ul>
 
-          <h4><span class="num">۲</span>چراغ وضعیت کلاس‌ها</h4>
-          <p>کنار نام هر کلاس در داشبورد، یک چراغ رنگی نمایش داده می‌شود:</p>
+          <h4><span class="num">گام ۲</span>افزودن کلاس‌ها (فقط بار اول یا هر ترم)</h4>
           <ul>
-            <li><span style="color:#22c55e;font-weight:800">● چراغ سبز:</span> معلم امروز ثبت را کامل کرده.</li>
-            <li><span style="color:#ff5a6e;font-weight:800">● چراغ قرمز:</span> ثبت ناقص یا اصلاً انجام نشده.</li>
-            <li><span style="color:#8ec9ba;font-weight:800">● چراغ خاکستری:</span> تعطیل یا کلاس خالی.</li>
+            <li>در داشبورد، روی آیکون ⚙️ (تنظیمات) بزنید.</li>
+            <li>تب «📚 کلاس‌ها» را انتخاب کنید.</li>
+            <li>در بخش «➕ افزودن کلاس» سه فیلد را پر کنید: <b>نام کلاس</b>، <b>نام معلم</b>، <b>کد ۵ رقمی</b> (یکتا).</li>
+            <li>دکمه ➕ را بزنید تا کلاس اضافه شود.</li>
+            <li>برای ویرایش هر کلاس، آیکون ✏️ و برای حذف، آیکون 🗑️ را در لیست پایین بزنید.</li>
           </ul>
 
-          <h4><span class="num">۳</span>مدیریت کلاس‌ها</h4>
-          <p>در «⚙️ تنظیمات → 📚 کلاس‌ها» می‌توانید کلاس‌ها را افزودن، ویرایش و حذف کنید. هر کلاس نیاز به نام + معلم + کد ۵ رقمی یکتا دارد.</p>
-
-          <h4><span class="num">۴</span>گزارش‌ها</h4>
+          <h4><span class="num">گام ۳</span>داشبورد روزانه</h4>
           <ul>
-            <li><span class="new">جدید</span><b>📋 گزارش کلاس‌ها:</b> به جای رتبه‌بندی قبلی، این بخش جایگزین شده است. دو حالت دارد:
+            <li>در داشبورد، خلاصه‌ی امروز مدرسه را در بالای صفحه می‌بینید: تعداد کلاس، دانش‌آموز، حاضر، غایب، تأخیر.</li>
+            <li>در بخش «📚 کلاس‌ها»، کارت هر کلاس نمایش داده می‌شود. کنار نام هر کلاس یک چراغ رنگی است:
               <ul>
-                <li><b>این ماه:</b> آمار از اول ماه جاری تا امروز.</li>
-                <li><b>تاکنون:</b> تمام آمار از ابتدای سال.</li>
+                <li><span style="color:#22c55e;font-weight:800">● سبز:</span> معلم امروز ثبت را کامل کرده.</li>
+                <li><span style="color:#ff5a6e;font-weight:800">● قرمز:</span> ثبت ناقص یا اصلاً انجام نشده.</li>
+                <li><span style="color:#8ec9ba;font-weight:800">● خاکستری:</span> امروز تعطیل یا کلاس خالی.</li>
               </ul>
-              برای هر کلاس، لیستی از دانش‌آموزان با ستون‌های «حاضر، غایب غیرموجه، غایب موجه، تأخیر» نمایش داده می‌شود. قابل تبدیل به PDF رسمی.
             </li>
-            <li><b>📨 غایبین:</b> جدول خلاصه غایبین امروز.</li>
-            <li><b>🚫 غایبین به تفکیک کلاس:</b> لیست مرتب غایبین/تأخیر/موجه امروز، گروه‌بندی‌شده بر اساس کلاس — قابل تبدیل به PDF رسمی.</li>
-            <li><b>📈 روند:</b> نمودار ۷ روز اخیر.</li>
-            <li><b>📅 بازه دلخواه:</b> با دکمه‌های سریع (این هفته، این ماه، ترم اول، ترم دوم).</li>
-            <li><b>🗂️ نمای کلی مدرسه:</b> خلاصه آمار مدرسه.</li>
+            <li>با کلیک روی هر کارت کلاس، وارد جزئیات آن می‌شوید (دانش‌آموزان، سابقه، خلاصه).</li>
+            <li>برای به‌روزرسانی، روی 🔄 بزنید.</li>
           </ul>
 
-          <h4><span class="num">۵</span>پیام مدرسه</h4>
-          <p>با دکمه «📢» در نوار بالایی داشبورد، پیامی برای همه کاربران ارسال کنید. پیام در بالای صفحه معلم‌ها با بنر بنفش ظاهر می‌شود.</p>
-
-          <h4><span class="num">۶</span>تنظیمات</h4>
+          <h4><span class="num">گام ۴</span>بررسی و پیام سریع به والدین</h4>
           <ul>
-            <li><b>🔐 رمز مدیر:</b> تغییر کد ۵ رقمی ورود.</li>
-            <li><b>📚 کلاس‌ها:</b> مدیریت کامل کلاس‌ها.</li>
-            <li><b>🗑️ داده‌های قدیمی:</b> حذف رکوردهای قدیمی‌تر از بازه‌ی مشخص برای آزادسازی حافظه.</li>
+            <li>روی آیکون 📊 (گزارش‌ها) در نوار بالا بزنید.</li>
+            <li>تب «🚫 غایبین به تفکیک کلاس» را انتخاب کنید.</li>
+            <li>غایبین، تأخیرها و موجه‌های امروز به‌تفکیک کلاس فهرست می‌شوند.</li>
+            <li><span class="new">جدید</span>کنار هر دانش‌آموز یک دکمه <b style="color:var(--teal);font-size:15px">📨</b> وجود دارد:
+              <ul>
+                <li>با لمس آن، متن پیام آماده مخصوص همان دانش‌آموز کپی می‌شود.</li>
+                <li>متن شامل: نام دانش‌آموز، تاریخ، کلاس، معلم و نوع وضعیت (غایب غیرموجه / تأخیر / موجه).</li>
+                <li>کافی است در شاد یا پیامک بچسبانید و به والدین بفرستید.</li>
+              </ul>
+            </li>
+            <li>برای پرینت یا PDF رسمی این گزارش، از دکمه‌های «📄 PDF رسمی» و «🖨️ پرینت» استفاده کنید.</li>
           </ul>
 
-          <h4><span class="num">۷</span>پشتیبان و همگام‌سازی</h4>
+          <h4><span class="num">گام ۵</span>گزارش‌های مدیریتی</h4>
           <ul>
-            <li><b>دانلود پشتیبان:</b> فایل JSON فشرده‌شده کل مدرسه.</li>
-            <li><b>بارگذاری:</b> دو حالت «ادغام هوشمند» یا «جایگزینی کامل».</li>
-            <li><b>خروجی اکسل:</b> فایل CSV کل مدرسه.</li>
-            <li><span class="new">جدید</span><b>پشتیبان خودکار هفتگی:</b> سامانه به‌صورت خودکار هر ۷ روز یک نسخه از داده‌ها را در حافظه محلی ذخیره می‌کند (۴ نسخه آخر نگه داشته می‌شود).</li>
-            <li><span class="new">جدید</span><b>حالت آفلاین:</b> وقتی اینترنت قطع باشد، تغییرات صف‌بندی شده و پس از اتصال خودکار ارسال می‌شوند.</li>
+            <li>در همان صفحه گزارش‌ها، شش تب در اختیار شماست:
+              <ul>
+                <li>📋 <b>گزارش کلاس‌ها:</b> جایگزین رتبه‌بندی قبلی. دو حالت «این ماه» و «تاکنون». برای هر کلاس، جدولی از دانش‌آموزان با ستون‌های «حاضر، غایب غیرموجه، غایب موجه، تأخیر» نشان می‌دهد. قابل تبدیل به PDF رسمی.</li>
+                <li>📨 <b>غایبین:</b> جدول خلاصه‌ی غایبین امروز مدرسه.</li>
+                <li>🚫 <b>غایبین به تفکیک کلاس:</b> لیست گروهی غایبین/تأخیر/موجه امروز به‌همراه دکمه 📨 برای هر دانش‌آموز.</li>
+                <li>📈 <b>روند:</b> مقایسه ۷ روز اخیر کلاس‌ها.</li>
+                <li>📅 <b>بازه دلخواه:</b> انتخاب تاریخ شروع و پایان با دکمه‌های سریع.</li>
+                <li>🗂️ <b>نمای کلی:</b> خلاصه کل مدرسه.</li>
+              </ul>
+            </li>
+            <li>دکمه «📄 PDF رسمی» در بالای صفحه، خلاصه‌ی کل مدرسه را با سربرگ رسمی و جای مهر و امضا آماده می‌کند.</li>
           </ul>
 
-          <h4><span class="num">۸</span>امنیت</h4>
+          <h4><span class="num">گام ۶</span>پیام مدرسه</h4>
           <ul>
-            <li>خروج خودکار مدیر پس از ۱۵ دقیقه عدم فعالیت.</li>
-            <li>کد ۵ رقمی مدیر فقط برای مدیر — توصیه می‌شود هر ترم تغییر کند.</li>
+            <li>روی آیکون 📢 در نوار بالا بزنید.</li>
+            <li>متن پیام را بنویسید و «💾 ارسال» را بزنید.</li>
+            <li>پیام شما در بالای صفحه‌ی معلم‌ها با بنر بنفش ظاهر می‌شود.</li>
+            <li>برای پاک کردن پیام، دکمه «🗑️ پاک کردن» را بزنید.</li>
           </ul>
 
-          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۳.۲.۱</span></div>
+          <h4><span class="num">گام ۷</span>تنظیمات و امنیت</h4>
+          <ul>
+            <li>روی آیکون ⚙️ بزنید تا تنظیمات باز شود.</li>
+            <li>تب «🔐 رمز مدیر»: با وارد کردن کد فعلی و کد جدید، رمز خود را تغییر دهید.</li>
+            <li>تب «📚 کلاس‌ها»: مدیریت کامل کلاس‌ها (افزودن، ویرایش، حذف).</li>
+            <li>تب «🗑️ داده‌های قدیمی»: می‌توانید رکوردهای قدیمی‌تر از بازه‌ی مشخص (۳ ماه، ۶ ماه، ۱ سال، ...) را حذف کنید تا حافظه آزاد شود. <b>قبل از حذف، حتماً پشتیبان بگیرید.</b></li>
+            <li>سامانه پس از ۱۵ دقیقه عدم فعالیت، خودکار شما را از پنل مدیر خارج می‌کند.</li>
+          </ul>
+
+          <h4><span class="num">گام ۸</span>پشتیبان‌گیری کامل مدرسه</h4>
+          <ul>
+            <li>روی آیکون 💾 در نوار بالا بزنید تا صفحه‌ی پشتیبان مدیر باز شود.</li>
+            <li>«⬇️ دانلود پشتیبان» یک فایل فشرده از همه‌ی داده‌های مدرسه (کلاس‌ها + رکوردها + پیام + رمز مدیر) می‌دهد.</li>
+            <li>«📤 بارگذاری فایل» برای بازگردانی پشتیبان — دو حالت «🔀 ادغام هوشمند» و «🔄 جایگزینی کامل».</li>
+            <li>«📗 خروجی اکسل» فایل CSV سازگار با Excel فارسی می‌دهد.</li>
+            <li><span class="new">پشتیبان خودکار</span>سامانه هر ۷ روز به‌صورت خودکار یک نسخه از داده‌ها را در حافظه‌ی محلی ذخیره می‌کند (۴ نسخه‌ی آخر نگه داشته می‌شود).</li>
+            <li><span class="new">حالت آفلاین</span>اگر اینترنت قطع باشد، تغییرات صف‌بندی می‌شوند و پس از اتصال خودکار ارسال می‌شوند.</li>
+          </ul>
+
+          <h4><span class="num">گام ۹</span>خروج</h4>
+          <ul>
+            <li>روی آیکون 🚪 در نوار بالای داشبورد بزنید و تایید کنید تا از پنل مدیر خارج شوید.</li>
+          </ul>
+
+          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۳.۱.۲</span> — پایان راهنمای مدیر</div>
         </div>
       </div>
 
@@ -909,7 +980,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       <div class="aboutSchool">دبستان برکت<br>شهید حسین نیکی ملکی یک</div>
       <div class="aboutLoc">📍 اراک، ناحیه ۲</div>
       <div class="aboutThanks">🌿 با هدف تسهیل کار معلمان و مدیران</div>
-      <div style="margin-top:14px"><span class="versionBadge">نسخه ۳.۲.۱</span></div>
+      <div style="margin-top:14px"><span class="versionBadge">نسخه ۳.۱.۲</span></div>
       <div class="shadBox">
         <div class="shadHint">📢 کانال شاد:</div>
         <a href="https://shad.ir/hossini_10" class="shadLink" target="_blank" rel="noopener noreferrer">
@@ -1154,19 +1225,13 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="vcHeader">
     <span class="vcIcon">🆕</span>
     <div>
-      <div class="vcTitle">نسخه <span id="vcVersion">۳.۲.۱</span></div>
+      <div class="vcTitle">نسخه <span id="vcVersion">۳.۱.۲</span></div>
       <div class="vcSub">تغییرات این نسخه</div>
     </div>
   </div>
   <ul class="vcList">
-    <li><span class="em">📡</span><span>حالت آفلاین واقعی + صف همگام‌سازی خودکار</span></li>
-    <li><span class="em">💬</span><span>اتصال مستقیم به شاد برای اطلاع به والدین</span></li>
-    <li><span class="em">🔔</span><span>اعلان صوتی و لرزشی هنگام ثبت وضعیت</span></li>
-    <li><span class="em">⚠️</span><span>هشدار غیبت‌های پی‌درپی روی کارت دانش‌آموز</span></li>
-    <li><span class="em">📄</span><span>گزارش ماهانه PDF برای والدین</span></li>
-    <li><span class="em">💾</span><span>پشتیبان خودکار هفتگی با نگهداری ۴ نسخه</span></li>
-    <li><span class="em">📋</span><span>گزارش ماهانه و تجمعی هر کلاس در پنل مدیر</span></li>
-    <li><span class="em">📘</span><span>راهنمای به‌روز در دو بخش معلم و مدیر</span></li>
+    <li><span class="em">📨</span><span>دکمه پیام سریع برای هر دانش‌آموز در تب «غایبین به تفکیک کلاس»</span></li>
+    <li><span class="em">📘</span><span>راهنمای گام‌به‌گام معلم و مدیر از ورود تا خروجی</span></li>
   </ul>
   <div class="vcFooter">🌿 با تشکر از استفاده شما</div>
 </div>
@@ -1188,7 +1253,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 /* ============================================================
    نسخه برنامه
 ============================================================ */
-var APP_VERSION = '3.2.1';
+var APP_VERSION = '3.1.2';
 
 /* ============================================================
    ۱) لاگ‌نما
@@ -1399,7 +1464,6 @@ async function cloudSaveConfig(){
   try{ await fdb.collection('config').doc('school').set(payload, { merge: true }); }
   catch(e){ queueSync('config', 'school', payload); console.warn('cloudSaveConfig: ' + e.message); }
 }
-/* اصلاح باگ ۲: حذف شرط if(!fdb) تا در حالت Firebase بار نشده هم صف شود */
 async function cloudSaveClass(id, data){
   if(!cloudReady || !fdb || !navigator.onLine){
     queueSync('class', id, data);
@@ -1575,7 +1639,6 @@ function d2j(jdn){
   else { jy-=1; k+=179; if(r.leap===1) k+=1; }
   jm=7+div(k,30); jd=mod(k,30)+1; return {jy:jy,jm:jm,jd:jd};
 }
-/* اصلاح باگ ۱: تابع تشخیص آخرین روز ماه جلالی */
 function lastDayOfJalaliMonth(year, month){
   if(month <= 6) return 31;
   if(month <= 11) return 30;
@@ -1641,7 +1704,6 @@ function toast(msg,type,opts){
    ۶) اعلان صوتی و لرزشی + کپی به کلیپ‌بورد
 ============================================================ */
 var _audioCtx = null;
-/* اصلاح باگ ۵: ساخت AudioContext در اولین تعامل کاربر */
 function initAudioOnFirstInteraction(){
   try{
     if(!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1685,7 +1747,6 @@ function doVibrate(){
 }
 function recordFeedback(){ playBeep(); doVibrate(); }
 
-/* اصلاح باگ ۶: کپی با فالبک */
 function copyToClipboard(text){
   if(navigator.clipboard && window.isSecureContext){
     return navigator.clipboard.writeText(text);
@@ -1851,7 +1912,6 @@ function applyTheme(theme){
 }
 function loadTheme(){ try{ applyTheme(localStorage.getItem(LS_THEME)||'default'); }catch(e){ applyTheme('default'); } }
 
-/* اصلاح باگ ۷: هشدار غیبت پی‌درپی با بررسی فاصله زمانی واقعی */
 function computeConsecutiveMap(){
   var recs = Object.values(DB.records || {}).filter(function(r){ return !r.holiday && r.date; });
   recs.sort(function(a,b){
@@ -1867,7 +1927,6 @@ function computeConsecutiveMap(){
       var r = recs[i];
       var rd = parseJalali(r.date);
       if(!rd) continue;
-      // اگر فاصله از آخرین رکورد بیش از ۴ روز باشد (شامل تعطیلات)، رشته قطع می‌شود
       if(lastDate){
         var gapDays = Math.round((lastDate - rd) / 86400000);
         if(gapDays > 4) break;
@@ -2049,7 +2108,6 @@ function sortedStudents(){
   });
   return list;
 }
-/* اصلاح باگ ۸: consecMap همیشه محاسبه می‌شود */
 function renderStudents(){
   var box=$('studentList'); if(!box) return;
   var rec=getRec(false);
@@ -2961,7 +3019,6 @@ function doCleanupOldData(){
 ============================================================ */
 function loadAutoBackups(){ try{ return JSON.parse(localStorage.getItem(LS_AUTO_BACKUPS) || '[]'); }catch(e){ return []; } }
 function saveAutoBackups(arr){ try{ localStorage.setItem(LS_AUTO_BACKUPS, JSON.stringify(arr)); }catch(e){} }
-/* اصلاح باگ ۳: متغیر saved برای ثبت موفقیت‌آمیز بودن پشتیبان */
 function autoWeeklyBackup(){
   try{
     var last = parseInt(localStorage.getItem(LS_LAST_AUTO_BACKUP) || '0', 10) || 0;
@@ -3036,7 +3093,6 @@ function checkVersionCard(){
 /* ============================================================
    ۱۸) گزارش کلاس‌ها (جایگزین رتبه‌بندی)
 ============================================================ */
-/* اصلاح باگ ۱: استفاده از lastDayOfJalaliMonth */
 function getClassStudentStats(cls, mode){
   var fromStr, toStr;
   if(mode === 'month'){
@@ -3779,7 +3835,6 @@ bind('btnGenImage', function(){
   });
 });
 
-/* اصلاح باگ ۴: رد کردن دکمه‌های data-cr از listener qBtn */
 document.querySelectorAll('.qBtn').forEach(function(b){
   if(b.dataset.cr) return;
   b.onclick = function(){
@@ -3941,7 +3996,6 @@ function buildParentStudentSelect(){
   sel.innerHTML=sorted.map(function(s){ return '<option value="'+s.id+'">'+escapeHtml(s.name)+' — '+escapeHtml(s.father||'—')+'</option>'; }).join('');
   if(cur && DB.students.some(function(s){ return s.id===cur; })) sel.value=cur;
 }
-/* اصلاح باگ ۱: استفاده از lastDayOfJalaliMonth */
 function getCurrentMonthRange(){
   var now = new Date();
   var j = d2j(g2d(now.getFullYear(), now.getMonth() + 1, now.getDate()));
@@ -4287,6 +4341,28 @@ function collectAbsentAllToday(){
   });
   return { date: today, dayName: dayName, groups: groups, totalAbsent: tA, totalLate: tL, totalExcused: tE };
 }
+
+/* ساخت متن پیام سریع برای دانش‌آموز بر اساس وضعیت */
+function buildQuickStudentMsg(student, status, dateStr, clsDef){
+  var statusLabel = '';
+  var statusIcon = '';
+  if(status === 'absent'){ statusLabel = 'غایب غیرموجه'; statusIcon = '❌'; }
+  else if(status === 'late'){ statusLabel = 'با تأخیر حاضر شد'; statusIcon = '⏰'; }
+  else if(status === 'excused'){ statusLabel = 'غایب موجه'; statusIcon = '📝'; }
+  else { statusLabel = 'حاضر'; statusIcon = '✔️'; }
+  var lines = [];
+  lines.push('سلام، والد گرامی ' + student.name);
+  lines.push('');
+  lines.push('📅 ' + dateStr);
+  lines.push('🏫 ' + getSchoolName());
+  lines.push('📚 کلاس: ' + (clsDef.name || '—'));
+  lines.push('👨‍🏫 معلم: ' + (clsDef.teacher || '—'));
+  lines.push(statusIcon + ' وضعیت امروز: ' + statusLabel);
+  lines.push('');
+  lines.push('با تشکر 🌿');
+  return lines.join('\n');
+}
+
 function renderMgrAllAbsentToday(){
   var out = $('mgrRepAbsentAllOut');
   if(!out) return;
@@ -4316,23 +4392,50 @@ function renderMgrAllAbsentToday(){
       html += '<div class="absentRow absent-a"><span class="arBadge">❌</span>' +
         '<div class="arInfo"><div class="arName">' + escapeHtml(s.name) + '</div>' +
         '<div class="arMeta">پدر: ' + escapeHtml(s.father||'—') + ' · شاد: <span dir="ltr">' + toFa(s.shad||'—') + '</span></div></div>' +
-        '<span class="arStatus absent">غایب</span></div>';
+        '<span class="arStatus absent">غایب</span>' +
+        '<button class="arMsgBtn" data-sid="'+escapeHtml(s.id)+'" data-cid="'+escapeHtml(g.cls.meta.classId)+'" data-status="absent" data-date="'+escapeHtml(data.date)+'" title="ارسال پیام سریع">📨</button></div>';
     });
     g.late.forEach(function(s){
       html += '<div class="absentRow absent-l"><span class="arBadge">⏰</span>' +
         '<div class="arInfo"><div class="arName">' + escapeHtml(s.name) + '</div>' +
         '<div class="arMeta">پدر: ' + escapeHtml(s.father||'—') + ' · شاد: <span dir="ltr">' + toFa(s.shad||'—') + '</span></div></div>' +
-        '<span class="arStatus late">تأخیر</span></div>';
+        '<span class="arStatus late">تأخیر</span>' +
+        '<button class="arMsgBtn" data-sid="'+escapeHtml(s.id)+'" data-cid="'+escapeHtml(g.cls.meta.classId)+'" data-status="late" data-date="'+escapeHtml(data.date)+'" title="ارسال پیام سریع">📨</button></div>';
     });
     g.excused.forEach(function(s){
       html += '<div class="absentRow absent-e"><span class="arBadge">📝</span>' +
         '<div class="arInfo"><div class="arName">' + escapeHtml(s.name) + '</div>' +
         '<div class="arMeta">پدر: ' + escapeHtml(s.father||'—') + ' · شاد: <span dir="ltr">' + toFa(s.shad||'—') + '</span></div></div>' +
-        '<span class="arStatus excused">موجه</span></div>';
+        '<span class="arStatus excused">موجه</span>' +
+        '<button class="arMsgBtn" data-sid="'+escapeHtml(s.id)+'" data-cid="'+escapeHtml(g.cls.meta.classId)+'" data-status="excused" data-date="'+escapeHtml(data.date)+'" title="ارسال پیام سریع">📨</button></div>';
     });
     html += '</div></div>';
   });
   out.innerHTML = html;
+
+  /* بایند دکمه‌های پیام سریع */
+  out.querySelectorAll('.arMsgBtn').forEach(function(btn){
+    btn.onclick = function(e){
+      e.stopPropagation();
+      var sid = btn.dataset.sid;
+      var cid = btn.dataset.cid;
+      var status = btn.dataset.status;
+      var dateStr = btn.dataset.date;
+      var clsData = null;
+      for(var i=0;i<MGR.classes.length;i++) if(MGR.classes[i].meta.classId === cid){ clsData = MGR.classes[i]; break; }
+      if(!clsData){ toast('کلاس یافت نشد','err'); return; }
+      var student = clsData.students.find(function(x){ return x.id === sid; });
+      if(!student){ toast('دانش‌آموز یافت نشد','err'); return; }
+      var def = getClassDef(cid);
+      var msg = buildQuickStudentMsg(student, status, dateStr, def);
+      copyToClipboard(msg).then(function(){
+        toast('📨 پیام کپی شد — در شاد بچسبانید');
+      }).catch(function(){
+        toast('📨 متن پیام آماده است — دستی کپی کنید');
+      });
+      recordFeedback();
+    };
+  });
 }
 function exportAbsentAllPDF(){
   var data = collectAbsentAllToday();
@@ -4537,4 +4640,4 @@ function renderMgrOverview(){
 })();
 </script>
 </body>
-      </html>
+  </html>
