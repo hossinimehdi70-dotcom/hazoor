@@ -1,114 +1,81 @@
 /* ============================================================
    Service Worker — دفتر حضور و غیاب
-   برای آپدیت برنامه فقط VERSION را تغییر دهید
+   نسخه کش: هر بار نسخه‌ی برنامه را عوض کردید، اینجا هم عوض کنید
 ============================================================ */
-const VERSION      = 'v16.0.0';
-const STATIC_CACHE = `hazoor-static-${VERSION}`;
-const RUNTIME_CACHE= `hazoor-runtime-${VERSION}`;
-
-const APP_SHELL = [
+const CACHE_NAME = 'hazoor-v1.2.3';
+const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './icon.svg',
-  './icon-192.png',
-  './icon-512.png'
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
-/* ---------- نصب ---------- */
+/* نصب: کش کردن دارایی‌های اصلی */
 self.addEventListener('install', (event) => {
+  console.log('[SW] Installing...');
   event.waitUntil(
-    caches.open(STATIC_CACHE)
-      .then((cache) =>
-        Promise.allSettled(
-          APP_SHELL.map((url) =>
-            cache.add(url).catch((err) => console.warn('خطا در کش:', url, err))
-          )
-        )
-      )
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('[SW] Caching app shell');
+      return cache.addAll(ASSETS);
+    }).then(() => self.skipWaiting())
   );
 });
 
-/* ---------- فعال‌سازی ---------- */
+/* فعال‌سازی: پاک کردن کش‌های قدیمی */
 self.addEventListener('activate', (event) => {
+  console.log('[SW] Activating...');
   event.waitUntil(
-    caches.keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter((k) => k !== STATIC_CACHE && k !== RUNTIME_CACHE)
-            .map((k) => caches.delete(k))
-        )
-      )
-      .then(() => self.clients.claim())
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter((key) => key !== CACHE_NAME).map((key) => {
+          console.log('[SW] Removing old cache:', key);
+          return caches.delete(key);
+        })
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
-/* ---------- پاسخ به درخواست‌ها ---------- */
+/* درخواست‌ها: Network First برای Firebase، Cache First برای بقیه */
 self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  if (request.method !== 'GET') return;
+  const req = event.request;
+  if (req.method !== 'GET') return;
 
-  const url = new URL(request.url);
-  if (!url.protocol.startsWith('http')) return;
+  const url = new URL(req.url);
 
-  /* --- Google Fonts: Cache First --- */
-  if (
-    url.hostname.includes('fonts.googleapis.com') ||
-    url.hostname.includes('fonts.gstatic.com')
-  ) {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        if (cached) return cached;
-        return fetch(request)
-          .then((response) => {
-            if (response && response.ok) {
-              const clone = response.clone();
-              caches.open(RUNTIME_CACHE).then((c) => c.put(request, clone));
-            }
-            return response;
-          })
-          .catch(() => caches.match(request));
-      })
-    );
+  /* Firebase / گوگل: اصلاً کش نکن */
+  if (url.hostname.includes('firebase') ||
+      url.hostname.includes('googleapis') ||
+      url.hostname.includes('gstatic') ||
+      url.hostname.includes('firebaseio')) {
     return;
   }
 
-  /* --- ناوبری صفحه: Network First با fallback به index.html --- */
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(STATIC_CACHE).then((c) => c.put(request, clone));
-          return response;
-        })
-        .catch(() =>
-          caches.match(request).then((c) => c || caches.match('./index.html'))
-        )
-    );
-    return;
-  }
-
-  /* --- سایر منابع: Cache First با به‌روزرسانی در پس‌زمینه --- */
+  /* منابع دیگر: Cache First با fallback به شبکه */
   event.respondWith(
-    caches.match(request).then((cached) => {
-      const networkFetch = fetch(request)
-        .then((response) => {
-          if (response && response.ok && url.origin === location.origin) {
-            const clone = response.clone();
-            caches.open(RUNTIME_CACHE).then((c) => c.put(request, clone));
-          }
+    caches.match(req).then((cached) => {
+      if (cached) return cached;
+      return fetch(req).then((response) => {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
           return response;
-        })
-        .catch(() => cached);
-      return cached || networkFetch;
+        }
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(req, responseClone);
+        });
+        return response;
+      }).catch(() => {
+        /* آفلاین: برای ناوبری صفحه، index.html برگردان */
+        if (req.mode === 'navigate') {
+          return caches.match('./index.html');
+        }
+      });
     })
   );
 });
 
-/* ---------- دریافت پیام از صفحه ---------- */
+/* پیام از برنامه: امکان به‌روزرسانی دستی */
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
