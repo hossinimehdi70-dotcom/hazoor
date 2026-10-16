@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
 <meta name="theme-color" content="#03211d">
 <title>دفتر حضور و غیاب | مدرسه من</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="حضور و غیاب">
+<meta name="application-name" content="حضور و غیاب">
+<meta name="msapplication-TileColor" content="#03211d">
+<meta name="msapplication-TileImage" content="icons/icon-144.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{--teal:#14e0b0;--green:#22c55e;--cyan:#00ffd5;--stroke:rgba(20,224,176,.28);--txt:#eafff9;--muted:#8ec9ba;--red:#ff5a6e;--amber:#ffc44d;--blue:#5ab9ff;--violet:#b07cff;--shadow:0 18px 50px rgba(0,0,0,.45)}
@@ -111,11 +128,7 @@ input::placeholder,textarea::placeholder{color:#5f9c8e}
 .statusLight.red{background:#ff5a6e;color:#ff5a6e;animation:lightGlow 1.6s infinite}
 .statusLight.holiday{background:#8ec9ba;color:#8ec9ba;opacity:.55;box-shadow:none}
 @keyframes lightGlow{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.85)}}
-@keyframes statusWave{
-  0%{box-shadow:0 0 0 0 var(--wave-color,rgba(20,224,176,.7));transform:scale(1)}
-  40%{box-shadow:0 0 22px 6px var(--wave-color,rgba(20,224,176,.5));transform:scale(1.02)}
-  100%{box-shadow:0 0 0 0 transparent;transform:scale(1)}
-}
+@keyframes statusWave{0%{box-shadow:0 0 0 0 var(--wave-color,rgba(20,224,176,.7));transform:scale(1)}40%{box-shadow:0 0 22px 6px var(--wave-color,rgba(20,224,176,.5));transform:scale(1.02)}100%{box-shadow:0 0 0 0 transparent;transform:scale(1)}}
 .stu.wave{animation:statusWave .7s cubic-bezier(.4,0,.2,1)}
 .stu.wave[data-st=present]{--wave-color:rgba(0,255,213,.75)}
 .stu.wave[data-st=absent]{--wave-color:rgba(255,90,110,.75)}
@@ -734,10 +747,10 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         <div id="mgrRepClassReportOut"></div>
       </div>
       <div class="pane" id="mgrRepAbsentAllTab">
-        <div class="note info">💡 <b>غایبین و تأخیرها:</b> در این گزارش، هم غایبین (غیرموجه و موجه) و هم دانش‌آموزان با تأخیر امروز ثبت می‌شوند. با لمس دکمه <b style="color:var(--teal);font-size:14px">📨</b> روی هر ردیف، متن پیام مخصوص همان دانش‌آموز و همان وضعیت (غایب غیرموجه / تأخیر / موجه) کپی می‌شود و می‌توانید در شاد یا پیامک برای والدین بفرستید.</div>
+        <div class="note info">💡 <b>غایبین و تأخیرها:</b> در این گزارش، هم غایبین (غیرموجه و موجه) و هم دانش‌آموزان با تأخیر امروز ثبت می‌شوند. با لمس دکمه <b style="color:var(--teal);font-size:14px">📨</b> روی هر ردیف، متن پیام مخصوص همان دانش‌آموز و همان وضعیت کپی می‌شود.</div>
         <div class="row" style="margin-bottom:10px">
           <button class="btn" id="btnMgrAbsentAllPDF">📄 PDF رسمی</button>
-          <button class="btn ghost" id="btnMgrAbsentAllPrint">🖨️ پرینت</button>
+          <button class="btn ghost" id="btnMgrAbsentAllPrint">🖨️ پرینت ساده</button>
         </div>
         <div id="mgrRepAbsentAllOut"></div>
       </div>
@@ -932,7 +945,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
                 <li>کافی است در شاد یا پیامک بچسبانید و به والدین بفرستید.</li>
               </ul>
             </li>
-            <li>برای پرینت یا PDF رسمی این گزارش، از دکمه‌های «📄 PDF رسمی» و «🖨️ پرینت» استفاده کنید.</li>
+            <li>برای پرینت یا PDF رسمی این گزارش، از دکمه‌های «📄 PDF رسمی» و «🖨️ پرینت ساده» استفاده کنید.</li>
           </ul>
 
           <h4><span class="num">گام ۵</span>گزارش‌های مدیریتی</h4>
@@ -1003,8 +1016,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 <section id="pageAbout" class="page">
   <div class="glass centerCard" style="max-width:480px;padding:0;overflow:hidden;position:relative;border-radius:24px">
     <button class="mgrBack" data-back type="button" style="z-index:5;top:14px;left:14px">←</button>
-    
-    <!-- هدر گرادیانی -->
+
     <div style="background:linear-gradient(135deg,rgba(20,224,176,.28),rgba(176,124,255,.28));padding:38px 20px 26px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(20,224,176,.5),transparent 70%);filter:blur(24px)"></div>
       <div style="position:absolute;bottom:-50px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(176,124,255,.5),transparent 70%);filter:blur(24px)"></div>
@@ -1014,27 +1026,22 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         <div style="display:inline-block;margin-top:10px;padding:6px 16px;border-radius:20px;background:rgba(20,224,176,.18);border:1px solid rgba(20,224,176,.4);color:var(--teal);font-size:12.5px;font-weight:800;letter-spacing:.3px">🏥 مراقب سلامت</div>
       </div>
     </div>
-    
-    <!-- بدنه -->
+
     <div style="padding:24px 22px 26px">
-      <!-- مدرسه -->
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:16px;font-weight:900;line-height:1.95;color:var(--txt);letter-spacing:.2px">دبستان برکت<br>شهید حسین نیکی ملکی یک</div>
         <div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;border-radius:12px;background:rgba(255,196,77,.12);border:1px solid rgba(255,196,77,.35);color:var(--amber);font-size:13px;font-weight:800">📍 اراک، ناحیه ۲</div>
       </div>
-      
-      <!-- پیام -->
+
       <div style="text-align:center;padding:16px 14px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-size:13px;color:#cfe9e2;line-height:2;margin-bottom:20px">
         <div style="font-size:20px;margin-bottom:6px">🌿</div>
         با هدف تسهیل کار معلمان و مدیران<br>تقدیم به جامعه‌ی آموزش و پرورش
       </div>
-      
-      <!-- نسخه -->
+
       <div style="text-align:center;margin-bottom:22px">
         <span class="versionBadge" style="font-size:12px;padding:6px 16px">نسخه ۱.۲.۳</span>
       </div>
-      
-      <!-- ارتباط با سازنده -->
+
       <div style="padding-top:20px;border-top:1px dashed rgba(0,188,212,.35);text-align:center">
         <div style="font-size:13.5px;color:var(--muted);margin-bottom:14px;font-weight:800;letter-spacing:.3px">📬 ارتباط با سازنده</div>
         <a href="https://shad.ir/hossini_10" class="shadLink" target="_blank" rel="noopener noreferrer" style="width:100%;padding:14px 22px;font-size:15px;border-radius:14px;box-shadow:0 10px 26px rgba(0,188,212,.35)">
@@ -1275,12 +1282,13 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
     </div>
   </div>
   <ul class="vcList">
-    <li><span class="em">✨</span><span>انیمیشن موج رنگی هنگام ثبت وضعیت حضور/غیاب</span></li>
+    <li><span class="em">🐛</span><span>رفع باگ کلید رکورد روز (تاریخ+روز هفته)</span></li>
+    <li><span class="em">🐛</span><span>رفع باگ باقی‌ماندن وضعیت تعطیلی پس از لغو</span></li>
+    <li><span class="em">🐛</span><span>قفل درخواست‌های همزمان احراز هویت</span></li>
+    <li><span class="em">🐛</span><span>جلوگیری از بکاپ خودکار خالی</span></li>
+    <li><span class="em">✨</span><span>انیمیشن موج رنگی هنگام ثبت وضعیت</span></li>
     <li><span class="em">📅</span><span>تقویم تعطیلات رسمی سال تحصیلی</span></li>
-    <li><span class="em">✍️</span><span>امضای سامانه در پایین همه خروجی‌های PDF، پرینت و PNG</span></li>
-    <li><span class="em">🎨</span><span>صفحه‌ی سازنده بازطراحی‌شده و خواناتر</span></li>
-    <li><span class="em">📨</span><span>گزارش «غایبین و تأخیرها» به تفکیک کلاس با پیام سریع به والدین</span></li>
-    <li><span class="em">👥</span><span>امکان ثبت شماره موبایل و نام پدر تکراری برای دوقلوها</span></li>
+    <li><span class="em">📨</span><span>گزارش «غایبین و تأخیرها» با پیام سریع</span></li>
   </ul>
   <div class="vcFooter">🌿 با تشکر از استفاده شما</div>
 </div>
@@ -1302,7 +1310,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 /* ============================================================
    نسخه برنامه
 ============================================================ */
-var APP_VERSION = '1.2.3';
+var APP_VERSION = '1.2.4';
 var APP_SIGNATURE = 'سامانه حضور و غیاب مدرسه. سازنده مهدی حسینی';
 
 /* ============================================================
@@ -1330,24 +1338,14 @@ var APP_SIGNATURE = 'سامانه حضور و غیاب مدرسه. سازنده 
   if(clearBtn && logContent) clearBtn.onclick = function(){ logContent.innerHTML=''; };
 
   var origLog = console.log, origWarn = console.warn, origError = console.error;
-  console.log = function(){
-    var msg = Array.prototype.slice.call(arguments).map(function(a){
+  function fmtArgs(args){
+    return Array.prototype.slice.call(args).map(function(a){
       try { return (typeof a === 'object') ? JSON.stringify(a) : String(a); } catch(e){ return String(a); }
     }).join(' ');
-    appendLog('#7effe6', '[LOG]', msg); origLog.apply(console, arguments);
-  };
-  console.warn = function(){
-    var msg = Array.prototype.slice.call(arguments).map(function(a){
-      try { return (typeof a === 'object') ? JSON.stringify(a) : String(a); } catch(e){ return String(a); }
-    }).join(' ');
-    appendLog('#ffc44d', '[WARN]', msg); origWarn.apply(console, arguments);
-  };
-  console.error = function(){
-    var msg = Array.prototype.slice.call(arguments).map(function(a){
-      try { return (typeof a === 'object') ? JSON.stringify(a) : String(a); } catch(e){ return String(a); }
-    }).join(' ');
-    appendLog('#ff5a6e', '[ERR]', msg); origError.apply(console, arguments);
-  };
+  }
+  console.log = function(){ appendLog('#7effe6','[LOG]',fmtArgs(arguments)); origLog.apply(console,arguments); };
+  console.warn = function(){ appendLog('#ffc44d','[WARN]',fmtArgs(arguments)); origWarn.apply(console,arguments); };
+  console.error = function(){ appendLog('#ff5a6e','[ERR]',fmtArgs(arguments)); origError.apply(console,arguments); };
   window.addEventListener('error', function(e){
     appendLog('#ff5a6e', '[ERROR]', (e.message || '?') + ' @ ' + (e.lineno||'') + ':' + (e.colno||''));
   });
@@ -1436,6 +1434,7 @@ var firebaseConfig = {
 
 var fdb = null, fauth = null, cloudReady = false, cloudStatus = 'connecting';
 var cloudRetryTimer = null, firebaseSDKLoaded = false;
+var _authInFlight = false;  // [FIX #3] قفل درخواست همزمان احراز هویت
 
 function loadScript(src, timeoutMs){
   return new Promise(function(resolve, reject){
@@ -1496,6 +1495,7 @@ async function flushSyncQueue(){
       if(item.type === 'class'){
         var clean = JSON.parse(JSON.stringify(item.data));
         delete clean._isEmpty;
+        delete clean._recKeyMigrated;
         await fdb.collection('classes').doc(item.id).set(clean, { merge: false });
       } else if(item.type === 'config'){
         await fdb.collection('config').doc('school').set(item.data, { merge: true });
@@ -1522,6 +1522,7 @@ async function cloudSaveClass(id, data){
   try{
     var clean = JSON.parse(JSON.stringify(data));
     delete clean._isEmpty;
+    delete clean._recKeyMigrated;
     await fdb.collection('classes').doc(id).set(clean, { merge: false });
   }catch(e){
     queueSync('class', id, data);
@@ -1613,19 +1614,27 @@ function updateCloudStatus(status, reason){
   });
 }
 function attemptCloudInit(showToastMsg){
+  // [FIX #3] قفل درخواست‌های همزمان احراز هویت
+  if(_authInFlight){ console.log('attemptCloudInit: درخواست قبلی در جریان است'); return; }
   if(cloudRetryTimer){ clearTimeout(cloudRetryTimer); cloudRetryTimer = null; }
   if(!navigator.onLine){ updateCloudStatus('offline'); return; }
   if(!fauth){
     console.log('auth نیست، دوباره بارگذاری SDK');
-    loadFirebaseSDK().then(function(ok){ if(ok && fauth) attemptCloudInit(showToastMsg); else { updateCloudStatus('error','timeout'); scheduleRetry(); } });
+    _authInFlight = true;
+    loadFirebaseSDK().then(function(ok){
+      _authInFlight = false;
+      if(ok && fauth) attemptCloudInit(showToastMsg);
+      else { updateCloudStatus('error','timeout'); scheduleRetry(); }
+    });
     return;
   }
   updateCloudStatus('connecting');
   cloudReady = false;
+  _authInFlight = true;
   console.log('در حال signInAnonymously...');
   var resolved = false;
   var timer = setTimeout(function(){
-    if(resolved) return; resolved = true;
+    if(resolved) return; resolved = true; _authInFlight = false;
     console.warn('auth timeout (15 ثانیه)');
     updateCloudStatus('error','timeout');
     if(showToastMsg) toast('اتصال برقرار نشد','err');
@@ -1633,13 +1642,15 @@ function attemptCloudInit(showToastMsg){
   }, 15000);
   fauth.signInAnonymously()
     .then(function(user){
-      if(resolved) return; resolved = true; clearTimeout(timer); cloudReady = true;
+      if(resolved) return; resolved = true; clearTimeout(timer); _authInFlight = false;
+      cloudReady = true;
       console.log('✅ متصل شد: ' + user.uid);
       updateCloudStatus('connected'); syncFromCloud(false);
       if(showToastMsg) toast('✅ اتصال برقرار شد');
     })
     .catch(function(err){
-      if(resolved) return; resolved = true; clearTimeout(timer); cloudReady = false;
+      if(resolved) return; resolved = true; clearTimeout(timer); _authInFlight = false;
+      cloudReady = false;
       var code = err && err.code ? err.code : 'unknown';
       console.warn('auth error: ' + code + ' — ' + (err.message||''));
       var reason = (code === 'auth/network-request-failed') ? 'network' : 'auth';
@@ -1650,7 +1661,7 @@ function attemptCloudInit(showToastMsg){
 }
 function scheduleRetry(){
   if(cloudRetryTimer) clearTimeout(cloudRetryTimer);
-  cloudRetryTimer = setTimeout(function(){ if(!cloudReady && !document.hidden && navigator.onLine) attemptCloudInit(false); }, 30000);
+  cloudRetryTimer = setTimeout(function(){ if(!cloudReady && !document.hidden && navigator.onLine && !_authInFlight) attemptCloudInit(false); }, 30000);
 }
 
 /* ============================================================
@@ -1706,13 +1717,20 @@ var toEn = function(s){
 function jStr(jy,jm,jd){ return toFa(jy+'/'+pad2(jm)+'/'+pad2(jd)); }
 function dateToJalaliStr(d){ var j=d2j(g2d(d.getFullYear(),d.getMonth()+1,d.getDate())); return jStr(j.jy,j.jm,j.jd); }
 function todayJalali(){ return dateToJalaliStr(new Date()); }
+// [FIX #9] اعتبارسنجی دقیق با roundtrip
 function parseJalali(s){
   s=toEn(String(s).trim()).replace(/[-.]/g,'/');
   var m=s.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
   if(!m) return null;
   var jy=+m[1], jm=+m[2], jd=+m[3];
   if(jm<1||jm>12||jd<1||jd>31) return null;
-  try{ var g=d2g(j2d(jy,jm,jd)); return new Date(g.gy,g.gm-1,g.gd); }catch(e){ return null; }
+  try{
+    var jdn = j2d(jy,jm,jd);
+    var back = d2j(jdn);
+    if(back.jy!==jy || back.jm!==jm || back.jd!==jd) return null;
+    var g=d2g(jdn);
+    return new Date(g.gy,g.gm-1,g.gd);
+  }catch(e){ return null; }
 }
 function addDaysToJalali(s,n){ var d=parseJalali(s); if(!d) return todayJalali(); d.setDate(d.getDate()+n); return dateToJalaliStr(d); }
 var WEEK_FA=['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'];
@@ -1752,29 +1770,18 @@ function toast(msg,type,opts){
 }
 
 /* ============================================================
-   ۶) اعلان صوتی و لرزشی + کپی به کلیپ‌بورد
+   ۶) اعلان صوتی و لرزشی + کپی
 ============================================================ */
 var _audioCtx = null;
 function initAudioOnFirstInteraction(){
   try{
     if(!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if(_audioCtx.state === 'suspended'){
-      try { _audioCtx.resume(); } catch(e){}
-    }
+    if(_audioCtx.state === 'suspended'){ try { _audioCtx.resume(); } catch(e){} }
   }catch(e){}
 }
-document.addEventListener('touchstart', function once(){
-  initAudioOnFirstInteraction();
-  document.removeEventListener('touchstart', once);
-}, {once:true, passive:true});
-document.addEventListener('click', function once(){
-  initAudioOnFirstInteraction();
-  document.removeEventListener('click', once);
-}, {once:true});
-document.addEventListener('keydown', function once(){
-  initAudioOnFirstInteraction();
-  document.removeEventListener('keydown', once);
-}, {once:true});
+document.addEventListener('touchstart', function once(){ initAudioOnFirstInteraction(); document.removeEventListener('touchstart', once); }, {once:true, passive:true});
+document.addEventListener('click', function once(){ initAudioOnFirstInteraction(); document.removeEventListener('click', once); }, {once:true});
+document.addEventListener('keydown', function once(){ initAudioOnFirstInteraction(); document.removeEventListener('keydown', once); }, {once:true});
 
 function playBeep(){
   try{
@@ -1793,9 +1800,7 @@ function playBeep(){
     setTimeout(function(){ try { osc.stop(); } catch(e){} }, 90);
   }catch(e){}
 }
-function doVibrate(){
-  try{ if(navigator.vibrate) navigator.vibrate(30); }catch(e){}
-}
+function doVibrate(){ try{ if(navigator.vibrate) navigator.vibrate(30); }catch(e){} }
 function recordFeedback(){ playBeep(); doVibrate(); }
 
 function copyToClipboard(text){
@@ -1881,12 +1886,8 @@ function updateSchoolMsgBanner(){
   var msg = getSchoolMsg();
   var dismissed = '';
   try { dismissed = localStorage.getItem(LS_SCHOOL_MSG_DISMISSED) || ''; }catch(e){}
-  if(msg && dismissed !== '1'){
-    txt.textContent = msg;
-    box.classList.add('show');
-  } else {
-    box.classList.remove('show');
-  }
+  if(msg && dismissed !== '1'){ txt.textContent = msg; box.classList.add('show'); }
+  else box.classList.remove('show');
 }
 function getMgrPin(){ try{ var v=localStorage.getItem(LS_MGR_PIN); return (v && /^\d{5}$/.test(v)) ? v : DEFAULT_MGR_PIN; }catch(e){ return DEFAULT_MGR_PIN; } }
 function setMgrPin(pin){
@@ -1911,15 +1912,8 @@ function loadHolidays(){
   }catch(e){ _holidaysCache = []; }
   return _holidaysCache;
 }
-function saveHolidays(arr){
-  try{ localStorage.setItem(LS_HOLIDAYS, JSON.stringify(arr)); }catch(e){}
-  _invalidateHolidaysCache();
-  cloudSaveConfig();
-}
-function saveHolidaysLocalOnly(arr){
-  try{ localStorage.setItem(LS_HOLIDAYS, JSON.stringify(arr)); }catch(e){}
-  _invalidateHolidaysCache();
-}
+function saveHolidays(arr){ try{ localStorage.setItem(LS_HOLIDAYS, JSON.stringify(arr)); }catch(e){} _invalidateHolidaysCache(); cloudSaveConfig(); }
+function saveHolidaysLocalOnly(arr){ try{ localStorage.setItem(LS_HOLIDAYS, JSON.stringify(arr)); }catch(e){} _invalidateHolidaysCache(); }
 function addHoliday(dateStr, reason){
   var arr = loadHolidays().slice();
   arr = arr.filter(function(h){ return h.date !== dateStr; });
@@ -1930,10 +1924,7 @@ function addHoliday(dateStr, reason){
   });
   saveHolidays(arr);
 }
-function removeHoliday(id){
-  var arr = loadHolidays().filter(function(h){ return h.id !== id; });
-  saveHolidays(arr);
-}
+function removeHoliday(id){ saveHolidays(loadHolidays().filter(function(h){ return h.id !== id; })); }
 function isHolidayDate(dateStr){
   if(!dateStr) return false;
   var arr = loadHolidays();
@@ -2041,6 +2032,15 @@ function computeConsecutiveMap(){
 }
 
 /* ============================================================
+   [FIX #1] کلید رکورد: همیشه روز را از تاریخ مشتق کن
+   ============================================================ */
+function recKey(dateStr, day){
+  // همیشه روز هفته را از تاریخ محاسبه کن تا با تغییر دستی currentDay، کلید عوض نشود.
+  var wd = weekdayFa(dateStr);
+  return dateStr + '|' + (wd || day || '');
+}
+
+/* ============================================================
    ۹) رندر لیست کلاس‌ها و ورود
 ============================================================ */
 function renderFirstPageClassList(){
@@ -2129,13 +2129,12 @@ function enterTeacherApp(){
   updateSchoolMsgBanner();
 }
 function updateStudentCount(){ var el=$('stuCount'); if(el) el.textContent=toFa(DB.students.length)+' دانش‌آموز'; }
-function recKey(dateStr,day){ return dateStr+'|'+(day||''); }
 function getRec(create){
   var k=recKey(currentDate,currentDay);
   if(!DB.records[k] && create){
     var calHoli = isHolidayDate(currentDate);
     var autoHol = isWeekendHoliday(currentDay) || calHoli;
-    DB.records[k]={ date:currentDate, day:currentDay, holiday:autoHol,
+    DB.records[k]={ date:currentDate, day:weekdayFa(currentDate) || currentDay, holiday:autoHol,
       holidayReason: calHoli ? getHolidayReason(currentDate) : (autoHol?'تعطیل هفتگی':''),
       notes:'', att:{}, ts:Date.now() };
   }
@@ -2168,9 +2167,28 @@ function renderDays(){
       el.className='day'+(d===currentDay&&!isHoliday?' on':'');
       el.textContent=d;
       el.onclick=function(){
-        currentDay=d; isHoliday=isWeekendHoliday(d) || isHolidayDate(currentDate);
+        // [FIX #2] به‌روزرسانی رکورد همراه با تغییر روز
+        currentDay=d;
+        isHoliday = isWeekendHoliday(d) || isHolidayDate(currentDate);
+        var rec = getRec(true);
+        if(rec){
+          rec.day = d;
+          rec.holiday = isHoliday;
+          if(isHoliday){
+            if(!rec.holidayReason){
+              rec.holidayReason = isWeekendHoliday(d) ? 'تعطیل هفتگی' : (getHolidayReason(currentDate) || 'تعطیل');
+            }
+          } else {
+            rec.holidayReason = '';
+          }
+          rec.ts = Date.now();
+        }
         var hb=$('holidayBox'); if(hb) hb.classList.toggle('show', isHoliday);
-        renderDays(); renderStudents(); renderStats(); saveTeacherDB(); closeDaysDrawer();
+        var hr=$('holidayReason'); if(hr) hr.value = (rec && rec.holidayReason) || '';
+        renderDays(); renderStudents(); renderStats();
+        if(_saveDebounceTimer){ clearTimeout(_saveDebounceTimer); _saveDebounceTimer=null; }
+        saveTeacherDB();
+        closeDaysDrawer();
       };
       box.appendChild(el);
     })(DAYS[i]);
@@ -2179,9 +2197,20 @@ function renderDays(){
   h.className='day'+(isHoliday?' holiday':'');
   h.textContent='🚫 تعطیل';
   h.onclick=function(){
-    isHoliday=true; currentDay='';
+    // [FIX #2] currentDay را خالی نکن؛ رکورد را آپدیت کن
+    isHoliday=true;
+    var rec = getRec(true);
+    if(rec){
+      rec.holiday = true;
+      if(!rec.holidayReason) rec.holidayReason = getHolidayReason(currentDate) || 'تعطیل';
+      rec.ts = Date.now();
+    }
     var hb=$('holidayBox'); if(hb) hb.classList.add('show');
-    renderDays(); renderStudents(); renderStats(); saveTeacherDB(); closeDaysDrawer();
+    var hr=$('holidayReason'); if(hr) hr.value = (rec && rec.holidayReason) || '';
+    renderDays(); renderStudents(); renderStats();
+    if(_saveDebounceTimer){ clearTimeout(_saveDebounceTimer); _saveDebounceTimer=null; }
+    saveTeacherDB();
+    closeDaysDrawer();
   };
   box.appendChild(h);
   updateDaysCurrent();
@@ -2202,7 +2231,8 @@ function closeDaysDrawer(){
 function syncDayWithDate(){
   var wd=weekdayFa(currentDate);
   var calHoli = isHolidayDate(currentDate);
-  if(DAYS.indexOf(wd)>=0){ currentDay=wd; isHoliday=isWeekendHoliday(wd) || calHoli; } else { currentDay=''; isHoliday=true; }
+  if(DAYS.indexOf(wd)>=0){ currentDay=wd; isHoliday=isWeekendHoliday(wd) || calHoli; }
+  else { currentDay=''; isHoliday=true; }
   selectedStudentId=null;
   renderDateUI(); renderStudents(); renderStats(); saveTeacherDB(); updateDockButtons();
 }
@@ -2240,8 +2270,7 @@ function renderStudents(){
       var consec = consecMap[s.id] || 0;
       var warnHtml = (consec >= 3) ? '<span class="consecWarn" title="این دانش‌آموز '+toFa(consec)+' روز پی‌درپی غایب بوده">⚠️ '+toFa(consec)+' غیبت پی‌درپی</span>' : '';
       el.innerHTML='<div class="idx">'+toFa(idx+1)+'</div>' +
-        '<div class="stuMain"><div class="stuLine1">' +
-        warnHtml +
+        '<div class="stuMain"><div class="stuLine1">' + warnHtml +
         '<span class="stuName">'+escapeHtml(s.name)+'</span>' +
         '<span class="stuFather">'+escapeHtml(s.father||'—')+'</span>' +
         '</div><div class="stuPhoneRow">' +
@@ -2283,7 +2312,8 @@ function updateDockButtons(){
 function renderStats(){
   var rec=getRec(false); var total=DB.students.length;
   var p=0,a=0,l=0,e=0;
-  if(rec && !rec.holiday && !isHoliday){
+  // [FIX #6] فقط بر اساس rec.holiday تصمیم بگیر (نه isHoliday جهانی)
+  if(rec && !rec.holiday){
     for(var i=0;i<DB.students.length;i++){
       var st=(rec.att||{})[DB.students[i].id];
       if(st==='present')p++; else if(st==='absent')a++; else if(st==='late')l++; else if(st==='excused')e++;
@@ -2300,7 +2330,6 @@ function addStudent(){
   if(!name){ showErr('نام را وارد کنید'); $('aName').focus(); return; }
   if(!father){ showErr('نام پدر را وارد کنید'); $('aFather').focus(); return; }
   if(!/^09\d{9}$/.test(shad)){ showErr('شماره شاد نامعتبر (باید با ۰۹ شروع و ۱۱ رقم باشد)'); $('aShad').focus(); return; }
-  /* شماره تکراری و نام پدر تکراری مجاز است (برای دانش‌آموزان دوقلو یا خواهر/برادر) */
   DB.students.push({ id:'s'+Date.now()+Math.random().toString(36).slice(2,6), name:name, father:father, shad:shad });
   $('aName').value=$('aFather').value=$('aShad').value='';
   $('aName').focus();
@@ -2334,7 +2363,7 @@ function openStudentAction(id){
 }
 
 /* ============================================================
-   ۱۰) خروجی‌ها (پشتیبان، عکس، PDF)
+   ۱۰) خروجی‌ها
 ============================================================ */
 function downloadFile(name,content,type){
   var blob=new Blob([content],{type:type||'text/plain;charset=utf-8'});
@@ -2375,8 +2404,48 @@ async function readBackupFile(file, callback){
   };
   rd.readAsArrayBuffer(file);
 }
-function loadClassData(id){ try{ var raw=localStorage.getItem(classKey(id)); if(raw) return JSON.parse(raw); }catch(e){} return null; }
-function saveClassData(id, data){ try{ localStorage.setItem(classKey(id), JSON.stringify(data)); }catch(e){ toast('حافظه پر است','err'); } cloudSaveClass(id, data); }
+
+// [FIX #1] Migration: normalize record keys (date|day) → (date|realWeekday)
+function migrateRecordKeysIfNeeded(d){
+  if(!d || !d.records || d._recKeyMigrated) return d;
+  var newRecs = {};
+  Object.keys(d.records).forEach(function(k){
+    var parts = k.split('|');
+    var date = parts[0];
+    var rec = d.records[k];
+    if(!rec) return;
+    var properKey = recKey(date, null);
+    if(!newRecs[properKey] || (rec.ts||0) > (newRecs[properKey].ts||0)){
+      newRecs[properKey] = rec;
+      if(!newRecs[properKey].day) newRecs[properKey].day = weekdayFa(date);
+    }
+  });
+  d.records = newRecs;
+  d._recKeyMigrated = true;
+  return d;
+}
+
+function loadClassData(id){
+  try{
+    var raw=localStorage.getItem(classKey(id));
+    if(!raw) return null;
+    var d = JSON.parse(raw);
+    var before = d && d._recKeyMigrated ? '1' : '0';
+    d = migrateRecordKeysIfNeeded(d);
+    if(before === '0'){
+      try{ localStorage.setItem(classKey(id), JSON.stringify(d)); }catch(e){}
+    }
+    return d;
+  }catch(e){ return null; }
+}
+function saveClassData(id, data){
+  try{
+    var clean = Object.assign({}, data);
+    delete clean._recKeyMigrated; // این فلگ فقط محلی است
+    localStorage.setItem(classKey(id), JSON.stringify(clean));
+  }catch(e){ toast('حافظه پر است','err'); }
+  cloudSaveClass(id, data);
+}
 function buildMgrAllJSON(){
   var classes=loadClasses();
   var nonEmpty = [];
@@ -2398,14 +2467,23 @@ function detectBackupKind(d){
   if(d.meta && Array.isArray(d.students)) return 'teacher';
   return null;
 }
+// [FIX #5] merge صریح فیلدها
 function mergeClassData(existing, incoming){
   var sm = {};
   (existing.students || []).forEach(function(s){ if(s && s.id) sm[s.id]=s; });
   (incoming.students || []).forEach(function(s){
     if(!s || !s.id) return;
     var prev = sm[s.id];
-    if(prev){ sm[s.id] = Object.assign({}, prev, s, {name:s.name||prev.name, father:s.father||prev.father, shad:s.shad||prev.shad}); }
-    else sm[s.id] = s;
+    if(prev){
+      sm[s.id] = {
+        id: s.id,
+        name: (s.name && s.name.trim()) ? s.name : prev.name,
+        father: (s.father && s.father.trim()) ? s.father : prev.father,
+        shad: (s.shad && s.shad.trim()) ? s.shad : prev.shad
+      };
+    } else {
+      sm[s.id] = { id:s.id, name:s.name||'', father:s.father||'', shad:s.shad||'' };
+    }
   });
   var students = Object.keys(sm).map(function(k){ return sm[k]; });
   var rm = {};
@@ -2442,10 +2520,16 @@ function saveReportAsImage(opts){
   var tableH = 50 + (rows.length * rowH);
   var H = headerH + summaryH + tableH + footerH + padding*2;
 
+  // [FIX #7] مقیاس تطبیقی برای جلوگیری از خطای canvas بزرگ
+  var maxDim = 4000;
+  var scaleW = maxDim / W;
+  var scaleH = maxDim / H;
+  var scale = Math.min(2, scaleW, scaleH);
+  if(scale < 1) scale = 1;
+
   var canvas = document.createElement('canvas');
-  var scale = 2;
-  canvas.width = W * scale;
-  canvas.height = H * scale;
+  canvas.width = Math.floor(W * scale);
+  canvas.height = Math.floor(H * scale);
   var ctx = canvas.getContext('2d');
   ctx.scale(scale, scale);
 
@@ -2627,9 +2711,7 @@ function exportOfficialPDF(opts){
     '</div>' +
     summaryHtml +
     '<table><thead>' + thead + '</thead><tbody>' + tbody + '</tbody></table>' +
-    '<div style="margin-top:18px;font-size:11px;color:#555;text-align:left">' +
-      'تاریخ تولید: ' + escapeHtml(timeStr) +
-    '</div>' +
+    '<div style="margin-top:18px;font-size:11px;color:#555;text-align:left">تاریخ تولید: ' + escapeHtml(timeStr) + '</div>' +
     '<div class="officialFooter">' +
       '<div><div class="line"></div>مهر و امضای مدیر</div>' +
       '<div><div class="line"></div>مهر مدرسه</div>' +
@@ -2659,9 +2741,7 @@ function applyQuickRange(type, target){
     if(j.jm < 7) year -= 1;
     var fromStr = jStr(year, 7, 1);
     var toStr = jStr(year, 10, 30);
-    if(target === 'gen' || target === 'card'){
-      setTeacherRangeByDate(target, fromStr, toStr, '🍂 ترم اول');
-    }
+    if(target === 'gen' || target === 'card'){ setTeacherRangeByDate(target, fromStr, toStr, '🍂 ترم اول'); }
   } else if(type === 'term2'){
     var j2 = d2j(g2d(d.getFullYear(), d.getMonth()+1, d.getDate()));
     var year2 = j2.jy;
@@ -2915,7 +2995,11 @@ function renderMgrClsStudents(cls, s){
 }
 function renderMgrClsHistory(cls){
   var out=$('mgrClsHistoryOut'); if(!out) return;
-  var recs=Object.values(cls.records).sort(function(a,b){ return (b.ts||0)-(a.ts||0); }).slice(0,30);
+  var recs=Object.values(cls.records).sort(function(a,b){
+    var ad=parseJalali(a.date||''), bd=parseJalali(b.date||'');
+    if(ad && bd && ad.getTime()!==bd.getTime()) return bd - ad;
+    return (b.ts||0)-(a.ts||0);
+  }).slice(0,30);
   if(!recs.length){ out.innerHTML='<div class="mgrEmpty"><div class="big">🗂️</div><div>سابقه‌ای نیست</div></div>'; return; }
   var rows=recs.map(function(r){
     if(r.holiday) return '<tr><td>'+(r.date||'')+'</td><td>'+(r.day||'')+'</td><td colspan="5" class="center"><span class="pill h">🚫 تعطیل</span></td></tr>';
@@ -3009,6 +3093,7 @@ function openDeleteClassModal(id){
 
 /* ============================================================
    ۱۶) پشتیبان خودکار هفتگی
+   [FIX #4] جلوگیری از بکاپ خالی در اولین اجرا
 ============================================================ */
 function loadAutoBackups(){ try{ return JSON.parse(localStorage.getItem(LS_AUTO_BACKUPS) || '[]'); }catch(e){ return []; } }
 function saveAutoBackups(arr){ try{ localStorage.setItem(LS_AUTO_BACKUPS, JSON.stringify(arr)); }catch(e){} }
@@ -3018,21 +3103,35 @@ function autoWeeklyBackup(){
     var weekMs = 7 * 24 * 60 * 60 * 1000;
     if(Date.now() - last < weekMs) return false;
 
+    // [FIX #4] بررسی وجود داده واقعی قبل از بکاپ
+    var classes = loadClasses();
+    if(!classes.length) return false;
+    var hasData = false;
+    var classesData = [];
+    for(var i=0;i<classes.length;i++){
+      var d = loadClassData(classes[i].id);
+      if(d){
+        var stCount = (d.students && d.students.length) || 0;
+        var recCount = (d.records && Object.keys(d.records).length) || 0;
+        if(stCount > 0 || recCount > 0){ hasData = true; }
+        classesData.push(d);
+      }
+    }
+    if(!hasData){
+      console.log('autoWeeklyBackup: داده‌ای برای بکاپ وجود ندارد — رد شد');
+      return false;
+    }
+
     var backup = {
       ts: Date.now(),
       date: todayJalali(),
       school: getSchoolName(),
-      classes: loadClasses(),
-      classesData: [],
+      classes: classes,
+      classesData: classesData,
       schoolMsg: getSchoolMsg(),
       holidays: loadHolidays(),
       mgrPin: getMgrPin() === DEFAULT_MGR_PIN ? null : getMgrPin()
     };
-    var classes = loadClasses();
-    classes.forEach(function(c){
-      var d = loadClassData(c.id);
-      if(d) backup.classesData.push(d);
-    });
 
     var backups = loadAutoBackups();
     backups.push(backup);
@@ -3080,7 +3179,6 @@ function checkVersionCard(){
     };
     var closeBtn = vc.querySelector('.vcClose');
     if(closeBtn) closeBtn.onclick = hideFn;
-    /* افزایش زمان بسته‌شدن خودکار به ۸ ثانیه — برای خواندن کامل ۶ مورد */
     setTimeout(function(){ if(vc.classList.contains('show')) hideFn(); }, 8000);
   }catch(e){}
 }
@@ -3100,9 +3198,7 @@ function getClassStudentStats(cls, mode){
   var fromD = fromStr ? parseJalali(fromStr) : null;
   var toD = toStr ? parseJalali(toStr) : null;
   var stats = {};
-  cls.students.forEach(function(s){
-    stats[s.id] = { present: 0, absent: 0, late: 0, excused: 0 };
-  });
+  cls.students.forEach(function(s){ stats[s.id] = { present: 0, absent: 0, late: 0, excused: 0 }; });
   Object.keys(cls.records || {}).forEach(function(k){
     var r = cls.records[k];
     if(r.holiday) return;
@@ -3466,8 +3562,8 @@ document.querySelectorAll('.statusBtn').forEach(function(btn){
 
 bind('btnSaveDay', function(){
   var r=ensureRec();
-  if(isHoliday){ r.holiday=true; if(!r.holidayReason) r.holidayReason='تعطیل هفتگی'; r.holidayReason=$('holidayReason').value || r.holidayReason; }
-  else r.holiday=false;
+  if(isHoliday){ r.holiday=true; r.holidayReason=$('holidayReason').value || r.holidayReason || 'تعطیل'; }
+  else { r.holiday=false; r.holidayReason=''; }
   r.notes=$('dayNotes').value; r.ts=Date.now();
   if(_saveDebounceTimer){ clearTimeout(_saveDebounceTimer); _saveDebounceTimer=null; }
   saveTeacherDB();
@@ -3535,8 +3631,21 @@ if(dtoggle) dtoggle.onclick=function(e){
   if(dt) dt.classList.toggle('open');
 };
 document.addEventListener('click', function(e){ if(!e.target.closest('.daysWrap')) closeDaysDrawer(); });
-var hr=$('holidayReason'); if(hr) hr.addEventListener('input', function(){ var r=getRec(true); r.holiday=true; r.holidayReason=hr.value; debouncedSave(); });
-var dn=$('dayNotes'); if(dn) dn.addEventListener('input', function(){ var r=ensureRec(); r.notes=dn.value; r.ts=Date.now(); debouncedSave(); });
+var hr=$('holidayReason');
+if(hr) hr.addEventListener('input', function(){
+  var r=getRec(true);
+  r.holiday=true;
+  r.holidayReason=hr.value;
+  r.ts=Date.now();
+  debouncedSave();
+});
+var dn=$('dayNotes');
+if(dn) dn.addEventListener('input', function(){
+  var r=ensureRec();
+  r.notes=dn.value;
+  r.ts=Date.now();
+  debouncedSave();
+});
 
 var sl=$('studentList');
 if(sl){
@@ -3594,11 +3703,8 @@ bind('btnShadStu', function(){
             'امروز ' + (rec?rec.date:currentDate) + ' وضعیت: ' + statusLabel + '\n' +
             'کلاس: ' + def.name + ' — ' + DB.meta.teacher + '\n' +
             'با تشکر 🌿';
-  copyToClipboard(msg).then(function(){
-    toast('💬 متن کپی شد — در شاد بچسبانید');
-  }).catch(function(){
-    toast('💬 متن آماده است — در شاد بچسبانید');
-  });
+  copyToClipboard(msg).then(function(){ toast('💬 متن کپی شد — در شاد بچسبانید'); })
+    .catch(function(){ toast('💬 متن آماده است — در شاد بچسبانید'); });
   setTimeout(function(){
     try{ window.open('https://shad.ir', '_blank'); }
     catch(e){ try{ window.location.href = 'https://shad.ir'; }catch(e2){} }
@@ -3622,7 +3728,8 @@ bind('btnMgrLogout', function(){
 bind('mgrClsPrevDay', function(){ MGR.selectedDate=addDaysToJalali(MGR.selectedDate,-1); renderMgrClassPage(); });
 bind('mgrClsNextDay', function(){ MGR.selectedDate=addDaysToJalali(MGR.selectedDate,1); renderMgrClassPage(); });
 bind('mgrClsToday', function(){ MGR.selectedDate=todayJalali(); renderMgrClassPage(); });
-var mcd=$('mgrClsDate'); if(mcd) mcd.addEventListener('change', function(){
+var mcd=$('mgrClsDate');
+if(mcd) mcd.addEventListener('change', function(){
   var v=mcd.value.trim();
   if(!parseJalali(v)){ toast('تاریخ نامعتبر','err'); mcd.value=MGR.selectedDate; return; }
   MGR.selectedDate=v; renderMgrClassPage();
@@ -3715,7 +3822,8 @@ bind('btnDelClassConfirm', function(){
   toast('حذف شد ✅');
 });
 bind('btnDelClassCancel', function(){ pendingDeleteClassId=null; $('delClassPin').value=''; closeModals(); });
-var dcp=$('delClassPin'); if(dcp) dcp.addEventListener('input', function(){ dcp.value=toEn(dcp.value).replace(/\D/g,'').slice(0,5); });
+var dcp=$('delClassPin');
+if(dcp) dcp.addEventListener('input', function(){ dcp.value=toEn(dcp.value).replace(/\D/g,'').slice(0,5); });
 
 bind('btnMgrMsg', function(){ $('schoolMsgInput').value=getSchoolMsg(); openModal('pageSchoolMsg'); });
 bind('btnSaveSchoolMsg', function(){
@@ -3769,9 +3877,7 @@ function buildMgrClassPDFOpts(){
     date: MGR.selectedDate + (dayName ? ' ('+dayName+')' : ''),
     headers: ['ردیف', 'نام و نام خانوادگی', 'نام پدر', 'شماره شاد', 'وضعیت'],
     rows: rows,
-    summary: holiday ? null : {
-      total: s.total, present: s.present, absent: s.absent, late: s.late, excused: s.excused
-    }
+    summary: holiday ? null : { total: s.total, present: s.present, absent: s.absent, late: s.late, excused: s.excused }
   };
 }
 bind('btnMgrClsPrint', function(){
@@ -3779,7 +3885,6 @@ bind('btnMgrClsPrint', function(){
   if(!opts){ toast('کلاسی انتخاب نشده','err'); return; }
   exportOfficialPDF(opts);
 });
-
 bind('btnMgrClsPDF', function(){
   var opts = buildMgrClassPDFOpts();
   if(!opts){ toast('کلاسی انتخاب نشده','err'); return; }
@@ -3788,7 +3893,6 @@ bind('btnMgrClsPDF', function(){
 
 bind('btnMgrRepPDF', function(){
   var today = todayJalali();
-  var title = 'گزارش رسمی کل مدرسه';
   var headers = ['کلاس', 'معلم', 'دانش‌آموز', 'حاضر', 'غایب', 'تأخیر', 'موجه', 'درصد'];
   var rows = [];
   var tP=0, tA=0, tL=0, tE=0, tS=0;
@@ -3809,7 +3913,7 @@ bind('btnMgrRepPDF', function(){
     ]);
   });
   exportOfficialPDF({
-    title: title,
+    title: 'گزارش رسمی کل مدرسه',
     className: 'کل مدرسه',
     teacher: '—',
     date: today,
@@ -4244,7 +4348,6 @@ bind('btnCopyAbsent', function(){
 bind('btnCopyShad', function(){
   var rec=getRec(false);
   if(!rec||rec.holiday){ toast('رکوردی نیست','err'); return; }
-  /* گروه‌بندی شماره‌های تکراری (دوقلوها) — هر شماره یک‌بار با نام‌های مشترک */
   var grouped = {};
   var order = [];
   DB.students.filter(function(s){ return (rec.att||{})[s.id]==='absent'; }).forEach(function(s){
@@ -4277,11 +4380,8 @@ bind('btnShadAbsent', function(){
   if(excused.length){ lines.push('📝 موجه (' + toFa(excused.length) + '):'); excused.forEach(function(s,i){ lines.push(toFa(i+1) + '. ' + s.name); }); lines.push(''); }
   lines.push('با تشکر 🌿');
   var msg = lines.join('\n');
-  copyToClipboard(msg).then(function(){
-    toast('💬 متن کپی شد — در شاد بچسبانید');
-  }).catch(function(){
-    toast('💬 متن آماده است — در شاد بچسبانید');
-  });
+  copyToClipboard(msg).then(function(){ toast('💬 متن کپی شد — در شاد بچسبانید'); })
+    .catch(function(){ toast('💬 متن آماده است — در شاد بچسبانید'); });
   setTimeout(function(){
     try{ window.open('https://shad.ir', '_blank'); }
     catch(e){ try{ window.location.href = 'https://shad.ir'; }catch(e2){} }
@@ -4302,7 +4402,11 @@ function archiveStats(r){
 function renderArchive(){
   if(archiveMode==='detail'){ renderArchiveDetail(); return; }
   var recs=Object.values(DB.records).slice();
-  recs.sort(function(a,b){ var ta=a.ts||0, tb=b.ts||0; if(ta&&tb&&ta!==tb) return tb-ta; return 0; });
+  recs.sort(function(a,b){
+    var ad=parseJalali(a.date||''), bd=parseJalali(b.date||'');
+    if(ad && bd && ad.getTime()!==bd.getTime()) return bd - ad;
+    return (b.ts||0)-(a.ts||0);
+  });
   var at=$('archiveTitle'); if(at) at.textContent='آرشیو';
   var as=$('archiveSub'); if(as) as.textContent=toFa(recs.length)+' روز';
   var ab=$('archSummaryBar'); if(ab) ab.innerHTML='';
@@ -4359,11 +4463,7 @@ function collectAbsentAllToday(){
       else if(status === 'excused') excused.push(st);
     });
     if(absent.length || late.length || excused.length){
-      groups.push({
-        cls: cls,
-        def: getClassDef(cls.meta.classId),
-        absent: absent, late: late, excused: excused
-      });
+      groups.push({ cls: cls, def: getClassDef(cls.meta.classId), absent: absent, late: late, excused: excused });
       tA += absent.length; tL += late.length; tE += excused.length;
     }
   });
@@ -4408,12 +4508,10 @@ function renderMgrAllAbsentToday(){
   data.groups.forEach(function(g){
     var total = g.absent.length + g.late.length + g.excused.length;
     html += '<div class="absentGroup">';
-    html += '<div class="absentGroupHeader">' +
-      '<span class="agIcon">📚</span>' +
+    html += '<div class="absentGroupHeader"><span class="agIcon">📚</span>' +
       '<div class="agTitle"><div class="agName">' + escapeHtml(g.def.name) + '</div>' +
       '<div class="agTeacher">معلم: ' + escapeHtml(g.def.teacher || '—') + '</div></div>' +
-      '<div class="agCount">' + toFa(total) + ' مورد</div>' +
-    '</div>';
+      '<div class="agCount">' + toFa(total) + ' مورد</div></div>';
     html += '<div class="absentList">';
     g.absent.forEach(function(s){
       html += '<div class="absentRow absent-a"><span class="arBadge">❌</span>' +
@@ -4454,11 +4552,8 @@ function renderMgrAllAbsentToday(){
       if(!student){ toast('دانش‌آموز یافت نشد','err'); return; }
       var def = getClassDef(cid);
       var msg = buildQuickStudentMsg(student, status, dateStr, def);
-      copyToClipboard(msg).then(function(){
-        toast('📨 پیام کپی شد — در شاد بچسبانید');
-      }).catch(function(){
-        toast('📨 متن پیام آماده است — دستی کپی کنید');
-      });
+      copyToClipboard(msg).then(function(){ toast('📨 پیام کپی شد — در شاد بچسبانید'); })
+        .catch(function(){ toast('📨 متن پیام آماده است — دستی کپی کنید'); });
       recordFeedback();
     };
   });
@@ -4468,15 +4563,9 @@ function exportAbsentAllPDF(){
   if(!data.groups.length){ toast('امروز موردی ثبت نشده','err'); return; }
   var rows = [];
   data.groups.forEach(function(g){
-    g.absent.forEach(function(s){
-      rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'غایب غیرموجه']);
-    });
-    g.late.forEach(function(s){
-      rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'تأخیر']);
-    });
-    g.excused.forEach(function(s){
-      rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'غایب موجه']);
-    });
+    g.absent.forEach(function(s){ rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'غایب غیرموجه']); });
+    g.late.forEach(function(s){ rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'تأخیر']); });
+    g.excused.forEach(function(s){ rows.push([g.def.name, s.name, s.father||'—', s.shad||'—', 'غایب موجه']); });
   });
   exportOfficialPDF({
     title: 'گزارش غایبین و تأخیرها — به تفکیک کلاس',
@@ -4488,9 +4577,29 @@ function exportAbsentAllPDF(){
     summary: null
   });
 }
+// [FIX #8] پرینت ساده — متفاوت از PDF رسمی
+function printAbsentAll(){
+  var data = collectAbsentAllToday();
+  if(!data.groups.length){ toast('امروز موردی ثبت نشده','err'); return; }
+  var html = '<h2>' + escapeHtml(getSchoolName()) + '</h2>';
+  html += '<div class="meta">غایبین و تأخیرها — ' + escapeHtml(data.date) + (data.dayName ? ' (' + escapeHtml(data.dayName) + ')' : '') + '</div>';
+  data.groups.forEach(function(g){
+    html += '<h3 style="font-size:14px;margin:12px 0 6px">' + escapeHtml(g.def.name) + ' — معلم: ' + escapeHtml(g.def.teacher || '—') + '</h3>';
+    html += '<table><thead><tr><th>#</th><th>نام</th><th>پدر</th><th>وضعیت</th></tr></thead><tbody>';
+    var i = 1;
+    g.absent.forEach(function(s){ html += '<tr><td>'+(i++)+'</td><td>'+escapeHtml(s.name)+'</td><td>'+escapeHtml(s.father||'')+'</td><td>غایب غیرموجه</td></tr>'; });
+    g.late.forEach(function(s){ html += '<tr><td>'+(i++)+'</td><td>'+escapeHtml(s.name)+'</td><td>'+escapeHtml(s.father||'')+'</td><td>تأخیر</td></tr>'; });
+    g.excused.forEach(function(s){ html += '<tr><td>'+(i++)+'</td><td>'+escapeHtml(s.name)+'</td><td>'+escapeHtml(s.father||'')+'</td><td>غایب موجه</td></tr>'; });
+    html += '</tbody></table>';
+  });
+  html += '<div class="officialSignature">' + escapeHtml(APP_SIGNATURE) + '</div>';
+  $('printArea').innerHTML = html;
+  setTimeout(function(){ window.print(); }, 120);
+}
 bind('btnMgrAbsentAllPDF', exportAbsentAllPDF);
-bind('btnMgrAbsentAllPrint', exportAbsentAllPDF);
+bind('btnMgrAbsentAllPrint', printAbsentAll);
 bind('btnMgrClassReportPDF', exportMgrClassReportPDF);
+bind('btnParentReportPDF', exportParentReportPDF);
 
 function renderMgrTrend(){
   var out=$('mgrRepTrendOut'); if(!out) return;
@@ -4579,7 +4688,7 @@ function renderMgrTrend(){
       console.log('آنلاین شد');
       setTimeout(function(){
         if(!cloudReady){
-          if(!fauth) loadFirebaseSDK().then(function(ok){ if(ok) attemptCloudInit(false); });
+          if(!fauth) loadFirebaseSDK().then(function(ok){ if(ok && fauth) attemptCloudInit(false); });
           else attemptCloudInit(false);
         } else {
           syncFromCloud(false);
@@ -4597,7 +4706,7 @@ function renderMgrTrend(){
       if(!document.hidden){
         if(!navigator.onLine){ updateCloudStatus('offline'); return; }
         if(!cloudReady){
-          if(!fauth) loadFirebaseSDK().then(function(ok){ if(ok) attemptCloudInit(false); });
+          if(!fauth) loadFirebaseSDK().then(function(ok){ if(ok && fauth) attemptCloudInit(false); });
           else attemptCloudInit(false);
         } else {
           flushSyncQueue();
@@ -4610,6 +4719,42 @@ function renderMgrTrend(){
     console.error('خطای راه‌اندازی: ' + e.message);
   }
 })();
+
+/* ============================================================
+   ۲۵) ثبت PWA Service Worker
+   [FIX #10] فعال‌سازی خودکار نسخه‌ی جدید با skipWaiting
+============================================================ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js', { scope: './' })
+      .then(function(reg){
+        console.log('✅ Service Worker ثبت شد:', reg.scope);
+        reg.addEventListener('updatefound', function(){
+          var newWorker = reg.installing;
+          if(!newWorker) return;
+          console.log('🔄 نسخه‌ی جدید PWA در حال نصب...');
+          newWorker.addEventListener('statechange', function(){
+            if(newWorker.state === 'installed' && navigator.serviceWorker.controller){
+              console.log('🔄 نسخه‌ی جدید نصب شد — فعال‌سازی...');
+              newWorker.postMessage({type: 'SKIP_WAITING'});
+            }
+          });
+        });
+      })
+      .catch(function(err){
+        console.warn('⚠️ ثبت Service Worker ناموفق:', err.message);
+      });
+
+    // اگر کنترلر عوض شد، صفحه را رفرش کن
+    var refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if(refreshing) return;
+      refreshing = true;
+      console.log('🔄 Service Worker جدید فعال شد — بازخوانی صفحه');
+      window.location.reload();
+    });
+  });
+}
 </script>
 </body>
-  </html>
+                                       </html>
