@@ -754,7 +754,13 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         </div>
         <div id="mgrRepAbsentAllOut"></div>
       </div>
-      <div class="pane" id="mgrRepTrendTab"><div id="mgrRepTrendOut"></div></div>
+      <div class="pane" id="mgrRepTrendTab">
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn" id="btnMgrTrendPDF" style="background:linear-gradient(135deg,#e63946,#ff5a6e);color:#fff">📄 PDF رسمی — ۲ هفته گذشته</button>
+        </div>
+        <div class="note info" style="font-size:11.5px">💡 <b>راهنما:</b> «—» یعنی تعطیل، «·» یعنی روز عادی که ثبت نشده، و عدد درصد یعنی ثبت‌شده.</div>
+        <div id="mgrRepTrendOut"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -797,7 +803,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="wrap">
     <div class="glass pageTopbar">
       <button class="iconbtn back" data-back type="button">←</button>
-      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">۱.۲.۳</span></div></div>
+      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">۱.۲.۴</span></div></div>
       <div class="spacerSide"></div>
     </div>
     <div class="glass" style="padding:18px">
@@ -829,7 +835,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
           <h4><span class="num">گام ۳</span>ثبت حضور و غیاب روزانه</h4>
           <ul>
             <li>تاریخ امروز به‌صورت خودکار در بالای صفحه نمایش داده می‌شود. اگر روز دیگری مدنظر دارید، با دکمه‌های «›» و «‹» جابه‌جا شوید یا روی «امروز» بزنید.</li>
-            <li>روز هفته به‌صورت خودکار انتخاب می‌شود. اگر <b>پنجشنبه یا جمعه</b> باشد یا در <b>تقویم تعطیلات رسمی</b> مدیر ثبت شده باشد، برنامه خودکار آن را تعطیل ثبت می‌کند و نیازی به ثبت نیست.</li>
+            <li>روز هفته به‌صورت خودکار از روی تاریخ انتخاب می‌شود. اگر <b>پنجشنبه یا جمعه</b> باشد یا در <b>تقویم تعطیلات رسمی</b> مدیر ثبت شده باشد، برنامه خودکار آن را تعطیل ثبت می‌کند و نیازی به ثبت نیست.</li>
             <li>روی کارت هر دانش‌آموز در لیست کلیک کنید تا انتخاب شود.</li>
             <li>یکی از ۴ دکمه پایین صفحه را بزنید:
               <ul>
@@ -896,7 +902,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
             <li><span class="new">حالت آفلاین</span>اگر اینترنت قطع باشد، همه‌ی تغییرات محلی ذخیره می‌شوند و در نوار ابری بالای صفحه با رنگ کهربایی نمایش داده می‌شوند. پس از اتصال، خودکار همگام می‌شوند.</li>
           </ul>
 
-          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۱.۲.۳</span> — پایان راهنمای معلم</div>
+          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۱.۲.۴</span> — پایان راهنمای معلم</div>
         </div>
       </div>
 
@@ -925,10 +931,11 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
             <li>در بخش «📚 کلاس‌ها»، کارت هر کلاس نمایش داده می‌شود. کنار نام هر کلاس یک چراغ رنگی است:
               <ul>
                 <li><span style="color:#22c55e;font-weight:800">● سبز:</span> معلم امروز ثبت را کامل کرده.</li>
-                <li><span style="color:#ff5a6e;font-weight:800">● قرمز:</span> ثبت ناقص یا اصلاً انجام نشده.</li>
+                <li><span style="color:#ff5a6e;font-weight:800">● قرمز:</span> ثبت ناقص، اصلاً انجام نشده، یا امروز اصلاً وارد نشده.</li>
                 <li><span style="color:#8ec9ba;font-weight:800">● خاکستری:</span> امروز تعطیل یا کلاس خالی.</li>
               </ul>
             </li>
+            <li>اگر امروز روز عادی است ولی معلم هنوز وارد نشده، به‌جای درصد، عبارت «ثبت نشده» با رنگ کهربایی می‌بینید.</li>
             <li>با کلیک روی هر کارت کلاس، وارد جزئیات آن می‌شوید (دانش‌آموزان، سابقه، خلاصه).</li>
             <li>برای به‌روزرسانی، روی 🔄 بزنید.</li>
           </ul>
@@ -954,7 +961,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
               <ul>
                 <li>📋 <b>گزارش کلاس‌ها:</b> دو حالت «این ماه» و «تاکنون». برای هر کلاس، جدولی از دانش‌آموزان با ستون‌های «حاضر، غایب غیرموجه، غایب موجه، تأخیر» نشان می‌دهد. قابل تبدیل به PDF رسمی.</li>
                 <li>🚫 <b>غایبین و تأخیرها:</b> لیست گروهی غایبین/تأخیر/موجه امروز به‌همراه دکمه 📨 برای هر دانش‌آموز.</li>
-                <li>📈 <b>روند:</b> مقایسه ۷ روز اخیر کلاس‌ها.</li>
+                <li>📈 <b>روند:</b> مقایسه ۱۴ روز اخیر کلاس‌ها. در ستون هر روز: «—» یعنی تعطیل، «·» یعنی روز عادی ثبت‌نشده، و درصد یعنی ثبت‌شده. با دکمه «📄 PDF رسمی — ۲ هفته گذشته» می‌توانید روند ۱۴ روز اخیر را با سربرگ رسمی و امضا دریافت کنید.</li>
               </ul>
             </li>
             <li>دکمه «📄 PDF رسمی» در بالای صفحه، خلاصه‌ی کل مدرسه را با سربرگ رسمی و جای مهر و امضا آماده می‌کند.</li>
@@ -1005,7 +1012,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
             <li>روی آیکون 🚪 در نوار بالای داشبورد بزنید و تایید کنید تا از پنل مدیر خارج شوید.</li>
           </ul>
 
-          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۱.۲.۳</span> — پایان راهنمای مدیر</div>
+          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۱.۲.۴</span> — پایان راهنمای مدیر</div>
         </div>
       </div>
 
@@ -1039,7 +1046,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       </div>
 
       <div style="text-align:center;margin-bottom:22px">
-        <span class="versionBadge" style="font-size:12px;padding:6px 16px">نسخه ۱.۲.۳</span>
+        <span class="versionBadge" style="font-size:12px;padding:6px 16px">نسخه ۱.۲.۴</span>
       </div>
 
       <div style="padding-top:20px;border-top:1px dashed rgba(0,188,212,.35);text-align:center">
@@ -1277,7 +1284,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="vcHeader">
     <span class="vcIcon">🆕</span>
     <div>
-      <div class="vcTitle">نسخه <span id="vcVersion">۱.۲.۳</span></div>
+      <div class="vcTitle">نسخه <span id="vcVersion">۱.۲.۴</span></div>
       <div class="vcSub">تغییرات این نسخه</div>
     </div>
   </div>
@@ -1289,6 +1296,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
     <li><span class="em">✨</span><span>انیمیشن موج رنگی هنگام ثبت وضعیت</span></li>
     <li><span class="em">📅</span><span>تقویم تعطیلات رسمی سال تحصیلی</span></li>
     <li><span class="em">📨</span><span>گزارش «غایبین و تأخیرها» با پیام سریع</span></li>
+    <li><span class="em">📄</span><span>دکمه PDF رسمی در تب «روند» برای خروجی ۲ هفته گذشته</span></li>
   </ul>
   <div class="vcFooter">🌿 با تشکر از استفاده شما</div>
 </div>
@@ -1434,7 +1442,7 @@ var firebaseConfig = {
 
 var fdb = null, fauth = null, cloudReady = false, cloudStatus = 'connecting';
 var cloudRetryTimer = null, firebaseSDKLoaded = false;
-var _authInFlight = false;  // [FIX #3] قفل درخواست همزمان احراز هویت
+var _authInFlight = false;
 
 function loadScript(src, timeoutMs){
   return new Promise(function(resolve, reject){
@@ -1554,14 +1562,18 @@ async function syncFromCloud(showToastMsg){
     var count = 0;
     classSnap.forEach(function(ds){
       try{
-        var cloudData = ds.data();
-        var localData = loadClassData(ds.id);
+        // [FIX #4] migrate cloud data before merge
+        var cloudData = migrateRecordKeysIfNeeded(ds.data());
+        var localData = loadClassData(ds.id); // already migrated internally
+        var merged;
         if(localData){
-          var merged = mergeClassData(localData, cloudData);
-          localStorage.setItem(classKey(ds.id), JSON.stringify(merged));
+          merged = mergeClassData(localData, cloudData);
         } else {
-          localStorage.setItem(classKey(ds.id), JSON.stringify(cloudData));
+          merged = cloudData;
         }
+        // keep migrated flag local
+        merged._recKeyMigrated = true;
+        localStorage.setItem(classKey(ds.id), JSON.stringify(merged));
         count++;
       }catch(e){}
     });
@@ -1574,6 +1586,18 @@ async function syncFromCloud(showToastMsg){
       if(p2 && p2.classList.contains('show')){ renderStudents(); renderStats(); }
     }
     await flushSyncQueue();
+
+    // [FIX #3] Refresh manager state if admin pages are visible
+    if(isAdminPageVisible()){
+      MGR.classes = loadAllClasses();
+      var pDash = $('pageMgrDash');
+      if(pDash && pDash.classList.contains('show')) renderMgrDash();
+      var pRep = $('pageMgrReports');
+      if(pRep && pRep.classList.contains('show')) renderMgrReports();
+      var pCls = $('pageMgrClass');
+      if(pCls && pCls.classList.contains('show') && MGR.selectedClassId) renderMgrClassPage();
+    }
+
     updateCloudStatus('connected');
     if(showToastMsg) toast('✅ همگام‌سازی کامل شد');
     return true;
@@ -1614,7 +1638,6 @@ function updateCloudStatus(status, reason){
   });
 }
 function attemptCloudInit(showToastMsg){
-  // [FIX #3] قفل درخواست‌های همزمان احراز هویت
   if(_authInFlight){ console.log('attemptCloudInit: درخواست قبلی در جریان است'); return; }
   if(cloudRetryTimer){ clearTimeout(cloudRetryTimer); cloudRetryTimer = null; }
   if(!navigator.onLine){ updateCloudStatus('offline'); return; }
@@ -1717,7 +1740,6 @@ var toEn = function(s){
 function jStr(jy,jm,jd){ return toFa(jy+'/'+pad2(jm)+'/'+pad2(jd)); }
 function dateToJalaliStr(d){ var j=d2j(g2d(d.getFullYear(),d.getMonth()+1,d.getDate())); return jStr(j.jy,j.jm,j.jd); }
 function todayJalali(){ return dateToJalaliStr(new Date()); }
-// [FIX #9] اعتبارسنجی دقیق با roundtrip
 function parseJalali(s){
   s=toEn(String(s).trim()).replace(/[-.]/g,'/');
   var m=s.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
@@ -2031,11 +2053,8 @@ function computeConsecutiveMap(){
   return map;
 }
 
-/* ============================================================
-   [FIX #1] کلید رکورد: همیشه روز را از تاریخ مشتق کن
-   ============================================================ */
+/* [FIX #1] کلید رکورد: همیشه روز از تاریخ مشتق می‌شود */
 function recKey(dateStr, day){
-  // همیشه روز هفته را از تاریخ محاسبه کن تا با تغییر دستی currentDay، کلید عوض نشود.
   var wd = weekdayFa(dateStr);
   return dateStr + '|' + (wd || day || '');
 }
@@ -2167,12 +2186,12 @@ function renderDays(){
       el.className='day'+(d===currentDay&&!isHoliday?' on':'');
       el.textContent=d;
       el.onclick=function(){
-        // [FIX #2] به‌روزرسانی رکورد همراه با تغییر روز
         currentDay=d;
         isHoliday = isWeekendHoliday(d) || isHolidayDate(currentDate);
         var rec = getRec(true);
         if(rec){
-          rec.day = d;
+          // [FIX #1] day همیشه از تاریخ مشتق شود — نه از انتخاب کاربر
+          rec.day = weekdayFa(currentDate);
           rec.holiday = isHoliday;
           if(isHoliday){
             if(!rec.holidayReason){
@@ -2197,10 +2216,11 @@ function renderDays(){
   h.className='day'+(isHoliday?' holiday':'');
   h.textContent='🚫 تعطیل';
   h.onclick=function(){
-    // [FIX #2] currentDay را خالی نکن؛ رکورد را آپدیت کن
     isHoliday=true;
     var rec = getRec(true);
     if(rec){
+      // [FIX #1] day همیشه از تاریخ مشتق شود
+      rec.day = weekdayFa(currentDate);
       rec.holiday = true;
       if(!rec.holidayReason) rec.holidayReason = getHolidayReason(currentDate) || 'تعطیل';
       rec.ts = Date.now();
@@ -2312,7 +2332,6 @@ function updateDockButtons(){
 function renderStats(){
   var rec=getRec(false); var total=DB.students.length;
   var p=0,a=0,l=0,e=0;
-  // [FIX #6] فقط بر اساس rec.holiday تصمیم بگیر (نه isHoliday جهانی)
   if(rec && !rec.holiday){
     for(var i=0;i<DB.students.length;i++){
       var st=(rec.att||{})[DB.students[i].id];
@@ -2405,20 +2424,34 @@ async function readBackupFile(file, callback){
   rd.readAsArrayBuffer(file);
 }
 
-// [FIX #1] Migration: normalize record keys (date|day) → (date|realWeekday)
+/* [FIX #4] مهاجرت قوی‌تر: گروه‌بندی بر اساس تاریخ + ادغام حضور + نرمال‌سازی rec.day */
 function migrateRecordKeysIfNeeded(d){
   if(!d || !d.records || d._recKeyMigrated) return d;
-  var newRecs = {};
+  var byDate = {};
   Object.keys(d.records).forEach(function(k){
     var parts = k.split('|');
     var date = parts[0];
     var rec = d.records[k];
-    if(!rec) return;
-    var properKey = recKey(date, null);
-    if(!newRecs[properKey] || (rec.ts||0) > (newRecs[properKey].ts||0)){
-      newRecs[properKey] = rec;
-      if(!newRecs[properKey].day) newRecs[properKey].day = weekdayFa(date);
-    }
+    if(!rec || !date) return;
+    if(!byDate[date]) byDate[date] = [];
+    byDate[date].push(rec);
+  });
+  var newRecs = {};
+  Object.keys(byDate).forEach(function(date){
+    var candidates = byDate[date];
+    candidates.sort(function(a,b){ return (b.ts||0) - (a.ts||0); });
+    var latest = candidates[0];
+    // ادغام حضور: جدیدترین اول، قدیمی‌ترها فقط جای خالی را پر می‌کنند
+    var mergedAtt = {};
+    candidates.slice().reverse().forEach(function(c){
+      if(c.att) Object.assign(mergedAtt, c.att);
+    });
+    var wd = weekdayFa(date);
+    var merged = Object.assign({}, latest, { att: mergedAtt, date: date });
+    // [FIX #1] نرمال‌سازی day به روز واقعی تاریخ
+    if(wd) merged.day = wd;
+    var properKey = date + '|' + (wd || '');
+    newRecs[properKey] = merged;
   });
   d.records = newRecs;
   d._recKeyMigrated = true;
@@ -2438,18 +2471,23 @@ function loadClassData(id){
     return d;
   }catch(e){ return null; }
 }
+/* [FIX #4] پرچم migration در localStorage حفظ می‌شود */
 function saveClassData(id, data){
   try{
-    var clean = Object.assign({}, data);
-    delete clean._recKeyMigrated; // این فلگ فقط محلی است
-    localStorage.setItem(classKey(id), JSON.stringify(clean));
+    localStorage.setItem(classKey(id), JSON.stringify(data));
   }catch(e){ toast('حافظه پر است','err'); }
-  cloudSaveClass(id, data);
+  cloudSaveClass(id, data); // cloud خودش پرچم‌ها را حذف می‌کند
 }
 function buildMgrAllJSON(){
   var classes=loadClasses();
   var nonEmpty = [];
-  for(var i=0;i<MGR.classes.length;i++) if(!MGR.classes[i]._isEmpty) nonEmpty.push(JSON.parse(JSON.stringify(MGR.classes[i])));
+  for(var i=0;i<MGR.classes.length;i++){
+    if(!MGR.classes[i]._isEmpty){
+      var copy = JSON.parse(JSON.stringify(MGR.classes[i]));
+      delete copy._recKeyMigrated;
+      nonEmpty.push(copy);
+    }
+  }
   return JSON.stringify({
     kind:'hazoor-school-backup', version:3,
     generatedAt:new Date().toISOString(),
@@ -2467,7 +2505,6 @@ function detectBackupKind(d){
   if(d.meta && Array.isArray(d.students)) return 'teacher';
   return null;
 }
-// [FIX #5] merge صریح فیلدها
 function mergeClassData(existing, incoming){
   var sm = {};
   (existing.students || []).forEach(function(s){ if(s && s.id) sm[s.id]=s; });
@@ -2520,7 +2557,6 @@ function saveReportAsImage(opts){
   var tableH = 50 + (rows.length * rowH);
   var H = headerH + summaryH + tableH + footerH + padding*2;
 
-  // [FIX #7] مقیاس تطبیقی برای جلوگیری از خطای canvas بزرگ
   var maxDim = 4000;
   var scaleW = maxDim / W;
   var scaleH = maxDim / H;
@@ -2774,7 +2810,7 @@ function setTeacherRangeByDate(target, fromStr, toStr, label){
 }
 
 /* ============================================================
-   ۱۴) مدیریت صفحه‌ها (کلاس‌ها، مدیر)
+   ۱۴) مدیریت صفحه‌ها
 ============================================================ */
 function openImportChoice(data, source, fileName){
   pendingImportData=data; pendingImportSource=source;
@@ -2814,16 +2850,28 @@ function enterManager(){
   showPage('pageMgrDash', {replace: true});
   if(cloudReady) syncFromCloud(false);
 }
+/* [FIX #2] افزودن missing flag — تفکیک تعطیل از ثبت‌نشده */
 function classStatsForDay(cls, dateStr){
   var dayName=weekdayFa(dateStr);
   var key=dateStr+'|'+(dayName||'');
   var rec=cls.records[key]||null;
   var total=cls.students.length;
   var calHoli = isHolidayDate(dateStr);
-  var autoHol = !rec && (isWeekendHoliday(dayName) || calHoli);
-  if(!rec || rec.holiday || autoHol){
-    return { total:total, present:0, absent:0, late:0, excused:0, unset:rec?0:total, holiday:true,
-      holidayReason: rec?(rec.holidayReason||''):(calHoli?getHolidayReason(dateStr):(autoHol?'تعطیل هفتگی':'')), pct:0 };
+  var isWeekend = isWeekendHoliday(dayName);
+  var holidayFlag = (rec && rec.holiday) || (!rec && (isWeekend || calHoli));
+  if(holidayFlag){
+    return {
+      total: total, present:0, absent:0, late:0, excused:0, unset:0,
+      holiday:true, missing:false,
+      holidayReason: rec ? (rec.holidayReason||'') : (calHoli ? getHolidayReason(dateStr) : (isWeekend ? 'تعطیل هفتگی' : '')),
+      pct:0
+    };
+  }
+  if(!rec){
+    return {
+      total: total, present:0, absent:0, late:0, excused:0, unset:total,
+      holiday:false, missing:true, holidayReason:'', pct:0
+    };
   }
   var p=0,a=0,l=0,e=0,u=0;
   cls.students.forEach(function(s){
@@ -2831,7 +2879,7 @@ function classStatsForDay(cls, dateStr){
     if(st==='present') p++; else if(st==='absent') a++; else if(st==='late') l++; else if(st==='excused') e++; else u++;
   });
   var denom=p+a+l+e||1;
-  return { total:total, present:p, absent:a, late:l, excused:e, unset:u, holiday:false, holidayReason:'', pct:Math.round((p/denom)*100) };
+  return { total: total, present:p, absent:a, late:l, excused:e, unset:u, holiday:false, missing:false, holidayReason:'', pct:Math.round((p/denom)*100) };
 }
 function getClassStatusLight(cls, dateStr){
   if(cls._isEmpty || !cls.students.length) return 'holiday';
@@ -2909,7 +2957,7 @@ function renderMgrDash(){
   MGR.classes.forEach(function(cls){
     var def=getClassDef(cls.meta.classId);
     var light = getClassStatusLight(cls, today);
-    var lightTitle = light === 'green' ? 'ثبت کامل — امروز حضور و غیاب ثبت شده' : (light === 'red' ? 'ثبت نشده — امروز حضور و غیاب کامل نشده' : 'تعطیل یا خالی');
+    var lightTitle = light === 'green' ? 'ثبت کامل — امروز حضور و غیاب ثبت شده' : (light === 'red' ? 'ثبت نشده یا ناقص' : 'تعطیل یا خالی');
     if(cls._isEmpty){
       html += '<div class="classCard empty" data-id="'+escapeHtml(cls.meta.classId)+'">' +
         '<div class="ccHead"><div class="ccIcon">'+escapeHtml(def.name.slice(0,10))+'</div>' +
@@ -2919,8 +2967,11 @@ function renderMgrDash(){
     }
     var s=classStatsForDay(cls, today);
     var card='classCard';
-    if(!s.holiday){ if(s.pct>=90) card+=' good'; else if(s.pct>=75) card+=' warn'; else card+=' bad'; }
-    var pctHtml = s.holiday ? '<div class="ccPct mute">🚫</div>' : '<div class="ccPct '+(s.pct>=90?'good':s.pct>=75?'warn':'bad')+'">'+toFa(s.pct)+'٪</div>';
+    if(!s.holiday && !s.missing){ if(s.pct>=90) card+=' good'; else if(s.pct>=75) card+=' warn'; else card+=' bad'; }
+    var pctHtml;
+    if(s.holiday) pctHtml = '<div class="ccPct mute" title="'+escapeHtml(s.holidayReason||'تعطیل')+'">🚫</div>';
+    else if(s.missing) pctHtml = '<div class="ccPct" style="color:var(--amber);font-size:12px;font-weight:800">ثبت نشده</div>';
+    else pctHtml = '<div class="ccPct '+(s.pct>=90?'good':s.pct>=75?'warn':'bad')+'">'+toFa(s.pct)+'٪</div>';
     html += '<div class="'+card+'" data-id="'+escapeHtml(cls.meta.classId)+'">' +
       '<div class="ccHead"><div class="ccIcon">'+escapeHtml(def.name.slice(0,10))+'</div>' +
       '<div class="ccTitle"><div class="t1"><span class="statusLight '+light+'" title="'+lightTitle+'"></span>'+escapeHtml(def.name)+'</div><div class="t2">'+escapeHtml(def.teacher)+' — '+toFa(cls.students.length)+'</div></div>' + pctHtml + '</div>' +
@@ -2981,6 +3032,8 @@ function renderMgrClsStudents(cls, s){
   var notesHtml='';
   if(rec && rec.notes) notesHtml='<div class="note notesInfo"><b>📝 یادداشت:</b><br>'+escapeHtml(rec.notes)+'</div>';
   if(s.holiday){ out.innerHTML=notesHtml+'<div class="note warn">🚫 تعطیل — '+escapeHtml(s.holidayReason||'—')+'</div>'; return; }
+  if(s.missing) out.innerHTML=notesHtml+'<div class="note" style="background:rgba(255,196,77,.1);border-right-color:var(--amber);color:#ffe6b3">📝 این روز توسط معلم ثبت نشده است.</div>';
+  else out.innerHTML=notesHtml;
   var att=rec?(rec.att||{}):{};
   var sorted=cls.students.slice().sort(function(a,b){
     var fa=(a.name||'').split(' ').pop(); var fb=(b.name||'').split(' ').pop();
@@ -2991,7 +3044,7 @@ function renderMgrClsStudents(cls, s){
     var cell = status && STATUS[status] ? '<span class="pill '+STATUS[status].cls+'">'+STATUS[status].label+'</span>' : '<span class="pill u">—</span>';
     return '<tr><td class="num">'+toFa(i+1)+'</td><td>'+escapeHtml(st.name)+'</td><td>'+escapeHtml(st.father||'—')+'</td><td class="shad">'+toFa(st.shad||'—')+'</td><td class="center">'+cell+'</td></tr>';
   }).join('');
-  out.innerHTML=notesHtml+'<div style="overflow-x:auto"><table class="dataTable"><thead><tr><th>#</th><th>نام</th><th>پدر</th><th>شاد</th><th>وضعیت</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  out.innerHTML+= '<div style="overflow-x:auto"><table class="dataTable"><thead><tr><th>#</th><th>نام</th><th>پدر</th><th>شاد</th><th>وضعیت</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
 function renderMgrClsHistory(cls){
   var out=$('mgrClsHistoryOut'); if(!out) return;
@@ -3002,7 +3055,9 @@ function renderMgrClsHistory(cls){
   }).slice(0,30);
   if(!recs.length){ out.innerHTML='<div class="mgrEmpty"><div class="big">🗂️</div><div>سابقه‌ای نیست</div></div>'; return; }
   var rows=recs.map(function(r){
-    if(r.holiday) return '<tr><td>'+(r.date||'')+'</td><td>'+(r.day||'')+'</td><td colspan="5" class="center"><span class="pill h">🚫 تعطیل</span></td></tr>';
+    // [FIX #6] استفاده از weekdayFa(r.date) با fallback به r.day
+    var dayDisplay = weekdayFa(r.date) || r.day || '';
+    if(r.holiday) return '<tr><td>'+(r.date||'')+'</td><td>'+dayDisplay+'</td><td colspan="5" class="center"><span class="pill h">🚫 تعطیل</span></td></tr>';
     var p=0,a=0,l=0,e=0,u=0;
     cls.students.forEach(function(s){
       var st=(r.att||{})[s.id];
@@ -3010,7 +3065,7 @@ function renderMgrClsHistory(cls){
     });
     var pct=Math.round((p/(p+a+l+e||1))*100);
     var col=pct>=90?'var(--green)':pct>=75?'var(--amber)':'var(--red)';
-    return '<tr><td>'+(r.date||'')+'</td><td>'+(r.day||'')+'</td>' +
+    return '<tr><td>'+(r.date||'')+'</td><td>'+dayDisplay+'</td>' +
       '<td class="center"><span class="pill p">'+toFa(p)+'</span></td>' +
       '<td class="center"><span class="pill a">'+toFa(a)+'</span></td>' +
       '<td class="center"><span class="pill l">'+toFa(l)+'</span></td>' +
@@ -3093,7 +3148,6 @@ function openDeleteClassModal(id){
 
 /* ============================================================
    ۱۶) پشتیبان خودکار هفتگی
-   [FIX #4] جلوگیری از بکاپ خالی در اولین اجرا
 ============================================================ */
 function loadAutoBackups(){ try{ return JSON.parse(localStorage.getItem(LS_AUTO_BACKUPS) || '[]'); }catch(e){ return []; } }
 function saveAutoBackups(arr){ try{ localStorage.setItem(LS_AUTO_BACKUPS, JSON.stringify(arr)); }catch(e){} }
@@ -3103,7 +3157,6 @@ function autoWeeklyBackup(){
     var weekMs = 7 * 24 * 60 * 60 * 1000;
     if(Date.now() - last < weekMs) return false;
 
-    // [FIX #4] بررسی وجود داده واقعی قبل از بکاپ
     var classes = loadClasses();
     if(!classes.length) return false;
     var hasData = false;
@@ -3162,7 +3215,7 @@ function autoWeeklyBackup(){
 }
 
 /* ============================================================
-   ۱۷) کارت نسخه (اولین ورود)
+   ۱۷) کارت نسخه
 ============================================================ */
 function checkVersionCard(){
   try{
@@ -3402,7 +3455,7 @@ function proceedToClassEntry(cls){
     DB.meta.school=school; DB.meta.teacher=cls.teacher; DB.meta.classId=cls.id; DB.meta.className=cls.name;
     if(DB.students.length > 0) toast('بارگذاری شد ✅');
   } else {
-    DB={ meta:{school:school, teacher:cls.teacher, classId:cls.id, className:cls.name}, students:[], records:{} };
+    DB={ meta:{school:school, teacher:cls.teacher, classId:cls.id, className:cls.name}, students:[], records:{}, _recKeyMigrated:true };
   }
   try{ localStorage.setItem(LS_LAST, cls.id); }catch(e){}
   saveTeacherDB();
@@ -3564,6 +3617,7 @@ bind('btnSaveDay', function(){
   var r=ensureRec();
   if(isHoliday){ r.holiday=true; r.holidayReason=$('holidayReason').value || r.holidayReason || 'تعطیل'; }
   else { r.holiday=false; r.holidayReason=''; }
+  r.day = weekdayFa(currentDate);
   r.notes=$('dayNotes').value; r.ts=Date.now();
   if(_saveDebounceTimer){ clearTimeout(_saveDebounceTimer); _saveDebounceTimer=null; }
   saveTeacherDB();
@@ -3636,6 +3690,7 @@ if(hr) hr.addEventListener('input', function(){
   var r=getRec(true);
   r.holiday=true;
   r.holidayReason=hr.value;
+  r.day = weekdayFa(currentDate);
   r.ts=Date.now();
   debouncedSave();
 });
@@ -3880,10 +3935,32 @@ function buildMgrClassPDFOpts(){
     summary: holiday ? null : { total: s.total, present: s.present, absent: s.absent, late: s.late, excused: s.excused }
   };
 }
+/* [FIX #5] print = چاپ ساده، PDF = گزارش رسمی */
 bind('btnMgrClsPrint', function(){
-  var opts = buildMgrClassPDFOpts();
-  if(!opts){ toast('کلاسی انتخاب نشده','err'); return; }
-  exportOfficialPDF(opts);
+  var cls = null;
+  for(var i=0;i<MGR.classes.length;i++) if(MGR.classes[i].meta.classId===MGR.selectedClassId){ cls=MGR.classes[i]; break; }
+  if(!cls){ toast('کلاسی انتخاب نشده','err'); return; }
+  var def = getClassDef(cls.meta.classId);
+  var dayName = weekdayFa(MGR.selectedDate);
+  var key = MGR.selectedDate + '|' + (dayName||'');
+  var rec = cls.records[key];
+  var holiday = rec ? !!rec.holiday : (isWeekendHoliday(dayName) || isHolidayDate(MGR.selectedDate));
+  var att = rec ? (rec.att||{}) : {};
+  var sorted = cls.students.slice().sort(function(a,b){
+    var fa=(a.name||'').split(' ').pop(); var fb=(b.name||'').split(' ').pop();
+    return new Intl.Collator('fa').compare(fa,fb);
+  });
+  var rows = sorted.map(function(st,i){
+    var stat = holiday ? null : att[st.id];
+    var label = holiday ? '—' : (stat && STATUS[stat] ? STATUS[stat].label : 'تعیین نشده');
+    return '<tr><td>'+(i+1)+'</td><td>'+escapeHtml(st.name)+'</td><td>'+escapeHtml(st.father||'')+'</td><td>'+label+'</td></tr>';
+  }).join('');
+  $('printArea').innerHTML =
+    '<h2>'+escapeHtml(getSchoolName())+'</h2>' +
+    '<div class="meta">'+escapeHtml(def.name)+' — '+escapeHtml(MGR.selectedDate)+(dayName?' ('+escapeHtml(dayName)+')':'')+'</div>' +
+    '<table><thead><tr><th>#</th><th>نام</th><th>پدر</th><th>وضعیت</th></tr></thead><tbody>'+rows+'</tbody></table>' +
+    '<div class="officialSignature">'+escapeHtml(APP_SIGNATURE)+'</div>';
+  setTimeout(function(){ window.print(); }, 120);
 });
 bind('btnMgrClsPDF', function(){
   var opts = buildMgrClassPDFOpts();
@@ -3909,7 +3986,7 @@ bind('btnMgrRepPDF', function(){
       def.name, def.teacher||'—', cls.students.length,
       s.holiday?'—':s.present, s.holiday?'—':s.absent,
       s.holiday?'—':s.late, s.holiday?'—':s.excused,
-      s.holiday?'تعطیل':(s.pct+'%')
+      s.holiday?'تعطیل':(s.missing?'ثبت نشده':(s.pct+'%'))
     ]);
   });
   exportOfficialPDF({
@@ -3935,7 +4012,7 @@ bind('btnCardImage', function(){
   var rows = recs.map(function(r,i){
     var st = (r.att||{})[s.id];
     if(st==='present')p++; else if(st==='absent')a++; else if(st==='late')l++; else if(st==='excused')e++; else u++;
-    return [i+1, r.date||'', r.day||'', st && STATUS[st] ? STATUS[st].label : '—'];
+    return [i+1, r.date||'', weekdayFa(r.date)||r.day||'', st && STATUS[st] ? STATUS[st].label : '—'];
   });
   var def = getClassDef(DB.meta.classId);
   saveReportAsImage({
@@ -4043,8 +4120,9 @@ bind('btnImportMerge', function(){
           if(!bcls||!bcls.meta||!bcls.meta.classId) return;
           var cid=bcls.meta.classId;
           var ed=loadClassData(cid);
-          if(!ed || !ed.students || !ed.students.length) saveClassData(cid, bcls);
-          else saveClassData(cid, mergeClassData(ed, bcls));
+          var migratedB = migrateRecordKeysIfNeeded(bcls);
+          if(!ed || !ed.students || !ed.students.length) saveClassData(cid, migratedB);
+          else saveClassData(cid, mergeClassData(ed, migratedB));
         });
         if(Array.isArray(pendingImportData.holidays)){
           var existingHol = loadHolidays().slice();
@@ -4065,16 +4143,18 @@ bind('btnImportMerge', function(){
         var has=false;
         for(var i=0;i<cls2.length;i++) if(cls2[i].id===cid2) has=true;
         if(!has){ cls2.push({ id:cid2, name:pendingImportData.meta.className||'—', teacher:pendingImportData.meta.teacher||'—', pin:'00000' }); saveClasses(cls2); }
+        var migratedT = migrateRecordKeysIfNeeded(pendingImportData);
         var ed2=loadClassData(cid2);
-        if(!ed2 || !ed2.students || !ed2.students.length) saveClassData(cid2, pendingImportData);
-        else saveClassData(cid2, mergeClassData(ed2, pendingImportData));
+        if(!ed2 || !ed2.students || !ed2.students.length) saveClassData(cid2, migratedT);
+        else saveClassData(cid2, mergeClassData(ed2, migratedT));
         pendingImportData=null; pendingImportSource=null;
         closeModals(); enterManager(); renderFirstPageClassList();
         toast('✅ ادغام شد');
       }
     } else {
       if(pendingImportData.meta && Array.isArray(pendingImportData.students)){
-        DB=mergeClassData(DB, pendingImportData);
+        var migratedI = migrateRecordKeysIfNeeded(pendingImportData);
+        DB=mergeClassData(DB, migratedI);
         saveTeacherDB();
         pendingImportData=null; pendingImportSource=null;
         closeModals(); enterTeacherApp();
@@ -4091,7 +4171,10 @@ bind('btnImportReplace', function(){
       if(pendingImportData.kind === 'hazoor-school-backup' || (Array.isArray(pendingImportData.classesList) && Array.isArray(pendingImportData.classesData))){
         saveClasses(pendingImportData.classesList || []);
         (pendingImportData.classesData || []).forEach(function(cls){
-          if(cls && cls.meta && cls.meta.classId) saveClassData(cls.meta.classId, cls);
+          if(cls && cls.meta && cls.meta.classId){
+            var migrated = migrateRecordKeysIfNeeded(cls);
+            saveClassData(cls.meta.classId, migrated);
+          }
         });
         if(pendingImportData.schoolName) setSchoolName(pendingImportData.schoolName);
         if(pendingImportData.schoolMsg) setSchoolMsg(pendingImportData.schoolMsg);
@@ -4103,7 +4186,8 @@ bind('btnImportReplace', function(){
     } else {
       var id=pendingImportData.meta.classId || DB.meta.classId;
       var cls=getClassById(id);
-      DB=Object.assign({meta:{school:'',teacher:'',classId:id,className:cls?cls.name:''}}, pendingImportData);
+      var migratedR = migrateRecordKeysIfNeeded(pendingImportData);
+      DB=Object.assign({meta:{school:'',teacher:'',classId:id,className:cls?cls.name:''}}, migratedR);
       DB.meta.classId=id;
       if(cls){ DB.meta.className=cls.name; DB.meta.teacher=cls.teacher; }
       DB.records=DB.records||{};
@@ -4124,8 +4208,10 @@ bind('btnImportReplace', function(){
 
 function exportJSON(){
   var def=getClassDef(DB.meta.classId);
+  var clean = JSON.parse(JSON.stringify(DB));
+  delete clean._recKeyMigrated;
   var name='پشتیبان_'+def.name.replace(/\s+/g,'-')+'_'+todayJalali().replace(/\//g,'-')+'.json.gz';
-  downloadGzip(name, JSON.stringify(DB,null,2));
+  downloadGzip(name, JSON.stringify(clean,null,2));
   toast('آماده شد 💾');
 }
 
@@ -4170,7 +4256,8 @@ function computeParentMonthlyData(studentId){
     else if(st === 'late') l++;
     else if(st === 'excused') e++;
     else u++;
-    return { idx: i+1, date: r.date || '', day: r.day || '', label: label };
+    // [FIX #6] همیشه روز از تاریخ
+    return { idx: i+1, date: r.date || '', day: weekdayFa(r.date) || r.day || '', label: label };
   });
   return { range: range, records: recs, rows: rows, present: p, absent: a, late: l, excused: e, unset: u };
 }
@@ -4244,7 +4331,7 @@ function renderCard(){
     var st=(r.att||{})[id];
     if(st==='present')p++; else if(st==='absent')a++; else if(st==='late')l++; else if(st==='excused')e++; else u++;
     var cell = st && STATUS[st] ? '<span class="pill '+STATUS[st].cls+'">'+STATUS[st].label+'</span>' : '<span class="pill u">—</span>';
-    return '<tr><td>'+(r.date||'')+'</td><td>'+(r.day||'')+'</td><td>'+cell+'</td></tr>';
+    return '<tr><td>'+(r.date||'')+'</td><td>'+(weekdayFa(r.date)||r.day||'')+'</td><td>'+cell+'</td></tr>';
   }).join('');
   var pct=Math.round((p/(recs.length||1))*100);
   out.innerHTML='<div class="note"><b>'+escapeHtml(s.name)+'</b></div>' +
@@ -4323,13 +4410,14 @@ function renderHistory(){
   var recs=Object.values(DB.records).sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
   if(!recs.length){ out.innerHTML='<div class="empty">هنوز روزی ثبت نشده</div>'; return; }
   var rows=recs.map(function(r){
-    if(r.holiday) return '<tr><td>'+(r.date||'')+'</td><td>'+(r.day||'')+'</td><td><span class="pill h">تعطیل</span></td><td colspan="5">'+escapeHtml(r.holidayReason||'')+'</td></tr>';
+    var dayDisplay = weekdayFa(r.date) || r.day || '';
+    if(r.holiday) return '<tr><td>'+(r.date||'')+'</td><td>'+dayDisplay+'</td><td><span class="pill h">تعطیل</span></td><td colspan="5">'+escapeHtml(r.holidayReason||'')+'</td></tr>';
     var p=0,a=0,l=0,e=0,u=0;
     DB.students.forEach(function(s){
       var st=(r.att||{})[s.id];
       if(st==='present')p++; else if(st==='absent')a++; else if(st==='late')l++; else if(st==='excused')e++; else u++;
     });
-    return '<tr><td>'+(r.date||'')+'</td><td>'+(r.day||'')+'</td>' +
+    return '<tr><td>'+(r.date||'')+'</td><td>'+dayDisplay+'</td>' +
       '<td><span class="pill p">'+toFa(p)+'</span></td>' +
       '<td><span class="pill a">'+toFa(a)+'</span></td>' +
       '<td><span class="pill l">'+toFa(l)+'</span></td>' +
@@ -4415,8 +4503,9 @@ function renderArchive(){
   body.innerHTML=recs.map(function(r){
     var s=archiveStats(r);
     var key=recKey(r.date, r.day);
-    if(r.holiday) return '<div class="archCard isHoliday" data-key="'+escapeHtml(key)+'"><div class="archDate"><div class="archDay">'+escapeHtml(r.day||'—')+'</div><div class="archDateVal">'+escapeHtml(r.date||'—')+'</div></div><div class="archHoliday">🚫 تعطیل — '+escapeHtml(r.holidayReason||'')+'</div><div class="archArrow">‹</div></div>';
-    return '<div class="archCard" data-key="'+escapeHtml(key)+'"><div class="archDate"><div class="archDay">'+escapeHtml(r.day||'—')+'</div><div class="archDateVal">'+escapeHtml(r.date||'—')+'</div></div><div class="archStats"><span class="pill p">'+toFa(s.p)+' حاضر</span><span class="pill a">'+toFa(s.a)+' غایب</span><span class="pill l">'+toFa(s.l)+' تأخیر</span><span class="pill e">'+toFa(s.e)+' موجه</span></div><div class="archPct">'+toFa(s.pct)+'٪</div><div class="archArrow">‹</div></div>';
+    var dayDisplay = weekdayFa(r.date) || r.day || '—';
+    if(r.holiday) return '<div class="archCard isHoliday" data-key="'+escapeHtml(key)+'"><div class="archDate"><div class="archDay">'+escapeHtml(dayDisplay)+'</div><div class="archDateVal">'+escapeHtml(r.date||'—')+'</div></div><div class="archHoliday">🚫 تعطیل — '+escapeHtml(r.holidayReason||'')+'</div><div class="archArrow">‹</div></div>';
+    return '<div class="archCard" data-key="'+escapeHtml(key)+'"><div class="archDate"><div class="archDay">'+escapeHtml(dayDisplay)+'</div><div class="archDateVal">'+escapeHtml(r.date||'—')+'</div></div><div class="archStats"><span class="pill p">'+toFa(s.p)+' حاضر</span><span class="pill a">'+toFa(s.a)+' غایب</span><span class="pill l">'+toFa(s.l)+' تأخیر</span><span class="pill e">'+toFa(s.e)+' موجه</span></div><div class="archPct">'+toFa(s.pct)+'٪</div><div class="archArrow">‹</div></div>';
   }).join('');
   document.querySelectorAll('.archCard').forEach(function(c){
     c.onclick=function(){ archiveKey=c.dataset.key; archiveMode='detail'; renderArchive(); window.scrollTo({top:0,behavior:'smooth'}); };
@@ -4425,7 +4514,7 @@ function renderArchive(){
 function renderArchiveDetail(){
   var r=DB.records[archiveKey]; if(!r){ archiveMode='list'; renderArchive(); return; }
   var at=$('archiveTitle'); if(at) at.textContent='حضور و غیاب '+(r.date||'');
-  var as=$('archiveSub'); if(as) as.textContent=r.day||'—';
+  var as=$('archiveSub'); if(as) as.textContent=weekdayFa(r.date)||r.day||'—';
   var s=archiveStats(r);
   var ab=$('archSummaryBar');
   if(ab) ab.innerHTML='<div class="rowTitle">📚 '+toFa(s.total)+' دانش‌آموز</div><div class="rowSub">'+toFa(s.p)+' حاضر — '+toFa(s.a)+' غایب — '+toFa(s.l)+' تأخیر — '+toFa(s.e)+' موجه</div>';
@@ -4577,7 +4666,6 @@ function exportAbsentAllPDF(){
     summary: null
   });
 }
-// [FIX #8] پرینت ساده — متفاوت از PDF رسمی
 function printAbsentAll(){
   var data = collectAbsentAllToday();
   if(!data.groups.length){ toast('امروز موردی ثبت نشده','err'); return; }
@@ -4601,24 +4689,60 @@ bind('btnMgrAbsentAllPrint', printAbsentAll);
 bind('btnMgrClassReportPDF', exportMgrClassReportPDF);
 bind('btnParentReportPDF', exportParentReportPDF);
 
+/* [FIX #7] روند ۱۴ روزه — با نمایش تفکیک تعطیل/ثبت‌نشده */
 function renderMgrTrend(){
   var out=$('mgrRepTrendOut'); if(!out) return;
   var today=todayJalali();
+  var dayCount = 14;
   var th='';
-  for(var d=6;d>=0;d--) th+='<th class="center">'+escapeHtml(addDaysToJalali(today,-d).split('/').slice(1).join('/'))+'</th>';
+  for(var d=dayCount-1;d>=0;d--) th+='<th class="center">'+escapeHtml(addDaysToJalali(today,-d).split('/').slice(1).join('/'))+'</th>';
   var trs=MGR.classes.filter(function(c){ return !c._isEmpty; }).map(function(cls){
     var def=getClassDef(cls.meta.classId);
     var cells='';
-    for(var dd=6;dd>=0;dd--){
+    for(var dd=dayCount-1;dd>=0;dd--){
       var dateStr=addDaysToJalali(today,-dd);
       var s=classStatsForDay(cls, dateStr);
-      if(s.holiday || s.total===0) cells+='<td class="center" style="color:var(--muted)">—</td>';
+      if(s.total===0 || s.holiday) cells+='<td class="center" style="color:var(--muted)">—</td>';
+      else if(s.missing) cells+='<td class="center" style="color:#8ec9ba" title="ثبت نشده">·</td>';
       else cells+='<td class="center"><b style="color:'+(s.pct>=90?'var(--green)':s.pct>=75?'var(--amber)':'var(--red)')+'">'+toFa(s.pct)+'٪</b></td>';
     }
     return '<tr><td>'+escapeHtml(def.name)+'</td>'+cells+'</tr>';
   }).join('');
   out.innerHTML='<div style="overflow-x:auto"><table class="dataTable"><thead><tr><th>کلاس</th>'+th+'</tr></thead><tbody>'+trs+'</tbody></table></div>';
 }
+
+function exportMgrTrendPDF(){
+  var today = todayJalali();
+  var dayCount = 14;
+  var headers = ['کلاس'];
+  for(var d = dayCount - 1; d >= 0; d--){
+    headers.push(addDaysToJalali(today, -d).split('/').slice(1).join('/'));
+  }
+  var nonEmpty = MGR.classes.filter(function(c){ return !c._isEmpty; });
+  if(!nonEmpty.length){ toast('داده‌ای برای گزارش نیست','err'); return; }
+  var rows = nonEmpty.map(function(cls){
+    var def = getClassDef(cls.meta.classId);
+    var row = [def.name];
+    for(var dd = dayCount - 1; dd >= 0; dd--){
+      var dateStr = addDaysToJalali(today, -dd);
+      var s = classStatsForDay(cls, dateStr);
+      if(s.total===0 || s.holiday) row.push('—');
+      else if(s.missing) row.push('ثبت نشده');
+      else row.push(s.pct + '٪');
+    }
+    return row;
+  });
+  exportOfficialPDF({
+    title: 'گزارش روند حضور و غیاب — ۲ هفته گذشته',
+    className: 'کل مدرسه (' + toFa(nonEmpty.length) + ' کلاس)',
+    teacher: '—',
+    date: today,
+    headers: headers,
+    rows: rows,
+    summary: null
+  });
+}
+bind('btnMgrTrendPDF', exportMgrTrendPDF);
 
 /* ============================================================
    ۲۴) راه‌اندازی
@@ -4721,8 +4845,7 @@ function renderMgrTrend(){
 })();
 
 /* ============================================================
-   ۲۵) ثبت PWA Service Worker
-   [FIX #10] فعال‌سازی خودکار نسخه‌ی جدید با skipWaiting
+   ۲۵) PWA Service Worker
 ============================================================ */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function(){
@@ -4745,7 +4868,6 @@ if ('serviceWorker' in navigator) {
         console.warn('⚠️ ثبت Service Worker ناموفق:', err.message);
       });
 
-    // اگر کنترلر عوض شد، صفحه را رفرش کن
     var refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', function(){
       if(refreshing) return;
@@ -4757,4 +4879,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-                                       </html>
+  </html>
