@@ -65,6 +65,7 @@ input::placeholder,textarea::placeholder{color:#5f9c8e}
 .btn.sm{padding:7px 10px;font-size:12px;border-radius:10px}
 .btn.manager{background:linear-gradient(135deg,var(--violet),#8a5cff);color:#fff;margin-top:6px}
 .btn.danger{background:linear-gradient(135deg,#ff3d55,#ff5a6e);color:#fff}
+.btn:disabled{opacity:.55;cursor:not-allowed}
 .firstClassList{display:flex;flex-direction:column;gap:6px;max-height:min(340px,38dvh);overflow-y:auto}
 .firstClassItem{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);cursor:pointer}
 .fciIcon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:19px;flex:none;background:linear-gradient(135deg,var(--teal),var(--green));color:#04231f}
@@ -326,6 +327,20 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 #toast.violet{background:linear-gradient(135deg,#b07cff,#8a5cff);color:#fff}
 #toast.undoToast{background:linear-gradient(135deg,#ffc44d,#ffb020);color:#3a2600;pointer-events:auto;padding:10px 12px;display:flex;align-items:center;gap:10px}
 #toast.undoToast .undoBtn{background:rgba(0,0,0,.28);color:#fff;border:none;padding:6px 12px;border-radius:8px;font-family:inherit;font-weight:800;font-size:12px;cursor:pointer}
+@media (min-width:1024px){ #toast{ bottom:110px; } }
+.storageStats{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;margin-bottom:14px}
+.storageGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.storageItem{text-align:center;padding:10px 6px;background:rgba(0,0,0,.2);border-radius:10px}
+.storageLabel{font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:700}
+.storageValue{font-size:15px;font-weight:900;color:var(--teal);line-height:1.25;word-break:break-word}
+.storageValue small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:3px}
+.storageBar{height:14px;background:rgba(255,255,255,.08);border-radius:7px;overflow:hidden;margin-bottom:8px;position:relative}
+.storageBarFill{height:100%;transition:width .4s ease;background:linear-gradient(90deg,var(--green),var(--teal));border-radius:7px}
+.storageBarFill.warn{background:linear-gradient(90deg,var(--amber),#ff8a5a)}
+.storageBarFill.danger{background:linear-gradient(90deg,#ff5a6e,#ff2a44)}
+.storageNote{font-size:11.5px;color:var(--muted);text-align:center;line-height:1.7}
+.storageNote b{color:var(--teal)}
+@media(max-width:520px){.storageGrid{grid-template-columns:1fr}}
 .versionCard{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);z-index:99999;width:calc(100% - 40px);max-width:420px;padding:20px 22px 18px;border-radius:20px;background:linear-gradient(145deg,#0a5c4d,#04342c);border:1.5px solid var(--teal);box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 40px rgba(20,224,176,.3);opacity:0;pointer-events:none;transition:.4s cubic-bezier(.4,0,.2,1);color:var(--txt);font-family:Tahoma,sans-serif;max-height:86dvh;overflow-y:auto}
 .versionCard.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
 .versionCard .vcClose{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:10px;border:none;background:rgba(255,255,255,.14);color:var(--txt);font-family:inherit;font-size:15px;font-weight:900;cursor:pointer;transition:.2s;display:grid;place-items:center}
@@ -803,7 +818,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="wrap">
     <div class="glass pageTopbar">
       <button class="iconbtn back" data-back type="button">←</button>
-      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">۱.۲.۴</span></div></div>
+      <div class="pageHead"><div class="t1">📘 راهنما</div><div class="t2">نسخه <span id="helpVersion">۱.۲.۶</span></div></div>
       <div class="spacerSide"></div>
     </div>
     <div class="glass" style="padding:18px">
@@ -815,204 +830,146 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       <div class="pane on" id="helpTeacherTab">
         <div class="helpBody">
 
-          <h4><span class="num">گام ۱</span>ورود به کلاس</h4>
+          <h4><span class="num">۱</span>ورود به کلاس</h4>
           <ul>
-            <li>در صفحه اول، نام مدرسه خود را در کادر بالای صفحه ببینید (در صورت نیاز اصلاح کنید).</li>
-            <li>در بخش «کلاس خود را انتخاب کنید»، روی کارت کلاس خود کلیک کنید.</li>
-            <li>صفحه‌ی ورود کلاس باز می‌شود — کد ۵ رقمی را با صفحه‌کلید لمس کنید.</li>
-            <li>دکمه «✅ تایید و ورود» را بزنید تا وارد صفحه‌ی ثبت حضور و غیاب شوید.</li>
+            <li>نام مدرسه را در صفحه اول ببینید (در صورت نیاز اصلاح کنید).</li>
+            <li>روی کارت کلاس خود کلیک کنید و کد ۵ رقمی را وارد نمایید.</li>
           </ul>
 
-          <h4><span class="num">گام ۲</span>افزودن دانش‌آموزان (فقط بار اول)</h4>
+          <h4><span class="num">۲</span>افزودن دانش‌آموز (یک‌بار برای همیشه)</h4>
           <ul>
-            <li>اگر اولین بار است که وارد می‌شوید و لیست دانش‌آموزان خالی است، دکمه «➕ افزودن دانش‌آموز» را بزنید.</li>
-            <li>سه فیلد را پر کنید: <b>نام و نام خانوادگی</b>، <b>نام پدر</b>، <b>شماره شاد (۰۹...)</b>.</li>
-            <li>دکمه «ثبت» را بزنید یا Enter بزنید — دانش‌آموز به لیست اضافه می‌شود.</li>
-            <li>این کار را برای همه دانش‌آموزان کلاس تکرار کنید (یک‌بار برای همیشه).</li>
-            <li><span class="new">دوقلوها</span>ثبت <b>نام پدر تکراری</b> و <b>شماره موبایل تکراری</b> برای دانش‌آموزان دوقلو یا خواهر/برادر <b>مجاز</b> است — سامانه این موارد را به‌عنوان «تکراری» رد نمی‌کند. فقط نام و نام خانوادگی و شماره شاد باید فرمت معتبر داشته باشند (شماره با ۰۹ شروع و ۱۱ رقم باشد).</li>
+            <li>دکمه «➕ افزودن دانش‌آموز» → سه فیلد: نام، نام پدر، شماره شاد (۰۹...) → «ثبت».</li>
+            <li>ثبت <b>نام پدر و شماره شاد تکراری</b> برای دوقلوها یا خواهر/برادر مجاز است.</li>
           </ul>
 
-          <h4><span class="num">گام ۳</span>ثبت حضور و غیاب روزانه</h4>
+          <h4><span class="num">۳</span>ثبت حضور و غیاب</h4>
           <ul>
-            <li>تاریخ امروز به‌صورت خودکار در بالای صفحه نمایش داده می‌شود. اگر روز دیگری مدنظر دارید، با دکمه‌های «›» و «‹» جابه‌جا شوید یا روی «امروز» بزنید.</li>
-            <li>روز هفته به‌صورت خودکار از روی تاریخ انتخاب می‌شود. اگر <b>پنجشنبه یا جمعه</b> باشد یا در <b>تقویم تعطیلات رسمی</b> مدیر ثبت شده باشد، برنامه خودکار آن را تعطیل ثبت می‌کند و نیازی به ثبت نیست.</li>
-            <li>روی کارت هر دانش‌آموز در لیست کلیک کنید تا انتخاب شود.</li>
-            <li>یکی از ۴ دکمه پایین صفحه را بزنید:
+            <li>تاریخ امروز خودکار انتخاب می‌شود. برای روز دیگر از «›»/«‹» یا «امروز» استفاده کنید.</li>
+            <li>پنجشنبه/جمعه و <b>تعطیلات رسمی</b> (که مدیر تعریف می‌کند) خودکار تعطیل محاسبه می‌شوند.</li>
+            <li>روی کارت دانش‌آموز کلیک کنید، سپس یکی از ۴ دکمه:
               <ul>
-                <li>✔️ <b>حاضر</b></li>
-                <li>❌ <b>غایب غیرموجه</b></li>
-                <li>⏰ <b>تأخیر</b></li>
-                <li>📝 <b>غایب موجه</b></li>
+                <li>✔️ حاضر — ❌ غایب غیرموجه — ⏰ تأخیر — 📝 غایب موجه</li>
               </ul>
             </li>
-            <li>هنگام ثبت وضعیت، یک <b>موج رنگی</b> متناسب با وضعیت روی ردیف دانش‌آموز می‌پیچد تا مطمئن شوید ثبت انجام شده.</li>
-            <li>پس از ثبت، به‌طور خودکار دانش‌آموز بعدی انتخاب می‌شود تا سریع ثبت را ادامه دهید. با هر ثبت یک بوق کوتاه و لرزش دریافت می‌کنید.</li>
-            <li>اگر می‌خواهید سریع همه را حاضر کنید، از دکمه «✅ همه حاضر» استفاده کنید و بعد فقط استثناها را تغییر دهید.</li>
-            <li>اگر وضعیت بعضی دانش‌آموزان جا افتاد، بنر کهربایی «ثبت ناقص» در بالای صفحه ظاهر می‌شود؛ با دکمه «✅ بقیه حاضر» یا انتخاب تکی، کامل کنید.</li>
-            <li><span class="new">هشدار هوشمند</span>اگر دانش‌آموزی ۳ روز پشت سر هم غایب باشد، بج قرمز «⚠️ X غیبت پی‌درپی» روی کارت او نمایش داده می‌شود.</li>
+            <li>با هر ثبت، <b>موج رنگی</b> روی ردیف + بوق کوتاه + لرزش.</li>
+            <li>دانش‌آموز بعدی خودکار انتخاب می‌شود.</li>
+            <li>«✅ همه حاضر» برای پرکردن سریع؛ بعد فقط استثناها را تغییر دهید.</li>
+            <li>اگر ثبت ناقص باشد، بنر کهربایی بالای صفحه با دکمه «✅ بقیه حاضر» راه‌حل فوری می‌دهد.</li>
+            <li>دانش‌آموز با ۳ روز غیبت پی‌درپی، بج هشدار «⚠️ X غیبت پی‌درپی» می‌گیرد.</li>
           </ul>
 
-          <h4><span class="num">گام ۴</span>یادداشت و ذخیره‌ی روز</h4>
+          <h4><span class="num">۴</span>ذخیره، پشتیبان و آفلاین</h4>
           <ul>
-            <li>در کادر «📝 یادداشت روز» می‌توانید توضیح یا نکته‌ای درباره‌ی امروز بنویسید (اختیاری).</li>
-            <li>تغییرات خودکار ذخیره می‌شوند، اما برای اطمینان دکمه «💾 ذخیره» را بزنید.</li>
-            <li>اگر می‌خواهید همه‌ی وضعیت‌های امروز را پاک کنید، «♻️ بازنشانی» را بزنید — تا ۵ ثانیه فرصت بازگردانی (Undo) دارید.</li>
+            <li>تغییرات خودکار ذخیره می‌شوند؛ برای اطمینان «💾 ذخیره» را بزنید.</li>
+            <li>«♻️ بازنشانی» — پاک‌کردن وضعیت‌های امروز با ۵ ثانیه فرصت بازگشت.</li>
+            <li>«💾 پشتیبان» در نوار بالا — دانلود فایل پشتیبان یا بازگردانی (ادغام/جایگزینی).</li>
+            <li><b>آفلاین:</b> تغییرات محلی ذخیره و پس از اتصال خودکار همگام می‌شوند.</li>
           </ul>
 
-          <h4><span class="num">گام ۵</span>اطلاع سریع به والدین</h4>
+          <h4><span class="num">۵</span>اطلاع به والدین</h4>
           <ul>
-            <li>برای اطلاع دادن به والدین یک دانش‌آموز خاص، کارت او را <b>نگه دارید</b> (حدود ۶۵۰ میلی‌ثانیه) تا پنجره‌ی «مدیریت دانش‌آموز» باز شود.</li>
-            <li>در این پنجره دو دکمه مهم دارید:
-              <ul>
-                <li>📨 <b>پیام آماده</b> — پیامک را با متن آماده باز می‌کند.</li>
-                <li>💬 <b>ارسال به شاد</b> — متن را کپی می‌کند و شاد را باز می‌کند.</li>
-              </ul>
-            </li>
-            <li>برای اطلاع گروهی به همه‌ی غایبین امروز: به «📊 گزارش‌ها» بروید، تب «📨 غایبین» را انتخاب کنید و دکمه «💬 ارسال به شاد» را بزنید.</li>
+            <li>کارت دانش‌آموز را <b>نگه دارید</b> (۶۵۰ms) → پنجره «مدیریت دانش‌آموز» باز می‌شود.</li>
+            <li>📨 <b>پیام آماده:</b> بازکردن پیامک با متن آماده.</li>
+            <li>💬 <b>ارسال به شاد:</b> کپی متن و باز کردن شاد.</li>
+            <li>برای گروهی: «📊 گزارش‌ها» → تب «📨 غایبین» → دکمه «💬 ارسال به شاد».</li>
           </ul>
 
-          <h4><span class="num">گام ۶</span>گزارش‌گیری و اطلاع به والدین</h4>
+          <h4><span class="num">۶</span>گزارش‌ها و آرشیو</h4>
           <ul>
-            <li>روی آیکون 📊 در نوار بالای صفحه بزنید تا وارد گزارش‌ها شوید.</li>
-            <li>پنج تب در اختیار شماست:
-              <ul>
-                <li>🎯 <b>کارنامه:</b> وضعیت حضور یک دانش‌آموز در بازه دلخواه (۷ روز / ۳۰ روز / کل).</li>
-                <li>📄 <b>گزارش والدین:</b> کارنامه ماهانه با سربرگ رسمی — دکمه «📄 تولید PDF رسمی» کارنامه‌ای مناسب ارائه به والدین می‌سازد.</li>
-                <li>📨 <b>غایبین:</b> متن آماده برای ارسال در شاد یا پیامک (کپی/ارسال مستقیم به شاد).</li>
-                <li>📈 <b>کلی:</b> خلاصه‌ی همه دانش‌آموزان کلاس در بازه مشخص.</li>
-                <li>🗂️ <b>سابقه:</b> همه‌ی روزهای ثبت‌شده با آمار.</li>
-              </ul>
-            </li>
-            <li>برای هر گزارش می‌توانید با دکمه‌های سریع («این هفته»، «این ماه»، «ترم اول»، «ترم دوم») بازه را انتخاب کنید.</li>
-            <li>با دکمه «📸 ذخیره عکس» هر گزارش را به‌صورت تصویر PNG ذخیره کنید.</li>
-            <li><span class="new">امضای سامانه</span>در گوشه پایین-چپ همه‌ی PDFها، پرینت‌ها و تصاویر PNG، امضای سامانه با خط ریز درج می‌شود.</li>
+            <li>📊 <b>گزارش‌ها:</b> پنج تب — کارنامه، گزارش والدین (PDF رسمی)، غایبین، کلی، سابقه.</li>
+            <li>دکمه‌های سریع بازه: «این هفته»، «این ماه»، «ترم اول»، «ترم دوم».</li>
+            <li>📸 «ذخیره عکس» هر گزارش را PNG می‌کند.</li>
+            <li>🗂️ <b>آرشیو:</b> مشاهده همه روزهای ثبت‌شده.</li>
           </ul>
 
-          <h4><span class="num">گام ۷</span>مشاهده‌ی آرشیو</h4>
-          <ul>
-            <li>روی آیکون 🗂️ بزنید تا همه‌ی روزهای ثبت‌شده را ببینید.</li>
-            <li>روی هر روز کلیک کنید تا جزئیات حضور و غیاب آن روز را مشاهده کنید.</li>
-          </ul>
-
-          <h4><span class="num">گام ۸</span>پشتیبان‌گیری</h4>
-          <ul>
-            <li>روی آیکون 💾 بزنید تا وارد صفحه‌ی پشتیبان شوید.</li>
-            <li>با دکمه «⬇️ دانلود پشتیبان» یک فایل فشرده از داده‌ها دانلود کنید و در جای امن نگه دارید.</li>
-            <li>اگر لازم شد، می‌توانید با «📤 بارگذاری فایل» پشتیبان قبلی را بازگردانید (ادغام یا جایگزینی کامل).</li>
-            <li><span class="new">حالت آفلاین</span>اگر اینترنت قطع باشد، همه‌ی تغییرات محلی ذخیره می‌شوند و در نوار ابری بالای صفحه با رنگ کهربایی نمایش داده می‌شوند. پس از اتصال، خودکار همگام می‌شوند.</li>
-          </ul>
-
-          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۱.۲.۴</span> — پایان راهنمای معلم</div>
+          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge" data-version-badge="only">۱.۲.۶</span> — پایان راهنمای معلم</div>
         </div>
       </div>
 
       <div class="pane" id="helpMgrTab">
         <div class="helpBody">
 
-          <h4><span class="num">گام ۱</span>ورود مدیر</h4>
+          <h4><span class="num">۱</span>ورود مدیر</h4>
           <ul>
-            <li>در صفحه‌ی اول، روی «🔐 ورود مدیر» کلیک کنید.</li>
-            <li>کد ۵ رقمی مدیریت را با صفحه‌کلید وارد کنید و روی «✅ تایید و ورود» بزنید.</li>
-            <li>اگر کد را نمی‌دانید، با سرپرست سامانه تماس بگیرید.</li>
+            <li>صفحه اول → «🔐 ورود مدیر» → کد ۵ رقمی را با صفحه‌کلید وارد کنید.</li>
+            <li>پس از ۱۵ دقیقه عدم فعالیت، خروج خودکار.</li>
           </ul>
 
-          <h4><span class="num">گام ۲</span>افزودن کلاس‌ها (فقط بار اول یا هر ترم)</h4>
+          <h4><span class="num">۲</span>مدیریت کلاس‌ها</h4>
           <ul>
-            <li>در داشبورد، روی آیکون ⚙️ (تنظیمات) بزنید.</li>
-            <li>تب «📚 کلاس‌ها» را انتخاب کنید.</li>
-            <li>در بخش «➕ افزودن کلاس» سه فیلد را پر کنید: <b>نام کلاس</b>، <b>نام معلم</b>، <b>کد ۵ رقمی</b> (یکتا).</li>
-            <li>دکمه ➕ را بزنید تا کلاس اضافه شود.</li>
-            <li>برای ویرایش هر کلاس، آیکون ✏️ و برای حذف، آیکون 🗑️ را در لیست پایین بزنید.</li>
+            <li>⚙️ تنظیمات → تب «📚 کلاس‌ها».</li>
+            <li>پر کردن نام کلاس، معلم و کد ۵ رقمی (یکتا) → «➕».</li>
+            <li>ویرایش: ✏️ — حذف: 🗑️ (با تأیید کد مدیر).</li>
           </ul>
 
-          <h4><span class="num">گام ۳</span>داشبورد روزانه</h4>
+          <h4><span class="num">۳</span>داشبورد روزانه</h4>
           <ul>
-            <li>در داشبورد، خلاصه‌ی امروز مدرسه را در بالای صفحه می‌بینید: تعداد کلاس، دانش‌آموز، حاضر، غایب، تأخیر.</li>
-            <li>در بخش «📚 کلاس‌ها»، کارت هر کلاس نمایش داده می‌شود. کنار نام هر کلاس یک چراغ رنگی است:
+            <li>خلاصه امروز مدرسه در بالا: کلاس، دانش‌آموز، حاضر، غایب، تأخیر.</li>
+            <li>چراغ رنگی هر کلاس:
               <ul>
-                <li><span style="color:#22c55e;font-weight:800">● سبز:</span> معلم امروز ثبت را کامل کرده.</li>
-                <li><span style="color:#ff5a6e;font-weight:800">● قرمز:</span> ثبت ناقص، اصلاً انجام نشده، یا امروز اصلاً وارد نشده.</li>
-                <li><span style="color:#8ec9ba;font-weight:800">● خاکستری:</span> امروز تعطیل یا کلاس خالی.</li>
+                <li><b style="color:#22c55e">● سبز:</b> ثبت کامل</li>
+                <li><b style="color:#ff5a6e">● قرمز:</b> ثبت ناقص/نشده</li>
+                <li><b style="color:#8ec9ba">● خاکستری:</b> تعطیل یا خالی</li>
               </ul>
             </li>
-            <li>اگر امروز روز عادی است ولی معلم هنوز وارد نشده، به‌جای درصد، عبارت «ثبت نشده» با رنگ کهربایی می‌بینید.</li>
-            <li>با کلیک روی هر کارت کلاس، وارد جزئیات آن می‌شوید (دانش‌آموزان، سابقه، خلاصه).</li>
-            <li>برای به‌روزرسانی، روی 🔄 بزنید.</li>
+            <li>کلیک روی هر کارت → جزئیات کلاس (دانش‌آموزان، سابقه، خلاصه).</li>
           </ul>
 
-          <h4><span class="num">گام ۴</span>بررسی غایبین و تأخیرها و پیام سریع به والدین</h4>
+          <h4><span class="num">۴</span>پیگیری غایبین و پیام سریع</h4>
           <ul>
-            <li>روی آیکون 📊 (گزارش‌ها) در نوار بالا بزنید.</li>
-            <li>تب «🚫 غایبین و تأخیرها» را انتخاب کنید.</li>
-            <li>غایبین (غیرموجه و موجه) و تأخیرهای امروز به‌تفکیک کلاس فهرست می‌شوند.</li>
-            <li>کنار هر دانش‌آموز یک دکمه <b style="color:var(--teal);font-size:15px">📨</b> وجود دارد:
+            <li>📊 گزارش‌ها → تب «🚫 غایبین و تأخیرها».</li>
+            <li>دکمه <b style="color:var(--teal)">📨</b> کنار هر دانش‌آموز، متن پیام آماده (نام، تاریخ، کلاس، معلم، وضعیت) را کپی می‌کند.</li>
+            <li>«📄 PDF رسمی» و «🖨️ پرینت ساده» برای خروجی.</li>
+          </ul>
+
+          <h4><span class="num">۵</span>گزارش‌های مدیریتی</h4>
+          <ul>
+            <li>📋 <b>گزارش کلاس‌ها:</b> دو حالت «این ماه» و «تاکنون». قابل PDF.</li>
+            <li>📈 <b>روند:</b> ۱۴ روز اخیر. «—» تعطیل، «·» ثبت‌نشده، درصد = ثبت‌شده. قابل PDF.</li>
+            <li>دکمه PDF در نوار بالا → خلاصه کل مدرسه.</li>
+          </ul>
+
+          <h4><span class="num">۶</span>تقویم تعطیلات رسمی</h4>
+          <ul>
+            <li>⚙️ تنظیمات → «📅 تعطیلات رسمی» → تاریخ + علت → «➕».</li>
+            <li>در پنل معلم و همه گزارش‌ها خودکار تعطیل محسوب می‌شود.</li>
+          </ul>
+
+          <h4><span class="num">۷</span>پیام مدرسه</h4>
+          <ul>
+            <li>📢 در نوار بالا → نوشتن متن → «💾 ارسال».</li>
+            <li>پیام در بنر بالای صفحه معلم‌ها ظاهر می‌شود.</li>
+          </ul>
+
+          <h4><span class="num">۸</span>تنظیمات، امنیت و پاکسازی داده</h4>
+          <ul>
+            <li>⚙️ تنظیمات شامل چهار تب:
               <ul>
-                <li>با لمس آن، متن پیام آماده مخصوص همان دانش‌آموز کپی می‌شود.</li>
-                <li>متن شامل: نام دانش‌آموز، تاریخ، کلاس، معلم و نوع وضعیت (غایب غیرموجه / تأخیر / موجه).</li>
-                <li>کافی است در شاد یا پیامک بچسبانید و به والدین بفرستید.</li>
+                <li>🔐 <b>رمز مدیر:</b> تغییر کد با وارد کردن کد فعلی.</li>
+                <li>📚 <b>کلاس‌ها:</b> مدیریت کامل.</li>
+                <li>📅 <b>تعطیلات رسمی:</b> تقویم سال تحصیلی.</li>
+                <li>🗑️ <b>پاکسازی داده:</b> حذف اطلاعات حضور و غیاب با بازه دلخواه.</li>
               </ul>
             </li>
-            <li>برای پرینت یا PDF رسمی این گزارش، از دکمه‌های «📄 PDF رسمی» و «🖨️ پرینت ساده» استفاده کنید.</li>
-          </ul>
-
-          <h4><span class="num">گام ۵</span>گزارش‌های مدیریتی</h4>
-          <ul>
-            <li>در همان صفحه گزارش‌ها، سه تب در اختیار شماست:
+            <li>در تب «پاکسازی داده»:
               <ul>
-                <li>📋 <b>گزارش کلاس‌ها:</b> دو حالت «این ماه» و «تاکنون». برای هر کلاس، جدولی از دانش‌آموزان با ستون‌های «حاضر، غایب غیرموجه، غایب موجه، تأخیر» نشان می‌دهد. قابل تبدیل به PDF رسمی.</li>
-                <li>🚫 <b>غایبین و تأخیرها:</b> لیست گروهی غایبین/تأخیر/موجه امروز به‌همراه دکمه 📨 برای هر دانش‌آموز.</li>
-                <li>📈 <b>روند:</b> مقایسه ۱۴ روز اخیر کلاس‌ها. در ستون هر روز: «—» یعنی تعطیل، «·» یعنی روز عادی ثبت‌نشده، و درصد یعنی ثبت‌شده. با دکمه «📄 PDF رسمی — ۲ هفته گذشته» می‌توانید روند ۱۴ روز اخیر را با سربرگ رسمی و امضا دریافت کنید.</li>
+                <li>نمایش فضای <b>مصرفی، آزاد و کل</b> حافظه با عدد و درصد.</li>
+                <li>انتخاب بازه: از/تا + دکمه‌های سریع (همه، ماه، ترم ۱، ترم ۲).</li>
+                <li>تأیید با کد ۵ رقمی مدیر.</li>
+                <li><b>فقط</b> اطلاعات حضور و غیاب حذف می‌شود؛ دانش‌آموزان، کلاس‌ها و کدها حفظ می‌شوند.</li>
+                <li>پاکسازی روی بکاپ‌های خودکار هفتگی هم اعمال می‌شود (ولی اطلاعات دانش‌آموزان در آن‌ها دست‌نخورده می‌ماند).</li>
               </ul>
             </li>
-            <li>دکمه «📄 PDF رسمی» در بالای صفحه، خلاصه‌ی کل مدرسه را با سربرگ رسمی و جای مهر و امضا آماده می‌کند.</li>
           </ul>
 
-          <h4><span class="num">گام ۶</span>تقویم تعطیلات رسمی سال تحصیلی</h4>
+          <h4><span class="num">۹</span>پشتیبان‌گیری و خروج</h4>
           <ul>
-            <li>در تنظیمات مدیر، تب «📅 تعطیلات رسمی» را انتخاب کنید.</li>
-            <li>تاریخ شمسی (مثل ۱۴۰۳/۰۷/۱۵) و علت (مثل «عید مبعث»، «تعطیل استانی») را وارد کنید و «➕ افزودن تعطیلی» را بزنید.</li>
-            <li>این تاریخ‌ها در تقویم سال تحصیلی ثبت می‌شوند و از آن پس:
-              <ul>
-                <li>در پنل معلم، آن روز خودکار تعطیل نمایش داده می‌شود.</li>
-                <li>در همه‌ی گزارش‌ها، به عنوان تعطیل محاسبه می‌شود.</li>
-                <li>در چراغ وضعیت کلاس، خاکستری (تعطیل) می‌شود.</li>
-              </ul>
-            </li>
-            <li>برای حذف هر تعطیلی، روی آیکون 🗑️ کنارش بزنید.</li>
+            <li>💾 پشتیبان کامل مدرسه → دانلود یا بازگردانی (ادغام/جایگزینی).</li>
+            <li>پشتیبان خودکار هفتگی (۴ نسخه آخر نگه داشته می‌شود).</li>
+            <li>🚪 خروج از پنل مدیر.</li>
           </ul>
 
-          <h4><span class="num">گام ۷</span>پیام مدرسه</h4>
-          <ul>
-            <li>روی آیکون 📢 در نوار بالا بزنید.</li>
-            <li>متن پیام را بنویسید و «💾 ارسال» را بزنید.</li>
-            <li>پیام شما در بالای صفحه‌ی معلم‌ها با بنر بنفش ظاهر می‌شود.</li>
-            <li>برای پاک کردن پیام، دکمه «🗑️ پاک کردن» را بزنید.</li>
-          </ul>
-
-          <h4><span class="num">گام ۸</span>تنظیمات و امنیت</h4>
-          <ul>
-            <li>روی آیکون ⚙️ بزنید تا تنظیمات باز شود.</li>
-            <li>تب «🔐 رمز مدیر»: با وارد کردن کد فعلی و کد جدید، رمز خود را تغییر دهید.</li>
-            <li>تب «📚 کلاس‌ها»: مدیریت کامل کلاس‌ها (افزودن، ویرایش، حذف).</li>
-            <li>تب «📅 تعطیلات رسمی»: مدیریت تقویم تعطیلات سال تحصیلی.</li>
-            <li>سامانه پس از ۱۵ دقیقه عدم فعالیت، خودکار شما را از پنل مدیر خارج می‌کند.</li>
-          </ul>
-
-          <h4><span class="num">گام ۹</span>پشتیبان‌گیری کامل مدرسه</h4>
-          <ul>
-            <li>روی آیکون 💾 در نوار بالا بزنید تا صفحه‌ی پشتیبان مدیر باز شود.</li>
-            <li>«⬇️ دانلود پشتیبان» یک فایل فشرده از همه‌ی داده‌های مدرسه (کلاس‌ها + رکوردها + پیام + تعطیلات + رمز مدیر) می‌دهد.</li>
-            <li>«📤 بارگذاری فایل» برای بازگردانی پشتیبان — دو حالت «🔀 ادغام هوشمند» و «🔄 جایگزینی کامل».</li>
-            <li><span class="new">پشتیبان خودکار</span>سامانه هر ۷ روز به‌صورت خودکار یک نسخه از داده‌ها را در حافظه‌ی محلی ذخیره می‌کند (۴ نسخه‌ی آخر نگه داشته می‌شود).</li>
-            <li><span class="new">حالت آفلاین</span>اگر اینترنت قطع باشد، تغییرات صف‌بندی می‌شوند و پس از اتصال خودکار ارسال می‌شوند.</li>
-          </ul>
-
-          <h4><span class="num">گام ۱۰</span>خروج</h4>
-          <ul>
-            <li>روی آیکون 🚪 در نوار بالای داشبورد بزنید و تایید کنید تا از پنل مدیر خارج شوید.</li>
-          </ul>
-
-          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge">۱.۲.۴</span> — پایان راهنمای مدیر</div>
+          <div class="tip" style="text-align:center;font-weight:700">🌿 نسخه <span class="versionBadge" data-version-badge="only">۱.۲.۶</span> — پایان راهنمای مدیر</div>
         </div>
       </div>
 
@@ -1046,7 +1003,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
       </div>
 
       <div style="text-align:center;margin-bottom:22px">
-        <span class="versionBadge" style="font-size:12px;padding:6px 16px">نسخه ۱.۲.۴</span>
+        <span class="versionBadge" data-version-badge="prefix" style="font-size:12px;padding:6px 16px">نسخه ۱.۲.۶</span>
       </div>
 
       <div style="padding-top:20px;border-top:1px dashed rgba(0,188,212,.35);text-align:center">
@@ -1063,7 +1020,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
   <div class="wrap">
     <div class="glass pageTopbar">
       <button class="iconbtn back" data-back type="button">←</button>
-      <div class="pageHead"><div class="t1">⚙️ تنظیمات مدیر</div><div class="t2">رمز، کلاس‌ها و تعطیلات</div></div>
+      <div class="pageHead"><div class="t1">⚙️ تنظیمات مدیر</div><div class="t2">رمز، کلاس‌ها، تعطیلات و پاکسازی</div></div>
       <div class="spacerSide"></div>
     </div>
     <div class="glass" style="padding:16px">
@@ -1071,6 +1028,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         <div class="tab on" data-tab="mgrPinTab">🔐 رمز مدیر</div>
         <div class="tab" data-tab="mgrClassesTab">📚 کلاس‌ها</div>
         <div class="tab" data-tab="mgrHolidayTab">📅 تعطیلات رسمی</div>
+        <div class="tab" data-tab="mgrCleanupTab">🗑️ پاکسازی داده</div>
       </div>
       <div class="pane on" id="mgrPinTab">
         <div class="note">برای تغییر کد، ابتدا کد فعلی را وارد کنید.</div>
@@ -1097,7 +1055,7 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
         <div class="classMgmtList" id="classMgmtList"></div>
       </div>
       <div class="pane" id="mgrHolidayTab">
-        <div class="note warn">📅 <b>تقویم تعطیلات رسمی سال تحصیلی:</b> تعطیلات رسمی (عیدها، مناسبت‌ها، تعطیلات استانی) را اینجا ثبت کنید. هر تاریخی که اینجا باشد، در پنل معلم و همه گزارش‌ها خودکار تعطیل محاسبه می‌شود.</div>
+        <div class="note warn">📅 <b>تقویم تعطیلات رسمی سال تحصیلی:</b> تعطیلات رسمی را اینجا ثبت کنید. هر تاریخی که اینجا باشد، در پنل معلم و همه گزارش‌ها خودکار تعطیل محاسبه می‌شود.</div>
         <div class="classMgmtAdd" style="background:rgba(255,138,90,.08);border-color:rgba(255,138,90,.28)">
           <div class="cmaTitle" style="color:#ff8a5a">➕ افزودن تعطیلی جدید</div>
           <div class="cmaRow" style="grid-template-columns:1fr 2fr auto">
@@ -1108,6 +1066,44 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
           <div class="err" id="newHolidayErr"></div>
         </div>
         <div id="holidayList"></div>
+      </div>
+      <div class="pane" id="mgrCleanupTab">
+        <div class="note warn">
+          ⚠️ <b>توجه:</b> این بخش فقط <b>اطلاعات حضور و غیاب</b> را حذف می‌کند.
+          <br>✅ <b>دانش‌آموزان، کلاس‌ها و کدها دست‌نخورده می‌مانند.</b>
+          <br>📌 پاکسازی روی بکاپ‌های خودکار هفتگی هم اعمال می‌شود (ولی اطلاعات دانش‌آموزان در آن‌ها حفظ می‌شود).
+        </div>
+
+        <div class="storageStats" id="storageStats">
+          <div style="text-align:center;color:var(--muted);padding:10px">در حال محاسبه...</div>
+        </div>
+
+        <div class="classMgmtAdd" style="background:rgba(255,90,110,.06);border-color:rgba(255,90,110,.28)">
+          <div class="cmaTitle" style="color:var(--red)">🗑️ پاکسازی اطلاعات حضور و غیاب</div>
+          <div class="field" style="margin-top:10px">
+            <label>از تاریخ (اختیاری — خالی یعنی از ابتدا)</label>
+            <input type="text" id="clearFromDate" placeholder="۱۴۰۳/۰۷/۰۱" inputmode="numeric" style="text-align:center;letter-spacing:2px;font-weight:700">
+          </div>
+          <div class="field">
+            <label>تا تاریخ (اختیاری — خالی یعنی تا انتها)</label>
+            <input type="text" id="clearToDate" placeholder="۱۴۰۳/۱۲/۲۹" inputmode="numeric" style="text-align:center;letter-spacing:2px;font-weight:700">
+          </div>
+          <div class="quickRangeRow" style="margin-bottom:10px">
+            <button type="button" class="qBtn" data-clean="all">همه</button>
+            <button type="button" class="qBtn" data-clean="month">این ماه</button>
+            <button type="button" class="qBtn" data-clean="term1">ترم اول</button>
+            <button type="button" class="qBtn" data-clean="term2">ترم دوم</button>
+          </div>
+          <div class="field">
+            <label>کد ۵ رقمی مدیر (برای تأیید)</label>
+            <input type="tel" id="clearPin" maxlength="5" inputmode="numeric" style="text-align:center;letter-spacing:8px;font-weight:800;color:var(--red)">
+          </div>
+          <div class="err" id="clearErr"></div>
+          <div class="actionBtns" style="margin-top:10px">
+            <button class="btn danger" id="btnClearAttendance" style="flex:1">🗑️ پاکسازی</button>
+            <button class="btn ghost" id="btnRefreshStorage" style="flex:0 0 auto">🔄 به‌روزرسانی</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1282,21 +1278,21 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 <div id="versionCard" class="versionCard" role="dialog" aria-label="خوش‌آمدگویی">
   <button class="vcClose" type="button" aria-label="بستن">✕</button>
   <div class="vcHeader">
-    <span class="vcIcon">🆕</span>
+    <span class="vcIcon">🛠️</span>
     <div>
-      <div class="vcTitle">نسخه <span id="vcVersion">۱.۲.۴</span></div>
-      <div class="vcSub">تغییرات این نسخه</div>
+      <div class="vcTitle">نسخه <span id="vcVersion">۱.۲.۶</span></div>
+      <div class="vcSub">رفع باگ‌های این نسخه</div>
     </div>
   </div>
   <ul class="vcList">
-    <li><span class="em">🐛</span><span>رفع باگ کلید رکورد روز (تاریخ+روز هفته)</span></li>
-    <li><span class="em">🐛</span><span>رفع باگ باقی‌ماندن وضعیت تعطیلی پس از لغو</span></li>
-    <li><span class="em">🐛</span><span>قفل درخواست‌های همزمان احراز هویت</span></li>
-    <li><span class="em">🐛</span><span>جلوگیری از بکاپ خودکار خالی</span></li>
-    <li><span class="em">✨</span><span>انیمیشن موج رنگی هنگام ثبت وضعیت</span></li>
-    <li><span class="em">📅</span><span>تقویم تعطیلات رسمی سال تحصیلی</span></li>
-    <li><span class="em">📨</span><span>گزارش «غایبین و تأخیرها» با پیام سریع</span></li>
-    <li><span class="em">📄</span><span>دکمه PDF رسمی در تب «روند» برای خروجی ۲ هفته گذشته</span></li>
+    <li><span class="em">🐛</span><span>رفع به‌روزرسانی‌نشدن داشبورد پس از پاکسازی</span></li>
+    <li><span class="em">🐛</span><span>رفع ناهماهنگی کش تعطیلات بین تب‌های باز</span></li>
+    <li><span class="em">🐛</span><span>رفع نشتی حافظه در پنل لاگ</span></li>
+    <li><span class="em">🐛</span><span>محافظت در برابر رکوردهای خراب در پاکسازی</span></li>
+    <li><span class="em">🐛</span><span>حفظ تغییرات ذخیره‌نشده هنگام همگام‌سازی تب‌ها</span></li>
+    <li><span class="em">🐛</span><span>نمایش صحیح درصد فضای حافظه (حداکثر ۱۰۰٪)</span></li>
+    <li><span class="em">🐛</span><span>جلوگیری از کلیک مکرر روی «پاکسازی»</span></li>
+    <li><span class="em">🔧</span><span>همگام‌سازی خودکار نسخه در همه صفحات</span></li>
   </ul>
   <div class="vcFooter">🌿 با تشکر از استفاده شما</div>
 </div>
@@ -1318,11 +1314,11 @@ textarea.big{min-height:230px;font-size:13.5px;line-height:2;font-family:inherit
 /* ============================================================
    نسخه برنامه
 ============================================================ */
-var APP_VERSION = '1.2.4';
+var APP_VERSION = '1.2.6';
 var APP_SIGNATURE = 'سامانه حضور و غیاب مدرسه. سازنده مهدی حسینی';
 
 /* ============================================================
-   ۱) لاگ‌نما
+   ۱) لاگ‌نما — [FIX #3] بدون نشتی حافظه + فقط با ?debug=1
 ============================================================ */
 (function(){
   var logBox = document.getElementById('logBox');
@@ -1331,17 +1327,33 @@ var APP_SIGNATURE = 'سامانه حضور و غیاب مدرسه. سازنده 
   var closeBtn = document.getElementById('logClose');
   var clearBtn = document.getElementById('logClear');
 
+  var debugMode = false;
+  try { debugMode = new URLSearchParams(location.search).get('debug') === '1'; } catch(e){}
+
+  var MAX_LOG_LINES = 500;
+
   function appendLog(color, label, msg){
-    if(!logContent) return;
+    // [FIX #3] در نسخه نهایی، حتی append هم نکن تا نشتی حافظه نداشته باشیم
+    if(!logContent || !debugMode) return;
     var line = document.createElement('div');
     line.style.cssText = 'padding:3px 0;border-bottom:1px solid rgba(255,255,255,.08);word-break:break-all';
     var time = new Date().toLocaleTimeString('en-US',{hour12:false});
     line.innerHTML = '<span style="color:#888;font-size:10px">'+time+'</span> <span style="color:'+color+';font-weight:700">'+label+'</span> ' + String(msg).replace(/[<>&]/g, function(c){ return {'<':'&lt;','>':'&gt;','&':'&amp;'}[c]; });
     logContent.appendChild(line);
+    // [FIX #3] سقف ۵۰۰ خط
+    while(logContent.childNodes.length > MAX_LOG_LINES){
+      logContent.removeChild(logContent.firstChild);
+    }
     logContent.scrollTop = logContent.scrollHeight;
   }
   window.__log = appendLog;
-  if(toggleBtn && logBox) toggleBtn.onclick = function(){ logBox.classList.toggle('show'); };
+  if(toggleBtn && logBox){
+    if(!debugMode){
+      toggleBtn.style.display = 'none';
+    } else {
+      toggleBtn.onclick = function(){ logBox.classList.toggle('show'); };
+    }
+  }
   if(closeBtn && logBox) closeBtn.onclick = function(){ logBox.classList.remove('show'); };
   if(clearBtn && logContent) clearBtn.onclick = function(){ logContent.innerHTML=''; };
 
@@ -1361,7 +1373,7 @@ var APP_SIGNATURE = 'سامانه حضور و غیاب مدرسه. سازنده 
     var r = e.reason;
     appendLog('#ff5a6e', '[PROMISE]', (r && r.message) ? r.message : String(r));
   });
-  appendLog('#00ffd5', '[BOOT]', 'لاگ‌نما فعال شد — نسخه ' + APP_VERSION);
+  appendLog('#00ffd5', '[BOOT]', 'لاگ‌نما فعال شد — نسخه ' + APP_VERSION + (debugMode ? ' — حالت دیباگ' : ''));
 })();
 
 /* ============================================================
@@ -1562,16 +1574,14 @@ async function syncFromCloud(showToastMsg){
     var count = 0;
     classSnap.forEach(function(ds){
       try{
-        // [FIX #4] migrate cloud data before merge
         var cloudData = migrateRecordKeysIfNeeded(ds.data());
-        var localData = loadClassData(ds.id); // already migrated internally
+        var localData = loadClassData(ds.id);
         var merged;
         if(localData){
           merged = mergeClassData(localData, cloudData);
         } else {
           merged = cloudData;
         }
-        // keep migrated flag local
         merged._recKeyMigrated = true;
         localStorage.setItem(classKey(ds.id), JSON.stringify(merged));
         count++;
@@ -1587,7 +1597,6 @@ async function syncFromCloud(showToastMsg){
     }
     await flushSyncQueue();
 
-    // [FIX #3] Refresh manager state if admin pages are visible
     if(isAdminPageVisible()){
       MGR.classes = loadAllClasses();
       var pDash = $('pageMgrDash');
@@ -1619,7 +1628,7 @@ function updateCloudStatus(status, reason){
   else if(status === 'offline'){ label = '📴 آفلاین — تغییرات محلی ذخیره می‌شود'; why = 'پس از اتصال، خودکار ارسال می‌شود.'; }
   else if(status === 'error'){
     if(reason === 'timeout'){ label='🔴 اتصال برقرار نشد'; why='دسترسی به Firebase ممکن نیست.'; showRetry=true; }
-    else if(reason === 'network'){ label='🔴 خطای شبکه'; why='اینترنت را بررسی کنید.'; showRetry=true; }
+    else if(reason === 'network'){ label='🔴 خطای شبکه'; why='اینترنت یا VPN را بررسی کنید.'; showRetry=true; }
     else if(reason === 'auth'){ label='🔴 خطای احراز هویت'; why='دوباره تلاش کنید.'; showRetry=true; }
     else if(reason === 'sync'){ label='🔴 خطا در همگام‌سازی'; why='دوباره تلاش کنید.'; showRetry=true; }
     else { label='🔴 اتصال برقرار نشد'; why='دوباره تلاش کنید.'; showRetry=true; }
@@ -1637,6 +1646,22 @@ function updateCloudStatus(status, reason){
     if(r) r.onclick = function(){ toast('تلاش مجدد...','violet'); attemptCloudInit(true); };
   });
 }
+
+function getAuthErrorMessage(code){
+  var map = {
+    'auth/network-request-failed': '🌐 اتصال شبکه برقرار نشد — اینترنت یا VPN را بررسی کنید',
+    'auth/operation-not-allowed': '🔒 ورود ناشناس در Firebase غیرفعال است — با سرپرست سامانه تماس بگیرید',
+    'auth/too-many-requests': '⏱️ تعداد تلاش‌ها زیاد است — چند دقیقه بعد تلاش کنید',
+    'auth/admin-restricted-operation': '🔒 این عملیات مجاز نیست',
+    'auth/quota-exceeded': '📊 سهمیه Firebase پر شده — بعداً تلاش کنید',
+    'auth/invalid-api-key': '🔑 کلید API معتبر نیست — با سرپرست تماس بگیرید',
+    'auth/user-disabled': '🚫 حساب غیرفعال شده',
+    'auth/internal-error': '⚙️ خطای داخلی سرور — دوباره تلاش کنید',
+    'auth/cancelled-popup-request': '⏹️ درخواست لغو شد'
+  };
+  return map[code] || ('خطای احراز هویت (' + code + ') — دوباره تلاش کنید');
+}
+
 function attemptCloudInit(showToastMsg){
   if(_authInFlight){ console.log('attemptCloudInit: درخواست قبلی در جریان است'); return; }
   if(cloudRetryTimer){ clearTimeout(cloudRetryTimer); cloudRetryTimer = null; }
@@ -1660,7 +1685,7 @@ function attemptCloudInit(showToastMsg){
     if(resolved) return; resolved = true; _authInFlight = false;
     console.warn('auth timeout (15 ثانیه)');
     updateCloudStatus('error','timeout');
-    if(showToastMsg) toast('اتصال برقرار نشد','err');
+    if(showToastMsg) toast('اتصال برقرار نشد — دسترسی به Firebase مسدود است','err');
     scheduleRetry();
   }, 15000);
   fauth.signInAnonymously()
@@ -1678,7 +1703,7 @@ function attemptCloudInit(showToastMsg){
       console.warn('auth error: ' + code + ' — ' + (err.message||''));
       var reason = (code === 'auth/network-request-failed') ? 'network' : 'auth';
       updateCloudStatus('error', reason);
-      if(showToastMsg) toast('خطای اتصال: ' + code,'err');
+      if(showToastMsg) toast(getAuthErrorMessage(code), 'err');
       scheduleRetry();
     });
 }
@@ -2053,7 +2078,6 @@ function computeConsecutiveMap(){
   return map;
 }
 
-/* [FIX #1] کلید رکورد: همیشه روز از تاریخ مشتق می‌شود */
 function recKey(dateStr, day){
   var wd = weekdayFa(dateStr);
   return dateStr + '|' + (wd || day || '');
@@ -2190,7 +2214,6 @@ function renderDays(){
         isHoliday = isWeekendHoliday(d) || isHolidayDate(currentDate);
         var rec = getRec(true);
         if(rec){
-          // [FIX #1] day همیشه از تاریخ مشتق شود — نه از انتخاب کاربر
           rec.day = weekdayFa(currentDate);
           rec.holiday = isHoliday;
           if(isHoliday){
@@ -2219,7 +2242,6 @@ function renderDays(){
     isHoliday=true;
     var rec = getRec(true);
     if(rec){
-      // [FIX #1] day همیشه از تاریخ مشتق شود
       rec.day = weekdayFa(currentDate);
       rec.holiday = true;
       if(!rec.holidayReason) rec.holidayReason = getHolidayReason(currentDate) || 'تعطیل';
@@ -2424,7 +2446,6 @@ async function readBackupFile(file, callback){
   rd.readAsArrayBuffer(file);
 }
 
-/* [FIX #4] مهاجرت قوی‌تر: گروه‌بندی بر اساس تاریخ + ادغام حضور + نرمال‌سازی rec.day */
 function migrateRecordKeysIfNeeded(d){
   if(!d || !d.records || d._recKeyMigrated) return d;
   var byDate = {};
@@ -2441,14 +2462,12 @@ function migrateRecordKeysIfNeeded(d){
     var candidates = byDate[date];
     candidates.sort(function(a,b){ return (b.ts||0) - (a.ts||0); });
     var latest = candidates[0];
-    // ادغام حضور: جدیدترین اول، قدیمی‌ترها فقط جای خالی را پر می‌کنند
     var mergedAtt = {};
     candidates.slice().reverse().forEach(function(c){
       if(c.att) Object.assign(mergedAtt, c.att);
     });
     var wd = weekdayFa(date);
     var merged = Object.assign({}, latest, { att: mergedAtt, date: date });
-    // [FIX #1] نرمال‌سازی day به روز واقعی تاریخ
     if(wd) merged.day = wd;
     var properKey = date + '|' + (wd || '');
     newRecs[properKey] = merged;
@@ -2471,12 +2490,11 @@ function loadClassData(id){
     return d;
   }catch(e){ return null; }
 }
-/* [FIX #4] پرچم migration در localStorage حفظ می‌شود */
 function saveClassData(id, data){
   try{
     localStorage.setItem(classKey(id), JSON.stringify(data));
   }catch(e){ toast('حافظه پر است','err'); }
-  cloudSaveClass(id, data); // cloud خودش پرچم‌ها را حذف می‌کند
+  cloudSaveClass(id, data);
 }
 function buildMgrAllJSON(){
   var classes=loadClasses();
@@ -2780,8 +2798,7 @@ function applyQuickRange(type, target){
     if(target === 'gen' || target === 'card'){ setTeacherRangeByDate(target, fromStr, toStr, '🍂 ترم اول'); }
   } else if(type === 'term2'){
     var j2 = d2j(g2d(d.getFullYear(), d.getMonth()+1, d.getDate()));
-    var year2 = j2.jy;
-    if(j2.jm < 11 && j2.jm > 6) year2 -= 1;
+    var year2 = (j2.jm >= 11) ? j2.jy : j2.jy - 1;
     var fromStr2 = jStr(year2, 11, 1);
     var toStr2 = jStr(year2 + 1, 3, 31);
     setTeacherRangeByDate(target, fromStr2, toStr2, '🌸 ترم دوم');
@@ -2850,7 +2867,6 @@ function enterManager(){
   showPage('pageMgrDash', {replace: true});
   if(cloudReady) syncFromCloud(false);
 }
-/* [FIX #2] افزودن missing flag — تفکیک تعطیل از ثبت‌نشده */
 function classStatsForDay(cls, dateStr){
   var dayName=weekdayFa(dateStr);
   var key=dateStr+'|'+(dayName||'');
@@ -3055,7 +3071,6 @@ function renderMgrClsHistory(cls){
   }).slice(0,30);
   if(!recs.length){ out.innerHTML='<div class="mgrEmpty"><div class="big">🗂️</div><div>سابقه‌ای نیست</div></div>'; return; }
   var rows=recs.map(function(r){
-    // [FIX #6] استفاده از weekdayFa(r.date) با fallback به r.day
     var dayDisplay = weekdayFa(r.date) || r.day || '';
     if(r.holiday) return '<tr><td>'+(r.date||'')+'</td><td>'+dayDisplay+'</td><td colspan="5" class="center"><span class="pill h">🚫 تعطیل</span></td></tr>';
     var p=0,a=0,l=0,e=0,u=0;
@@ -3215,15 +3230,24 @@ function autoWeeklyBackup(){
 }
 
 /* ============================================================
-   ۱۷) کارت نسخه
+   ۱۷) کارت نسخه + همگام‌سازی نسخه
 ============================================================ */
+function syncVersionBadges(){
+  var v = toFa(APP_VERSION);
+  var vcV = $('vcVersion'); if(vcV) vcV.textContent = v;
+  var hv = $('helpVersion'); if(hv) hv.textContent = v;
+  var badges = document.querySelectorAll('[data-version-badge]');
+  for(var i=0;i<badges.length;i++){
+    var el = badges[i];
+    var mode = el.getAttribute('data-version-badge');
+    el.textContent = mode === 'prefix' ? 'نسخه ' + v : v;
+  }
+}
 function checkVersionCard(){
   try{
     var seen = localStorage.getItem(LS_LAST_SEEN_VERSION);
     if(seen === APP_VERSION) return;
     var vc = $('versionCard');
-    var vv = $('vcVersion');
-    if(vv) vv.textContent = toFa(APP_VERSION);
     if(!vc) return;
     vc.classList.add('show');
     var hideFn = function(){
@@ -3396,6 +3420,155 @@ function renderHolidayList(){
 }
 
 /* ============================================================
+   آمار حافظه + پاکسازی اطلاعات حضور و غیاب
+============================================================ */
+function formatBytes(bytes){
+  if(!bytes || bytes < 0) return '۰ بایت';
+  if(bytes < 1024) return toFa(Math.round(bytes)) + ' بایت';
+  if(bytes < 1048576) return toFa((bytes/1024).toFixed(1)) + ' کیلوبایت';
+  return toFa((bytes/1048576).toFixed(2)) + ' مگابایت';
+}
+
+async function getStorageStats(){
+  var browserUsed = 0, browserQuota = 0;
+  if(navigator.storage && typeof navigator.storage.estimate === 'function'){
+    try {
+      var est = await navigator.storage.estimate();
+      browserUsed = est.usage || 0;
+      browserQuota = est.quota || 0;
+    } catch(e){}
+  }
+
+  var appBytes = 0, classCount = 0, recordCount = 0;
+  try {
+    for(var i = 0; i < localStorage.length; i++){
+      var k = localStorage.key(i);
+      if(!k || k.indexOf('hazoor_') !== 0) continue;
+      var v = localStorage.getItem(k) || '';
+      appBytes += (k.length + v.length) * 2;
+      if(k.indexOf('hazoor_class_v1_') === 0){
+        classCount++;
+        try {
+          var d = JSON.parse(v);
+          if(d && d.records) recordCount += Object.keys(d.records).length;
+        } catch(e){}
+      }
+    }
+  } catch(e){}
+
+  if(browserQuota === 0){
+    browserQuota = 5 * 1024 * 1024;
+    browserUsed = appBytes;
+  }
+
+  return { browserUsed: browserUsed, browserQuota: browserQuota, appBytes: appBytes, classCount: classCount, recordCount: recordCount };
+}
+
+async function renderStorageStats(){
+  var el = $('storageStats');
+  if(!el) return;
+  el.innerHTML = '<div style="text-align:center;color:var(--muted);padding:10px">در حال محاسبه...</div>';
+  try {
+    var stats = await getStorageStats();
+    var rawPct = stats.browserQuota > 0 ? Math.round((stats.browserUsed / stats.browserQuota) * 100) : 0;
+    // [FIX #8] محدودسازی نمایش درصد به ۱۰۰
+    var displayPct = Math.min(rawPct, 100);
+    var freePct = Math.max(0, 100 - displayPct);
+    var freeBytes = Math.max(0, stats.browserQuota - stats.browserUsed);
+    var barCls = displayPct >= 90 ? 'danger' : displayPct >= 70 ? 'warn' : '';
+    el.innerHTML =
+      '<div class="storageGrid">' +
+        '<div class="storageItem"><div class="storageLabel">📦 فضای استفاده شده</div>' +
+          '<div class="storageValue">' + formatBytes(stats.browserUsed) + '<small>' + toFa(displayPct) + '٪</small></div></div>' +
+        '<div class="storageItem"><div class="storageLabel">✨ فضای آزاد</div>' +
+          '<div class="storageValue">' + formatBytes(freeBytes) + '<small>' + toFa(freePct) + '٪</small></div></div>' +
+        '<div class="storageItem"><div class="storageLabel">📊 فضای کل</div>' +
+          '<div class="storageValue">' + formatBytes(stats.browserQuota) + '<small>۱۰۰٪</small></div></div>' +
+      '</div>' +
+      '<div class="storageBar"><div class="storageBarFill ' + barCls + '" style="width:' + displayPct + '%"></div></div>' +
+      '<div class="storageNote">🧮 داده‌های این سامانه: <b>' + formatBytes(stats.appBytes) + '</b> — ' +
+        toFa(stats.classCount) + ' کلاس، ' + toFa(stats.recordCount) + ' روز ثبت</div>';
+  } catch(e){
+    el.innerHTML = '<div style="text-align:center;color:var(--red);padding:10px">خطا در محاسبه فضای حافظه</div>';
+  }
+}
+
+async function clearAttendanceByRange(fromStr, toStr){
+  var from = fromStr ? parseJalali(fromStr) : null;
+  var to = toStr ? parseJalali(toStr) : null;
+  if((fromStr && !from) || (toStr && !to)) throw new Error('تاریخ نامعتبر');
+
+  var shouldRemove = function(dateStr){
+    var rd = parseJalali(dateStr || '');
+    if(!rd) return false;
+    if(!from && !to) return true;
+    if(from && to) return rd >= from && rd <= to;
+    if(from) return rd >= from;
+    if(to) return rd <= to;
+    return false;
+  };
+
+  var classes = loadClasses();
+  var totalRemoved = 0, classesAffected = 0;
+
+  for(var i = 0; i < classes.length; i++){
+    var cls = classes[i];
+    var data = loadClassData(cls.id);
+    if(!data || !data.records) continue;
+
+    var newRecords = {};
+    var removedHere = 0;
+    var keys = Object.keys(data.records);
+    for(var j = 0; j < keys.length; j++){
+      var key = keys[j];
+      var rec = data.records[key];
+      // [FIX #4] محافظت در برابر رکوردهای null/بدون date
+      if(!rec || !rec.date){ newRecords[key] = rec; continue; }
+      if(shouldRemove(rec.date)) removedHere++;
+      else newRecords[key] = rec;
+    }
+
+    if(removedHere > 0){
+      data.records = newRecords;
+      try { localStorage.setItem(classKey(cls.id), JSON.stringify(data)); } catch(e){}
+      cloudSaveClass(cls.id, data);
+      totalRemoved += removedHere;
+      classesAffected++;
+    }
+  }
+
+  // پاکسازی رکوردهای داخل بکاپ‌های خودکار (نگهداشتن دانش‌آموزان و کلاس‌ها)
+  try {
+    var backups = loadAutoBackups();
+    var backupsChanged = false;
+    backups = backups.map(function(b){
+      var changed = false;
+      if(Array.isArray(b.classesData)){
+        b.classesData = b.classesData.map(function(cd){
+          if(!cd || !cd.records) return cd;
+          var newR = {};
+          var any = false;
+          Object.keys(cd.records).forEach(function(k){
+            var r = cd.records[k];
+            // [FIX #4] محافظت در برابر رکوردهای null/بدون date
+            if(!r || !r.date){ newR[k] = r; return; }
+            if(shouldRemove(r.date)){ any = true; }
+            else newR[k] = r;
+          });
+          if(any){ changed = true; cd.records = newR; }
+          return cd;
+        });
+      }
+      if(changed) backupsChanged = true;
+      return b;
+    });
+    if(backupsChanged) saveAutoBackups(backups);
+  } catch(e){ console.warn('auto-backup clean error: ' + e.message); }
+
+  return { totalRemoved: totalRemoved, classesAffected: classesAffected };
+}
+
+/* ============================================================
    ۲۳) رویدادها
 ============================================================ */
 console.log('در حال تنظیم رویدادها...');
@@ -3412,6 +3585,7 @@ document.querySelectorAll('.tab').forEach(function(t){
     if(t.dataset.tab === 'mgrHolidayTab') renderHolidayList();
     if(t.dataset.tab === 'mgrRepAbsentAllTab') renderMgrAllAbsentToday();
     if(t.dataset.tab === 'tabParentReport'){ buildParentStudentSelect(); renderParentReportPreview(); }
+    if(t.dataset.tab === 'mgrCleanupTab') renderStorageStats();
   };
 });
 
@@ -3553,6 +3727,10 @@ bind('btnAllPresent', function(){
   r._confettiShown = true;
   recordFeedback();
   toast('✅ همه حاضر ثبت شدند');
+  setTimeout(function(){
+    var firstStu = document.querySelector('.stu');
+    if(firstStu) firstStu.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 200);
 });
 
 bind('btnAlertFix', function(){
@@ -3799,8 +3977,11 @@ bind('btnMgrSettings', function(){
   var ne=$('newClassErr'); if(ne) ne.classList.remove('show');
   ['newHolidayDate','newHolidayReason'].forEach(function(id){ var e=$(id); if(e) e.value=''; });
   var nhe=$('newHolidayErr'); if(nhe) nhe.classList.remove('show');
+  ['clearFromDate','clearToDate','clearPin'].forEach(function(id){ var e=$(id); if(e) e.value=''; });
+  var ce=$('clearErr'); if(ce) ce.classList.remove('show');
   renderClassMgmtList();
   renderHolidayList();
+  renderStorageStats();
   openModal('pageMgrSettings');
 });
 ['mgrCurrentPin','mgrNewPin','mgrNewPin2'].forEach(function(id){
@@ -3810,6 +3991,12 @@ var ncp=$('newClassPin');
 if(ncp) ncp.addEventListener('input', function(){ ncp.value=toEn(ncp.value).replace(/\D/g,'').slice(0,5); });
 var nhd=$('newHolidayDate');
 if(nhd) nhd.addEventListener('input', function(){ nhd.value=nhd.value.replace(/[^\d۰-۹\/\-\.]/g,'').slice(0,10); });
+var cf=$('clearFromDate');
+if(cf) cf.addEventListener('input', function(){ cf.value=cf.value.replace(/[^\d۰-۹\/\-\.]/g,'').slice(0,10); });
+var ct=$('clearToDate');
+if(ct) ct.addEventListener('input', function(){ ct.value=ct.value.replace(/[^\d۰-۹\/\-\.]/g,'').slice(0,10); });
+var cpin=$('clearPin');
+if(cpin) cpin.addEventListener('input', function(){ cpin.value=toEn(cpin.value).replace(/\D/g,'').slice(0,5); });
 
 bind('btnSaveMgrPin', function(){
   var c=$('mgrCurrentPin').value.trim();
@@ -3861,6 +4048,95 @@ bind('btnAddHoliday', function(){
   $('newHolidayDate').value = '';
   $('newHolidayReason').value = '';
   renderHolidayList();
+});
+
+bind('btnRefreshStorage', function(){ renderStorageStats(); });
+
+/* [FIX #1, #7] پاکسازی: همیشه رفرش داشبورد + غیرفعال‌سازی دکمه */
+bind('btnClearAttendance', async function(){
+  var btn = $('btnClearAttendance');
+  if(btn && btn.disabled) return;
+  var pin = toEn($('clearPin').value).trim();
+  var err = $('clearErr');
+  var showErr = function(m){ err.textContent = m; err.classList.add('show'); setTimeout(function(){ err.classList.remove('show'); }, 3500); };
+
+  if(!/^\d{5}$/.test(pin)){ showErr('کد ۵ رقمی مدیر را وارد کنید'); return; }
+  if(pin !== getMgrPin()){ showErr('کد مدیر صحیح نیست'); return; }
+
+  var fromRaw = toEn($('clearFromDate').value.trim()).replace(/[-.]/g,'/');
+  var toRaw = toEn($('clearToDate').value.trim()).replace(/[-.]/g,'/');
+  var fromStr = fromRaw ? (parseJalali(fromRaw) ? fromRaw : null) : '';
+  var toStr = toRaw ? (parseJalali(toRaw) ? toRaw : null) : '';
+  if(fromRaw && !fromStr){ showErr('تاریخ «از» نامعتبر است'); return; }
+  if(toRaw && !toStr){ showErr('تاریخ «تا» نامعتبر است'); return; }
+
+  var fromD = fromStr ? parseJalali(fromStr) : null;
+  var toD = toStr ? parseJalali(toStr) : null;
+  if(fromD && toD && fromD > toD){ showErr('تاریخ «از» نباید بعد از «تا» باشد'); return; }
+
+  var rangeLabel;
+  if(fromStr && toStr) rangeLabel = fromStr + ' تا ' + toStr;
+  else if(fromStr) rangeLabel = 'از ' + fromStr + ' به بعد';
+  else if(toStr) rangeLabel = 'تا ' + toStr;
+  else rangeLabel = 'همه‌ی روزها';
+
+  if(!confirm('⚠️ پاکسازی اطلاعات حضور و غیاب\n\nبازه: ' + rangeLabel + '\n\n✅ دانش‌آموزان، کلاس‌ها و کدها حفظ می‌شوند.\n\nمطمئن هستید؟')) return;
+
+  // [FIX #7] غیرفعال‌سازی دکمه در طول عملیات
+  if(btn){ btn.disabled = true; }
+  try {
+    var result = await clearAttendanceByRange(fromStr || null, toStr || null);
+    $('clearPin').value = '';
+    $('clearFromDate').value = '';
+    $('clearToDate').value = '';
+    err.classList.remove('show');
+
+    // [FIX #1] همیشه داشبورد را رفرش کن (حتی اگر کاربر در تب تنظیمات است)
+    MGR.classes = loadAllClasses();
+    renderMgrDash();
+    var pCls = $('pageMgrClass');
+    if(pCls && pCls.classList.contains('show') && MGR.selectedClassId) renderMgrClassPage();
+    var pRep = $('pageMgrReports');
+    if(pRep && pRep.classList.contains('show')) renderMgrReports();
+
+    if(result.totalRemoved === 0){
+      toast('داده‌ای در این بازه یافت نشد','err');
+    } else {
+      toast('✅ ' + toFa(result.totalRemoved) + ' روز از ' + toFa(result.classesAffected) + ' کلاس پاک شد');
+    }
+    setTimeout(renderStorageStats, 400);
+  } catch(e){
+    showErr('خطا: ' + (e.message || 'نامشخص'));
+  } finally {
+    // [FIX #7] آزادسازی دکمه در هر حالت
+    if(btn){ btn.disabled = false; }
+  }
+});
+
+document.querySelectorAll('[data-clean]').forEach(function(b){
+  b.onclick = function(){
+    var type = b.dataset.clean;
+    var fromEl = $('clearFromDate'), toEl = $('clearToDate');
+    if(!fromEl || !toEl) return;
+    if(type === 'all'){
+      fromEl.value = ''; toEl.value = '';
+    } else if(type === 'month'){
+      var r = getCurrentMonthRange();
+      fromEl.value = r.fromStr; toEl.value = r.toStr;
+    } else if(type === 'term1' || type === 'term2'){
+      var today = todayJalali();
+      var d = parseJalali(today);
+      if(!d) return;
+      var j = d2j(g2d(d.getFullYear(), d.getMonth()+1, d.getDate()));
+      if(type === 'term1'){
+        var y1 = j.jm < 7 ? j.jy - 1 : j.jy;
+        fromEl.value = jStr(y1, 7, 1); toEl.value = jStr(y1, 10, 30);
+      } else {
+        var y2 = (j.jm >= 11) ? j.jy : j.jy - 1;
+        fromEl.value = jStr(y2, 11, 1); toEl.value = jStr(y2 + 1, 3, 31);
+      }
+    }
+  };
 });
 
 bind('btnDelClassConfirm', function(){
@@ -3935,7 +4211,6 @@ function buildMgrClassPDFOpts(){
     summary: holiday ? null : { total: s.total, present: s.present, absent: s.absent, late: s.late, excused: s.excused }
   };
 }
-/* [FIX #5] print = چاپ ساده، PDF = گزارش رسمی */
 bind('btnMgrClsPrint', function(){
   var cls = null;
   for(var i=0;i<MGR.classes.length;i++) if(MGR.classes[i].meta.classId===MGR.selectedClassId){ cls=MGR.classes[i]; break; }
@@ -4256,7 +4531,6 @@ function computeParentMonthlyData(studentId){
     else if(st === 'late') l++;
     else if(st === 'excused') e++;
     else u++;
-    // [FIX #6] همیشه روز از تاریخ
     return { idx: i+1, date: r.date || '', day: weekdayFa(r.date) || r.day || '', label: label };
   });
   return { range: range, records: recs, rows: rows, present: p, absent: a, late: l, excused: e, unset: u };
@@ -4689,7 +4963,6 @@ bind('btnMgrAbsentAllPrint', printAbsentAll);
 bind('btnMgrClassReportPDF', exportMgrClassReportPDF);
 bind('btnParentReportPDF', exportParentReportPDF);
 
-/* [FIX #7] روند ۱۴ روزه — با نمایش تفکیک تعطیل/ثبت‌نشده */
 function renderMgrTrend(){
   var out=$('mgrRepTrendOut'); if(!out) return;
   var today=todayJalali();
@@ -4745,6 +5018,60 @@ function exportMgrTrendPDF(){
 bind('btnMgrTrendPDF', exportMgrTrendPDF);
 
 /* ============================================================
+   [FIX #2, #5] همگام‌سازی بین تب‌های باز مرورگر
+============================================================ */
+var _storageEventDebounce = null;
+window.addEventListener('storage', function(e){
+  if(!e.key || e.key.indexOf('hazoor_') !== 0) return;
+
+  // [FIX #2] نامعتبر کردن کش تعطیلات وقتی از تب دیگر تغییر کرده
+  if(e.key === LS_HOLIDAYS) _invalidateHolidaysCache();
+
+  if(_storageEventDebounce) clearTimeout(_storageEventDebounce);
+  _storageEventDebounce = setTimeout(function(){
+    _storageEventDebounce = null;
+    console.log('[sync] storage event: ' + e.key);
+
+    // [FIX #5] اگر تغییری در انتظار ذخیره است، قبل از overwrite ذخیره‌اش کن
+    if(DB.meta.classId && _saveDebounceTimer){
+      clearTimeout(_saveDebounceTimer);
+      _saveDebounceTimer = null;
+      try { saveTeacherDB(); } catch(err){ console.warn('storage save error: ' + err.message); }
+    }
+
+    renderFirstPageClassList();
+    updateSchoolMsgBanner();
+
+    if(DB.meta.classId){
+      var fresh = loadClassData(DB.meta.classId);
+      if(fresh){
+        DB = fresh;
+        var p2 = $('page2');
+        if(p2 && p2.classList.contains('show')){
+          renderDateUI(); renderStudents(); renderStats(); updateDockButtons();
+        }
+      }
+    }
+
+    if(isAdminPageVisible()){
+      MGR.classes = loadAllClasses();
+      var pDash = $('pageMgrDash');
+      if(pDash && pDash.classList.contains('show')) renderMgrDash();
+      var pRep = $('pageMgrReports');
+      if(pRep && pRep.classList.contains('show')) renderMgrReports();
+      var pCls = $('pageMgrClass');
+      if(pCls && pCls.classList.contains('show') && MGR.selectedClassId) renderMgrClassPage();
+    }
+
+    var pSettings = $('pageMgrSettings');
+    if(pSettings && pSettings.classList.contains('show')){
+      var cleanup = $('mgrCleanupTab');
+      if(cleanup && cleanup.classList.contains('on')) renderStorageStats();
+    }
+  }, 300);
+});
+
+/* ============================================================
    ۲۴) راه‌اندازی
 ============================================================ */
 (function init(){
@@ -4756,7 +5083,8 @@ bind('btnMgrTrendPDF', exportMgrTrendPDF);
     isHoliday = isWeekendHoliday(wd) || isHolidayDate(currentDate);
     console.log('تاریخ امروز: ' + currentDate + ' — ' + currentDay);
 
-    var hv = $('helpVersion'); if(hv) hv.textContent = toFa(APP_VERSION);
+    // [FIX #6] همگام‌سازی نسخه در همه‌جا از APP_VERSION
+    syncVersionBadges();
 
     var ss=$('sSchool');
     if(ss){
@@ -4879,4 +5207,4 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 </body>
-  </html>
+                                                           </html>
